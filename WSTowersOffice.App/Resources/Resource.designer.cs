@@ -124,12 +124,6 @@ namespace WSTowersOffice
 			// aapt resource value: 0x7F040000
 			public const int action_settings = 2130968576;
 			
-			// aapt resource value: 0x7F040001
-			public const int fab = 2130968577;
-			
-			// aapt resource value: 0x7F040002
-			public const int toolbar = 2130968578;
-			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -144,10 +138,7 @@ namespace WSTowersOffice
 		{
 			
 			// aapt resource value: 0x7F050000
-			public const int activity_main = 2131034112;
-			
-			// aapt resource value: 0x7F050001
-			public const int content_main = 2131034113;
+			public const int activity_start = 2131034112;
 			
 			static Layout()
 			{
@@ -220,16 +211,7 @@ namespace WSTowersOffice
 		{
 			
 			// aapt resource value: 0x7F090000
-			public const int AppTheme = 2131296256;
-			
-			// aapt resource value: 0x7F090001
-			public const int AppTheme_AppBarOverlay = 2131296257;
-			
-			// aapt resource value: 0x7F090002
-			public const int AppTheme_NoActionBar = 2131296258;
-			
-			// aapt resource value: 0x7F090003
-			public const int AppTheme_PopupOverlay = 2131296259;
+			public const int AppTheme_NoActionBar = 2131296256;
 			
 			static Style()
 			{
