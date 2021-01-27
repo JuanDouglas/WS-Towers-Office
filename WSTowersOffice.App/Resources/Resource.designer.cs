@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("WSTowersOffice.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("WSTowersOffice.App.Resource", IsApplication=true)]
 
-namespace WSTowersOffice
+namespace WSTowersOffice.App
 {
 	
 	
@@ -108,6 +108,12 @@ namespace WSTowersOffice
 			// aapt resource value: 0x7F030007
 			public const int selo = 2130903047;
 			
+			// aapt resource value: 0x7F030008
+			public const int ws = 2130903048;
+			
+			// aapt resource value: 0x7F030009
+			public const int ws_towers_office = 2130903049;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -124,6 +130,9 @@ namespace WSTowersOffice
 			// aapt resource value: 0x7F040000
 			public const int action_settings = 2130968576;
 			
+			// aapt resource value: 0x7F040001
+			public const int logoImg = 2130968577;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -138,7 +147,10 @@ namespace WSTowersOffice
 		{
 			
 			// aapt resource value: 0x7F050000
-			public const int activity_start = 2131034112;
+			public const int activity_splash = 2131034112;
+			
+			// aapt resource value: 0x7F050001
+			public const int activity_start = 2131034113;
 			
 			static Layout()
 			{
