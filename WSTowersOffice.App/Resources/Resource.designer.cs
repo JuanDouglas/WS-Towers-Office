@@ -8,9 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("WSTowersOffice.App.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("WSTowersOffice.Resource", IsApplication=true)]
 
-namespace WSTowersOffice.App
+namespace WSTowersOffice
 {
 	
 	
@@ -81,17 +81,54 @@ namespace WSTowersOffice.App
 			}
 		}
 		
-		public partial class Id
+		public partial class Drawable
 		{
 			
 			// aapt resource value: 0x7F030000
-			public const int action_settings = 2130903040;
+			public const int branca = 2130903040;
 			
 			// aapt resource value: 0x7F030001
-			public const int fab = 2130903041;
+			public const int branco = 2130903041;
 			
 			// aapt resource value: 0x7F030002
-			public const int toolbar = 2130903042;
+			public const int logo = 2130903042;
+			
+			// aapt resource value: 0x7F030003
+			public const int logo_azul = 2130903043;
+			
+			// aapt resource value: 0x7F030004
+			public const int logo_pb = 2130903044;
+			
+			// aapt resource value: 0x7F030005
+			public const int logo_training = 2130903045;
+			
+			// aapt resource value: 0x7F030006
+			public const int logo_verde = 2130903046;
+			
+			// aapt resource value: 0x7F030007
+			public const int selo = 2130903047;
+			
+			static Drawable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Drawable()
+			{
+			}
+		}
+		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7F040000
+			public const int action_settings = 2130968576;
+			
+			// aapt resource value: 0x7F040001
+			public const int fab = 2130968577;
+			
+			// aapt resource value: 0x7F040002
+			public const int toolbar = 2130968578;
 			
 			static Id()
 			{
@@ -106,11 +143,11 @@ namespace WSTowersOffice.App
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7F040000
-			public const int activity_main = 2130968576;
+			// aapt resource value: 0x7F050000
+			public const int activity_main = 2131034112;
 			
-			// aapt resource value: 0x7F040001
-			public const int content_main = 2130968577;
+			// aapt resource value: 0x7F050001
+			public const int content_main = 2131034113;
 			
 			static Layout()
 			{
@@ -125,8 +162,8 @@ namespace WSTowersOffice.App
 		public partial class Menu
 		{
 			
-			// aapt resource value: 0x7F050000
-			public const int menu_main = 2131034112;
+			// aapt resource value: 0x7F060000
+			public const int menu_main = 2131099648;
 			
 			static Menu()
 			{
@@ -141,14 +178,14 @@ namespace WSTowersOffice.App
 		public partial class Mipmap
 		{
 			
-			// aapt resource value: 0x7F060000
-			public const int ic_launcher = 2131099648;
+			// aapt resource value: 0x7F070000
+			public const int ic_launcher = 2131165184;
 			
-			// aapt resource value: 0x7F060001
-			public const int ic_launcher_foreground = 2131099649;
+			// aapt resource value: 0x7F070001
+			public const int ic_launcher_foreground = 2131165185;
 			
-			// aapt resource value: 0x7F060002
-			public const int ic_launcher_round = 2131099650;
+			// aapt resource value: 0x7F070002
+			public const int ic_launcher_round = 2131165186;
 			
 			static Mipmap()
 			{
@@ -163,11 +200,11 @@ namespace WSTowersOffice.App
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7F070000
-			public const int action_settings = 2131165184;
+			// aapt resource value: 0x7F080000
+			public const int action_settings = 2131230720;
 			
-			// aapt resource value: 0x7F070001
-			public const int app_name = 2131165185;
+			// aapt resource value: 0x7F080001
+			public const int app_name = 2131230721;
 			
 			static String()
 			{
@@ -182,17 +219,17 @@ namespace WSTowersOffice.App
 		public partial class Style
 		{
 			
-			// aapt resource value: 0x7F080000
-			public const int AppTheme = 2131230720;
+			// aapt resource value: 0x7F090000
+			public const int AppTheme = 2131296256;
 			
-			// aapt resource value: 0x7F080001
-			public const int AppTheme_AppBarOverlay = 2131230721;
+			// aapt resource value: 0x7F090001
+			public const int AppTheme_AppBarOverlay = 2131296257;
 			
-			// aapt resource value: 0x7F080002
-			public const int AppTheme_NoActionBar = 2131230722;
+			// aapt resource value: 0x7F090002
+			public const int AppTheme_NoActionBar = 2131296258;
 			
-			// aapt resource value: 0x7F080003
-			public const int AppTheme_PopupOverlay = 2131230723;
+			// aapt resource value: 0x7F090003
+			public const int AppTheme_PopupOverlay = 2131296259;
 			
 			static Style()
 			{
