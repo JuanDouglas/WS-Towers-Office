@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+	<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,5 +12,41 @@
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:src="@drawable/ws_towers_office"/>
+    <TextView
+        android:id="@+id/txtWork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="350dp"
+        android:textSize="24dp"
+        android:textColor="@android:color/black"
+        android:text="@string/start_text"
+        />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+       android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="wrap_content"
+            android:textSize="25dp"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:background="@drawable/round_button"
+               android:id="@+id/buttonRegister"
+            android:text="@string/start_new_user"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:textSize="25dp"
+            android:padding="20dp"
+            android:background="@drawable/round_button"
+             android:id="@+id/buttonLogin"
+            android:text="@string/start_login"/>
+    </LinearLayout>
 </RelativeLayout>

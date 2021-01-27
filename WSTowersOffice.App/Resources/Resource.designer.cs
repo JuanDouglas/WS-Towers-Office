@@ -106,13 +106,16 @@ namespace WSTowersOffice.App
 			public const int logo_verde = 2130903046;
 			
 			// aapt resource value: 0x7F030007
-			public const int selo = 2130903047;
+			public const int round_button = 2130903047;
 			
 			// aapt resource value: 0x7F030008
-			public const int ws = 2130903048;
+			public const int selo = 2130903048;
 			
 			// aapt resource value: 0x7F030009
-			public const int ws_towers_office = 2130903049;
+			public const int ws = 2130903049;
+			
+			// aapt resource value: 0x7F03000A
+			public const int ws_towers_office = 2130903050;
 			
 			static Drawable()
 			{
@@ -131,7 +134,16 @@ namespace WSTowersOffice.App
 			public const int action_settings = 2130968576;
 			
 			// aapt resource value: 0x7F040001
-			public const int logoImg = 2130968577;
+			public const int buttonLogin = 2130968577;
+			
+			// aapt resource value: 0x7F040002
+			public const int buttonRegister = 2130968578;
+			
+			// aapt resource value: 0x7F040003
+			public const int logoImg = 2130968579;
+			
+			// aapt resource value: 0x7F040004
+			public const int txtWork = 2130968580;
 			
 			static Id()
 			{
@@ -208,6 +220,15 @@ namespace WSTowersOffice.App
 			
 			// aapt resource value: 0x7F080001
 			public const int app_name = 2131230721;
+			
+			// aapt resource value: 0x7F080002
+			public const int start_login = 2131230722;
+			
+			// aapt resource value: 0x7F080003
+			public const int start_new_user = 2131230723;
+			
+			// aapt resource value: 0x7F080004
+			public const int start_text = 2131230724;
 			
 			static String()
 			{
