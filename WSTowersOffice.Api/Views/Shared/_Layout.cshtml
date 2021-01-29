@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - WS Towers Office</title>
@@ -9,28 +9,48 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("WS Towers Office", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Teams", "ListTeams", "Team")</li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        @Html.ActionLink("WS Towers Office", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">@Html.ActionLink("Início", "Index", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Sobre", "About", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Contato", "Contact", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Teams", "ListTeams", "Team")</li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">@Html.ActionLink("Início", "Index", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Sobre", "About", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Contato", "Contact", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Teams", "ListTeams", "Team")</li>
+            </ul>
+        </div>
+    </nav>
+
+
+
     <div class="container body-content">
+        <!--Esse codigo rederiza o resto da pagina que será definido em outro arquivo cshtml -->
         @RenderBody()
+        <!-- Após rederizar a tela o código seguinte será rederizado -->
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - WS Corp.</p>
