@@ -8,37 +8,29 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body style="background-color: #c9c9c9">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">WebSiteName</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        @Html.ActionLink("WS Towers Office", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">@Html.ActionLink("Início", "Index", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Sobre", "About", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Contato", "Contact", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Teams", "ListTeams", "Team")</li>
             </ul>
         </div>
     </nav>
-                @Html.ActionLink("WS Towers Office", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Teams", "ListTeams", "Team")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
+
+
     <div class="container body-content">
+        <!--Esse codigo rederiza o resto da pagina que será definido em outro arquivo cshtml -->
         @RenderBody()
+        <!-- Após rederizar a tela o código seguinte será rederizado -->
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - WS Corp.</p>
