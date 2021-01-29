@@ -26,5 +26,9 @@ namespace WSTowersOffice.Api.Controllers
 
             return View();
         }
+        public ActionResult Error() {
+            return RedirectPermanent($"https://http.cat/");
+        }
     }
+
 }
