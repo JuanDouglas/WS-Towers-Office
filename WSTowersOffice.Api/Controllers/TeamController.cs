@@ -61,7 +61,10 @@ namespace WSTowersOffice.Api.Controllers
                 return View(team);
             }
 
-            return View(team);
+            db.Team.Add(team.GetTeam());
+            await db.SaveChangesAsync();
+
+            return RedirectToAction("ManageTeam","Team",routeValues: new { id= (await db.Team.FirstOrDefaultAsync(fs=>fs.Name==team.Name)).ID});
         }
 
         [Route("SetTeamIcon/{team_id}")]
