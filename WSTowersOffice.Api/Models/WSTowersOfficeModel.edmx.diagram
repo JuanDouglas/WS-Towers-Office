@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="868f610ef6ef47529e98e84670e8074b" Name="Diagram1">
+      <Diagram DiagramId="e87b3e1bba4a4a8b92f5cc20f2c26f4d" Name="Diagram1">
         <EntityTypeShape EntityType="WSTowersOfficeDataModel.File" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WSTowersOfficeDataModel.Team" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="WSTowersOfficeDataModel.FK__Team__Icon__2B3F6F97" ManuallyRouted="false" />

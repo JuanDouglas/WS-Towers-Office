@@ -81,6 +81,31 @@ namespace WSTowersOffice.Api.Controllers
 
             throw new NotImplementedException();
         }
+        internal static async Task<FileModel> SaveImageAsync(FileType fileType, Image image, int contentLength)
+        {
+            WSTowersOfficeEntities db = new WSTowersOfficeEntities();
+            string fileName = $"{fileType}_{DateTime.Now.ToString("yyMMdd_HHmmss_fffffff")}.png";
+            SaveInAPI(fileType, image, fileName);
+            try
+            {
+                db.File.Add(new Models.File()
+                {
+                    FileName = fileName,
+                    FileType = (int)fileType,
+                    Width = image.Width,
+                    Height = image.Height,
+                    Leaght = contentLength
+                });
+                await db.SaveChangesAsync();
+                return new FileModel(await db.File.FirstOrDefaultAsync(fs => fs.FileName == fileName));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            throw new NotImplementedException();
+        }
         private static void SaveInAPI(FileType fileType, System.Drawing.Image image, string filename)
         {
             var path = GetPartialDirectory(fileType);

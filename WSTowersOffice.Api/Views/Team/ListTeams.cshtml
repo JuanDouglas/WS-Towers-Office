@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WSTowersOffice.Api.Models.Team>
+@using WSTowersOffice.Api.Models 
+
+@{
+    ViewBag.Title = "List Teams";
+}
+
+<h2>ListTeams</h2>
+
+<p>
+    @Html.ActionLink("Add new Team", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Icon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    FileModel icon = new FileModel(item.File);
+
+    <tr>
+        
+        <img src="@icon.ImageUrl"/>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Manage Team,", "ManageTeam", new { team_id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

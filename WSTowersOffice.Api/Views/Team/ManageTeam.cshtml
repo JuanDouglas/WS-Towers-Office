@@ -1,0 +1,85 @@
+﻿@model WSTowersOffice.Api.Models.Team
+
+@{
+    ViewBag.Title = "Manage Team";
+}
+
+<h2>Manage Team</h2>
+
+<div>Team: <img src="" width="4rem">@Model.Name</div>
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Team</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Icon, "Icon", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Icon", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }*@
+
+<div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<div class="modal" id="addIconModal">
+
+    <div class="modal-header">
+        Adicione um ícone ao Time!
+    </div>
+    @using (Html.BeginForm((string)ViewBag.Action, (string)ViewBag.Controller, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="modal-body">
+            <img id="output" class="img-icon border-warning" width="50%" height="50%" src="@ViewBag.ImageLink" style="max-width: 18rem;border-width: 0px;cursor: pointer;" />
+            <input type="file" id="Arquivos" name="Arquivos" multiple onchange="" accept="image/*" />
+            <script>
+                var loadFile = function (event) {
+                    var output = document.getElementById('output');
+                    output.src = URl.createObjectURL(event.targetfiles[0]);
+                    output.onload = function () { URL.revokeObjectURL(output.src) }
+                }
+            </script>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
+            <input type="submit" name="submit" value="Enviar Arquivo" class="btn btn-outline-success add" />
+        </div>
+    }
+
+
+
+</div>

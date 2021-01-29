@@ -17,6 +17,7 @@ namespace WSTowersOffice.Api.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public int Icon { get; set; }
+        public string Description { get; set; }
     
         public virtual File File { get; set; }
     }
