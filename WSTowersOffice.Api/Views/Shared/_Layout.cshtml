@@ -17,7 +17,7 @@
 
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">@Html.ActionLink("Início", "Index", "Home")</li>
+                <li class="nav-item">@Html.ActionLink("Início", "Index")</li>
                 <li class="nav-item">@Html.ActionLink("Sobre", "About", "Home")</li>
                 <li class="nav-item">@Html.ActionLink("Contato", "Contact", "Home")</li>
                 <li class="nav-item">@Html.ActionLink("Teams", "", "Teams")</li>
@@ -32,9 +32,11 @@
         @RenderBody()
         <!-- Após rederizar a tela o código seguinte será rederizado -->
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - WS Corp.</p>
-        </footer>
+        <center>
+            <footer>
+                <h5>&copy; @DateTime.Now.Year - WS Corp.</h5>
+            </footer>
+        </center>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
