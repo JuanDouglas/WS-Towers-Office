@@ -40,7 +40,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Manage Team,", "ManageTeam", new { team_id=item.ID }) |
+            @Html.ActionLink("Manage Team", $"Management", new { team_name= item.Name }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>

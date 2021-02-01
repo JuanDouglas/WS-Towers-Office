@@ -9,6 +9,8 @@ using System.Drawing;
 using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using WSTowersOffice.Api.Properties;
 
 namespace WSTowersOffice.Api.Controllers
 {
@@ -29,8 +31,8 @@ namespace WSTowersOffice.Api.Controllers
         }
 
         [HttpGet]
-        [Route("Management/{team_name}")]
-        public async Task<ActionResult> ManageTeam(string team_name)
+        [Route("Management")]
+        public async Task<ActionResult> Management(string team_name)
         {
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
 
@@ -89,12 +91,22 @@ namespace WSTowersOffice.Api.Controllers
             db.Team.Add(teamModel);
             db.SaveChanges();
 
+            //using (SqlConnection connection = new SqlConnection(Resources.ConnectionString))
+            //{
+            //    connection.Open();
+            //    SqlCommand sqlCommand = new SqlCommand($"INSERT INTO [Team] ([Name],[Description],[Icon]) VALUES ('{team.Name}','{team.Description}',2);",connection);
+
+
+            //    sqlCommand.ExecuteNonQuery();
+            //    connection.Close();
+            //}
+
             return RedirectToAction($"Management/{team.Name}", "Teams");
         }
 
-        [Route("Management/{team_name}/SetTeamIcon")]
+        [Route("Management/SetIcon")]
         [HttpPost]
-        public async Task<ActionResult> SetTeamIcon(string team_name)
+        public async Task<ActionResult> SetIcon(string team_name)
         {
 
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);

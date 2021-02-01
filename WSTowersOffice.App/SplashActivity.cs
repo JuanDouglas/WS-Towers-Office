@@ -33,6 +33,7 @@ namespace WSTowersOffice.App
             });
             logoImageView.StartAnimation(alphaAnimation);
             // Create your application here
+          
         }
         private void Animate(int duration,int delay)
         {

@@ -56,13 +56,15 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+<!-- Modal Set Icon -->
 <div class="modal" id="addIconModal">
-
+    <!-- Set Icon Modal Header-->
     <div class="modal-header">
         Adicione um ícone ao Time!
     </div>
     @using (Html.BeginForm((string)ViewBag.Action, (string)ViewBag.Controller, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
+        <!-- Set Icon Modal Body -->
         <div class="modal-body">
             <img id="output" class="img-icon border-warning" width="50%" height="50%" src="@ViewBag.ImageLink" style="max-width: 18rem;border-width: 0px;cursor: pointer;" />
             <input type="file" id="Arquivos" name="Arquivos" multiple onchange="" accept="image/*" />
@@ -74,6 +76,8 @@
                 }
             </script>
         </div>
+
+        <!-- Set Icon Modal Footer -->
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
             <input type="submit" name="submit" value="Enviar Arquivo" class="btn btn-outline-success add" />
@@ -84,16 +88,20 @@
 
 </div>
 
+<!-- Modal Add User -->
 <div class="modal" id="addUser">
 
+
+    <!-- Header -->
     <div class="modal-header">
         Adicione um usuário
     </div>
 
 
+    <!-- Add user Form -->
     @using (Html.BeginForm($"{Model.Name}/Management", "Team", FormMethod.Post))
     {
-
+        <!-- Add user Modal Body -->
         <div class="modal-body">
             @Html.AntiForgeryToken();
 
@@ -109,9 +117,10 @@
                 </div>
             </div>
 
-            <input type="hidden" name="post" value="@Request.Url.AbsoluteUri"/>
+            <input type="hidden" name="post" value="@Request.Url.AbsoluteUri" />
         </div>
 
+        <!-- Add user Modal Footer -->
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
             <input type="submit" name="submit" value="Adicionar Funcionário" class="btn btn-outline-success add" />

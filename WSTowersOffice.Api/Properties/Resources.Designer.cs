@@ -61,7 +61,7 @@ namespace WSTowersOffice.Api.Properties {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a metadata=res://*/Models.DataModel.csdl|res://*/Models.DataModel.ssdl|res://*/Models.DataModel.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\WSTowersOfficeData.mdf;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&amp;quot;.
+        ///   Consulta uma cadeia de caracteres localizada semelhante a data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\WSTowersOfficeData.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;.
         /// </summary>
         internal static string ConnectionString {
             get {
