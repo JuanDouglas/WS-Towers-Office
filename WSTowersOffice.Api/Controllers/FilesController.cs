@@ -11,6 +11,7 @@ using System.Web.Routing;
 using System.Web.Http;
 using WSTowersOffice.Api.Models.Enums;
 using WSTowersOffice.Api.Models;
+using WSTowersOffice.Api.Properties;
 
 namespace WSTowersOffice.Api.Controllers
 {
@@ -41,6 +42,10 @@ namespace WSTowersOffice.Api.Controllers
             //System.Drawing.Image img = System.Drawing.Image.FromStream(flStream);
 
             Bitmap bitmap = null;
+            if (filename== "default_team_icon.png"&&filetype==FileType.TeamIcon)
+            {
+                bitmap = Resources.default_team_icon;
+            }
             if (bitmap == null)
             {
                 bitmap = (Bitmap)Bitmap.FromFile(GetPartialDirectory(filetype) + filename);

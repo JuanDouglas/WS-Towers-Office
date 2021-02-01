@@ -14,11 +14,22 @@ namespace WSTowersOffice.Api.Models
     
     public partial class Team
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Team()
+        {
+            this.Team_Employee = new HashSet<Team_Employee>();
+            this.Team_Role = new HashSet<Team_Role>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public int Icon { get; set; }
         public string Description { get; set; }
     
         public virtual File File { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Team_Employee> Team_Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Team_Role> Team_Role { get; set; }
     }
 }

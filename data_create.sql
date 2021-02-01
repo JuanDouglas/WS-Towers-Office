@@ -10,6 +10,8 @@ CREATE TABLE [File] (
 [Height] INTEGER NULL,
 [Leaght] INTEGER NOT NULL
 );
+INSERT INTO [File] ([FileType], [FileName], [Leaght]) VALUES (1,'default_team_icon.png',32768);
+
 
 CREATE TABLE [Team] (
 [ID] INTEGER PRIMARY KEY IDENTITY NOT NULL,
@@ -38,6 +40,7 @@ FOREIGN KEY ([Role]) REFERENCES [Role]([ID])
 CREATE TABLE [Employee] (
 [ID] INTEGER PRIMARY KEY IDENTITY NOT NULL,
 [CPF] VARCHAR(15) UNIQUE NOT NULL,
+[Name] VARCHAR(500) NOT NULL,
 [QuantityFamilyPersons] INT NOT NULL,
 [Email] VARCHAR(1000) UNIQUE NOT NULL,
 [Team_Role] INTEGER NOT NULL,
@@ -49,6 +52,8 @@ CREATE TABLE [Team_Employee](
 [Team] INTEGER NOT NULL,
 [Employee] INTEGER NOT NULL,
 [AddDate] DATETIME NOT NULL,
+[Role] INTEGER NOT NULL,
 FOREIGN KEY ([Team]) REFERENCES [Team]([ID]),
-FOREIGN KEY ([Employee]) REFERENCES [Employee]([ID])
+FOREIGN KEY ([Employee]) REFERENCES [Employee]([ID]),
+FOREIGN KEY ([Role]) REFERENCES [Team_Role]([ID])
 );

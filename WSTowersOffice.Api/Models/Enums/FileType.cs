@@ -7,6 +7,7 @@ namespace WSTowersOffice.Api.Models.Enums
 {
     public enum FileType : int
     {
-        TeamIcon
+        TeamIcon = 1,
+        RoleIcon = 2
     }
 }

@@ -12,25 +12,21 @@ namespace WSTowersOffice.Api.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class File
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public File()
+        public Role()
         {
-            this.Team = new HashSet<Team>();
-            this.Role = new HashSet<Role>();
+            this.Team_Role = new HashSet<Team_Role>();
         }
     
         public int ID { get; set; }
-        public int FileType { get; set; }
-        public string FileName { get; set; }
-        public Nullable<int> Width { get; set; }
-        public Nullable<int> Height { get; set; }
-        public int Leaght { get; set; }
+        public string Name { get; set; }
+        public int Icon { get; set; }
+        public string Description { get; set; }
     
+        public virtual File File { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Team> Team { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role> Role { get; set; }
+        public virtual ICollection<Team_Role> Team_Role { get; set; }
     }
 }

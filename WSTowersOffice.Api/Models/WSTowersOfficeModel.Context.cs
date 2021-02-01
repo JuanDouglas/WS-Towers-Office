@@ -27,5 +27,9 @@ namespace WSTowersOffice.Api.Models
     
         public virtual DbSet<File> File { get; set; }
         public virtual DbSet<Team> Team { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<Team_Employee> Team_Employee { get; set; }
+        public virtual DbSet<Team_Role> Team_Role { get; set; }
     }
 }

@@ -120,4 +120,8 @@
   <data name="ConnectionString" xml:space="preserve">
     <value>metadata=res://*/Models.DataModel.csdl|res://*/Models.DataModel.ssdl|res://*/Models.DataModel.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\WSTowersOfficeData.mdf;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&amp;quot;</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="default_team_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\default_team_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

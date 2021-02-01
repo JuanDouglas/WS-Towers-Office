@@ -8,6 +8,17 @@
         <EntityTypeShape EntityType="WSTowersOfficeDataModel.File" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WSTowersOfficeDataModel.Team" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="WSTowersOfficeDataModel.FK__Team__Icon__2B3F6F97" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WSTowersOfficeDataModel.Employee" Width="1.5" PointX="7.5" PointY="5.125" />
+        <EntityTypeShape EntityType="WSTowersOfficeDataModel.Role" Width="1.5" PointX="3" PointY="5.25" />
+        <EntityTypeShape EntityType="WSTowersOfficeDataModel.Team_Employee" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="WSTowersOfficeDataModel.Team_Role" Width="1.5" PointX="5.25" PointY="5.25" />
+        <AssociationConnector Association="WSTowersOfficeDataModel.FK__Employee__Team_R__403A8C7D" />
+        <AssociationConnector Association="WSTowersOfficeDataModel.FK__Team_Empl__Emplo__440B1D61" />
+        <AssociationConnector Association="WSTowersOfficeDataModel.FK__Role__Icon__37A5467C" />
+        <AssociationConnector Association="WSTowersOfficeDataModel.FK__Team_Role__Role__3B75D760" />
+        <AssociationConnector Association="WSTowersOfficeDataModel.FK__Team_Emplo__Team__4316F928" />
+        <AssociationConnector Association="WSTowersOfficeDataModel.FK__Team_Role__Team__3A81B327" />
+        <AssociationConnector Association="WSTowersOfficeDataModel.FK__Team_Emplo__Role__47DBAE45" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

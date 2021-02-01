@@ -22,7 +22,7 @@ namespace WSTowersOffice.Api.Models
             return new Team() { 
             Name = Name,
             Description = Description,
-            Icon = 1
+            Icon = 2
             };
         }
     }

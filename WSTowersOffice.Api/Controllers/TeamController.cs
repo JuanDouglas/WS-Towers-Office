@@ -8,81 +8,107 @@ using WSTowersOffice.Api.Models.Enums;
 using System.Drawing;
 using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace WSTowersOffice.Api.Controllers
 {
-
-    [RoutePrefix("Team")]
-    public class TeamController : Controller
+    public class TeamsController : Controller
     {
         public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
         // GET: Teams
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            List<Team> teams = await db.Team.Where(wh => true).ToListAsync();
+
+            if (teams == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(teams);
         }
 
-        public async Task<ActionResult> ListTeams()
+        [HttpGet]
+        [Route("Management/{team_name}")]
+        public async Task<ActionResult> ManageTeam(string team_name)
         {
-            Team[] team = await db.Team.Where(wh=>true).ToArrayAsync();
+            Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
 
             if (team == null)
             {
                 return HttpNotFound();
             }
 
-            return View(team);
-        }
-
-        public async Task<ActionResult> ManageTeam(int team_id) {
-            Team team = await db.Team.FirstOrDefaultAsync(fs => fs.ID == team_id);
-
-            if (team == null)
+            Employee[] employees = await db.Employee.Where(wh => true).ToArrayAsync();
+            List<SelectListItem> employeesList = new List<SelectListItem>();
+            foreach (Employee employee in employees)
             {
-                return HttpNotFound();
+                employeesList.Add(new SelectListItem()
+                {
+                    Text = $"{employee.Name.Split(' ')[0]}, {employee.CPF}",
+                    Value = employee.ID.ToString()
+                });
             }
 
+            ViewBag.Employees = employeesList;
+
+            Team_Role[] roles = await db.Team_Role.Where(wh => wh.Team == team.ID).ToArrayAsync();
+            List<SelectListItem> rolesList = new List<SelectListItem>();
+            foreach (Team_Role role in roles)
+            {
+                employeesList.Add(new SelectListItem()
+                {
+                    Text = $"{role.Role1.Name}",
+                    Value = role.Role1.Name
+                });
+            }
+            ViewBag.Roles = rolesList;
+
+
             return View(team);
         }
-        public async Task<ActionResult> Create() {
+        public async Task<ActionResult> Create()
+        {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include ="Name,Description")]TeamModel team) 
+        public async Task<ActionResult> Create([Bind(Include = "Name,Description")] TeamModel team)
         {
-            if ((await db.Team.FirstOrDefaultAsync(fs=>fs.Name==team.Name))!=null)
+            if ((await db.Team.FirstOrDefaultAsync(fs => fs.Name == team.Name)) != null)
             {
-                ModelState.AddModelError("Name","This name already use!");
+                ModelState.AddModelError("Name", "This name already use!");
             }
 
             if (!ModelState.IsValid)
             {
                 return View(team);
             }
+            Team teamModel = team.GetTeam();
+            db.Team.Add(teamModel);
+            db.SaveChanges();
 
-            db.Team.Add(team.GetTeam());
-            await db.SaveChangesAsync();
-
-            return RedirectToAction("ManageTeam","Team",routeValues: new { id= (await db.Team.FirstOrDefaultAsync(fs=>fs.Name==team.Name)).ID});
+            return RedirectToAction($"Management/{team.Name}", "Teams");
         }
 
-        [Route("SetTeamIcon/{team_id}")]
+        [Route("Management/{team_name}/SetTeamIcon")]
         [HttpPost]
-        public async Task<ActionResult> SetTeamIcon(int team_id) {
+        public async Task<ActionResult> SetTeamIcon(string team_name)
+        {
 
-            Team team = await db.Team.FirstOrDefaultAsync(fs=>fs.ID==team_id);
+            Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
 
-            if (team==null)
+            if (team == null)
             {
                 return HttpNotFound();
             }
 
             HttpFileCollection fileCollection = System.Web.HttpContext.Current.Request.Files;
 
-            if (fileCollection.Count<1)
+            if (fileCollection.Count < 1)
             {
-                return RedirectToActionPermanent("BadRequest","Errors");
+                return RedirectToActionPermanent("BadRequest", "Errors");
             }
 
             if (fileCollection[0] != null)
@@ -103,7 +129,7 @@ namespace WSTowersOffice.Api.Controllers
                     return Content(JsonConvert.SerializeObject(e));
                 }
 
-                FileModel fileModel = await FilesController.SaveImageAsync(FileType.TeamIcon, image ,fileCollection[0].ContentLength);
+                FileModel fileModel = await FilesController.SaveImageAsync(FileType.TeamIcon, image, fileCollection[0].ContentLength);
                 team.Icon = fileModel.ID;
 
                 db.Entry(team).State = EntityState.Modified;
@@ -117,5 +143,38 @@ namespace WSTowersOffice.Api.Controllers
             return View();
         }
 
+        [HttpPost]
+        [Route("Management/{team_name}/AddEmployee")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddEmployee(int employee_id, string team_name, string role_name, string post)
+        {
+            Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            Employee employee = await db.Employee.FirstOrDefaultAsync(fs => fs.ID == employee_id);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            Team_Role teamRole = await db.Team_Role.FirstOrDefaultAsync(fs => fs.Role1.Name == role_name && fs.Team1.ID == team.ID);
+            if (teamRole == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Team_Employee.Add(new Team_Employee()
+            {
+                Team = team.ID,
+                Role = teamRole.ID,
+                Employee = employee_id,
+                AddDate = DateTime.Now
+            });
+            await db.SaveChangesAsync();
+            return Redirect(post);
+        }
     }
 }
