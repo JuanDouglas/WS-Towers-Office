@@ -156,7 +156,7 @@ namespace WSTowersOffice.Api.Controllers
         }
 
         [HttpPost]
-        [Route("Management/{team_name}/AddEmployee")]
+        [Route("Management/AddEmployee")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddEmployee(int employee_id, string team_name, string role_name, string post)
         {

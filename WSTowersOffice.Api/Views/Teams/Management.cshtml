@@ -7,6 +7,8 @@
 <h2>Manage Team</h2>
 
 <div>Team: <img src="" width="4rem">@Model.Name</div>
+<button type="button" class="btn btn-outline-primary add" data-target="#addIconModal" data-toggle="modal" style="margin-right: -2.5%;">Set Icon </button>
+<button type="button" class="btn btn-outline-success add" data-target="#addUserModal" data-toggle="modal" style="margin-right: -2.5%;">Add Employee</button>
 @*@using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -89,7 +91,7 @@
 </div>
 
 <!-- Modal Add User -->
-<div class="modal" id="addUser">
+<div class="modal" id="addUserModal">
 
 
     <!-- Header -->
@@ -99,12 +101,13 @@
 
 
     <!-- Add user Form -->
-    @using (Html.BeginForm($"{Model.Name}/Management", "Team", FormMethod.Post))
+    @using (Html.BeginForm($"Management/AddEmployee", "Team", FormMethod.Post))
     {
         <!-- Add user Modal Body -->
         <div class="modal-body">
             @Html.AntiForgeryToken();
-
+            @Html.Hidden("team_name", Model.Name)
+            @Html.Hidden("post", Request.Url.AbsoluteUri)
             <div class="form-group">
                 <div class="col-md-10">
                     @Html.DropDownList("employee_id", (IEnumerable<SelectListItem>)ViewBag.Employees);
@@ -117,7 +120,6 @@
                 </div>
             </div>
 
-            <input type="hidden" name="post" value="@Request.Url.AbsoluteUri" />
         </div>
 
         <!-- Add user Modal Footer -->
