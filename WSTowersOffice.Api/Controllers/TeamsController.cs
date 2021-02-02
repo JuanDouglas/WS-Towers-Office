@@ -93,7 +93,7 @@ namespace WSTowersOffice.Api.Controllers
 
             //await db.SaveChangesAsync();
 
-            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["WSTowersOfficeEntities"].ConnectionString))
+            using (SqlConnection connection = new SqlConnection(WebApiConfig.ConnectionString))
             {
                 connection.Open();
                 SqlCommand sqlCommand = new SqlCommand($"INSERT INTO [Team] ([Name],[Description],[Icon]) VALUES ('{team.Name}','{team.Description}',2);", connection);
