@@ -4,8 +4,6 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -21,6 +19,13 @@ namespace WSTowersOffice.Api.Controllers
     public class FilesController : ApiController
     {
         public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
+
+        [HttpGet]
+        [Route("Image")]
+        public async Task<IHttpActionResult> Get()
+        {
+            return Ok("Teste");
+        }
         // GET: api/Files
         [Route("Image")]
         [HttpGet]
