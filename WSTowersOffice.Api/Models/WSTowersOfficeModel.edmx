@@ -4,17 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WSTowersOfficeDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WSTowersOfficeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CPF" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="QuantityFamilyPersons" Type="int" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="1000" Nullable="false" />
-          <Property Name="Team_Role" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ProfileImage" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="File">
           <Key>
@@ -43,7 +43,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Icon" Type="int" Nullable="false" />
-          <Property Name="Description" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Team_Employee">
           <Key>
@@ -63,19 +63,19 @@
           <Property Name="Team" Type="int" Nullable="false" />
           <Property Name="Role" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Employee__Team_R__403A8C7D">
-          <End Role="Team_Role" Type="Self.Team_Role" Multiplicity="1" />
+        <Association Name="FK__Employee__Profil__34C8D9D1">
+          <End Role="File" Type="Self.File" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Team_Role">
+            <Principal Role="File">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Employee">
-              <PropertyRef Name="Team_Role" />
+              <PropertyRef Name="ProfileImage" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Role__Icon__37A5467C">
+        <Association Name="FK__Role__Icon__2C3393D0">
           <End Role="File" Type="Self.File" Multiplicity="1" />
           <End Role="Role" Type="Self.Role" Multiplicity="*" />
           <ReferentialConstraint>
@@ -87,7 +87,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team__Icon__2B3F6F97">
+        <Association Name="FK__Team__Icon__286302EC">
           <End Role="File" Type="Self.File" Multiplicity="1" />
           <End Role="Team" Type="Self.Team" Multiplicity="*" />
           <ReferentialConstraint>
@@ -99,7 +99,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team_Empl__Emplo__440B1D61">
+        <Association Name="FK__Team_Empl__Emplo__38996AB5">
           <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
           <End Role="Team_Employee" Type="Self.Team_Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -111,7 +111,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team_Emplo__Role__47DBAE45">
+        <Association Name="FK__Team_Emplo__Role__398D8EEE">
           <End Role="Team_Role" Type="Self.Team_Role" Multiplicity="1" />
           <End Role="Team_Employee" Type="Self.Team_Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -123,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team_Emplo__Team__4316F928">
+        <Association Name="FK__Team_Emplo__Team__37A5467C">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="Team_Employee" Type="Self.Team_Employee" Multiplicity="*" />
           <ReferentialConstraint>
@@ -135,7 +135,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team_Role__Role__3B75D760">
+        <Association Name="FK__Team_Role__Role__300424B4">
           <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="Team_Role" Type="Self.Team_Role" Multiplicity="*" />
           <ReferentialConstraint>
@@ -147,7 +147,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team_Role__Team__3A81B327">
+        <Association Name="FK__Team_Role__Team__2F10007B">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="Team_Role" Type="Self.Team_Role" Multiplicity="*" />
           <ReferentialConstraint>
@@ -159,50 +159,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WSTowersOfficeDataModelStoreContainer">
+        <EntityContainer Name="WSTowersOfficeModelStoreContainer">
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="File" EntityType="Self.File" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team_Employee" EntityType="Self.Team_Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team_Role" EntityType="Self.Team_Role" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Employee__Team_R__403A8C7D" Association="Self.FK__Employee__Team_R__403A8C7D">
-            <End Role="Team_Role" EntitySet="Team_Role" />
+          <AssociationSet Name="FK__Employee__Profil__34C8D9D1" Association="Self.FK__Employee__Profil__34C8D9D1">
+            <End Role="File" EntitySet="File" />
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
-          <AssociationSet Name="FK__Role__Icon__37A5467C" Association="Self.FK__Role__Icon__37A5467C">
+          <AssociationSet Name="FK__Role__Icon__2C3393D0" Association="Self.FK__Role__Icon__2C3393D0">
             <End Role="File" EntitySet="File" />
             <End Role="Role" EntitySet="Role" />
           </AssociationSet>
-          <AssociationSet Name="FK__Team__Icon__2B3F6F97" Association="Self.FK__Team__Icon__2B3F6F97">
+          <AssociationSet Name="FK__Team__Icon__286302EC" Association="Self.FK__Team__Icon__286302EC">
             <End Role="File" EntitySet="File" />
             <End Role="Team" EntitySet="Team" />
           </AssociationSet>
-          <AssociationSet Name="FK__Team_Empl__Emplo__440B1D61" Association="Self.FK__Team_Empl__Emplo__440B1D61">
+          <AssociationSet Name="FK__Team_Empl__Emplo__38996AB5" Association="Self.FK__Team_Empl__Emplo__38996AB5">
             <End Role="Employee" EntitySet="Employee" />
             <End Role="Team_Employee" EntitySet="Team_Employee" />
           </AssociationSet>
-          <AssociationSet Name="FK__Team_Emplo__Role__47DBAE45" Association="Self.FK__Team_Emplo__Role__47DBAE45">
+          <AssociationSet Name="FK__Team_Emplo__Role__398D8EEE" Association="Self.FK__Team_Emplo__Role__398D8EEE">
             <End Role="Team_Role" EntitySet="Team_Role" />
             <End Role="Team_Employee" EntitySet="Team_Employee" />
           </AssociationSet>
-          <AssociationSet Name="FK__Team_Emplo__Team__4316F928" Association="Self.FK__Team_Emplo__Team__4316F928">
+          <AssociationSet Name="FK__Team_Emplo__Team__37A5467C" Association="Self.FK__Team_Emplo__Team__37A5467C">
             <End Role="Team" EntitySet="Team" />
             <End Role="Team_Employee" EntitySet="Team_Employee" />
           </AssociationSet>
-          <AssociationSet Name="FK__Team_Role__Role__3B75D760" Association="Self.FK__Team_Role__Role__3B75D760">
+          <AssociationSet Name="FK__Team_Role__Role__300424B4" Association="Self.FK__Team_Role__Role__300424B4">
             <End Role="Role" EntitySet="Role" />
             <End Role="Team_Role" EntitySet="Team_Role" />
           </AssociationSet>
-          <AssociationSet Name="FK__Team_Role__Team__3A81B327" Association="Self.FK__Team_Role__Team__3A81B327">
+          <AssociationSet Name="FK__Team_Role__Team__2F10007B" Association="Self.FK__Team_Role__Team__2F10007B">
             <End Role="Team" EntitySet="Team" />
             <End Role="Team_Role" EntitySet="Team_Role" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="WSTowersOfficeDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="WSTowersOfficeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CPF" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QuantityFamilyPersons" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProfileImage" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="Self.FK__Employee__Profil__34C8D9D1" FromRole="Employee" ToRole="File" />
+          <NavigationProperty Name="Team_Employee" Relationship="Self.FK__Team_Empl__Emplo__38996AB5" FromRole="Employee" ToRole="Team_Employee" />
+        </EntityType>
         <EntityType Name="File">
           <Key>
             <PropertyRef Name="ID" />
@@ -213,8 +227,20 @@
           <Property Name="Width" Type="Int32" />
           <Property Name="Height" Type="Int32" />
           <Property Name="Leaght" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Team" Relationship="Self.FK__Team__Icon__2B3F6F97" FromRole="File" ToRole="Team" />
-          <NavigationProperty Name="Role" Relationship="WSTowersOfficeDataModel.FK__Role__Icon__37A5467C" FromRole="File" ToRole="Role" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__Profil__34C8D9D1" FromRole="File" ToRole="Employee" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Role__Icon__2C3393D0" FromRole="File" ToRole="Role" />
+          <NavigationProperty Name="Team" Relationship="Self.FK__Team__Icon__286302EC" FromRole="File" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Icon" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="File" Relationship="Self.FK__Role__Icon__2C3393D0" FromRole="Role" ToRole="File" />
+          <NavigationProperty Name="Team_Role" Relationship="Self.FK__Team_Role__Role__300424B4" FromRole="Role" ToRole="Team_Role" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -223,12 +249,72 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Icon" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="File" Relationship="Self.FK__Team__Icon__2B3F6F97" FromRole="Team" ToRole="File" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Team_Employee" Relationship="WSTowersOfficeDataModel.FK__Team_Emplo__Team__4316F928" FromRole="Team" ToRole="Team_Employee" />
-          <NavigationProperty Name="Team_Role" Relationship="WSTowersOfficeDataModel.FK__Team_Role__Team__3A81B327" FromRole="Team" ToRole="Team_Role" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="File" Relationship="Self.FK__Team__Icon__286302EC" FromRole="Team" ToRole="File" />
+          <NavigationProperty Name="Team_Employee" Relationship="Self.FK__Team_Emplo__Team__37A5467C" FromRole="Team" ToRole="Team_Employee" />
+          <NavigationProperty Name="Team_Role" Relationship="Self.FK__Team_Role__Team__2F10007B" FromRole="Team" ToRole="Team_Role" />
         </EntityType>
-        <Association Name="FK__Team__Icon__2B3F6F97">
+        <EntityType Name="Team_Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Team" Type="Int32" Nullable="false" />
+          <Property Name="Employee" Type="Int32" Nullable="false" />
+          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK__Team_Empl__Emplo__38996AB5" FromRole="Team_Employee" ToRole="Employee" />
+          <NavigationProperty Name="Team1" Relationship="Self.FK__Team_Emplo__Team__37A5467C" FromRole="Team_Employee" ToRole="Team" />
+          <NavigationProperty Name="Team_Role" Relationship="Self.FK__Team_Emplo__Role__398D8EEE" FromRole="Team_Employee" ToRole="Team_Role" />
+        </EntityType>
+        <EntityType Name="Team_Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Team" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role1" Relationship="Self.FK__Team_Role__Role__300424B4" FromRole="Team_Role" ToRole="Role" />
+          <NavigationProperty Name="Team1" Relationship="Self.FK__Team_Role__Team__2F10007B" FromRole="Team_Role" ToRole="Team" />
+          <NavigationProperty Name="Team_Employee" Relationship="Self.FK__Team_Emplo__Role__398D8EEE" FromRole="Team_Role" ToRole="Team_Employee" />
+        </EntityType>
+        <Association Name="FK__Employee__Profil__34C8D9D1">
+          <End Role="File" Type="Self.File" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="ProfileImage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team_Empl__Emplo__38996AB5">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Team_Employee" Type="Self.Team_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Team_Employee">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Role__Icon__2C3393D0">
+          <End Role="File" Type="Self.File" Multiplicity="1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="Icon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Team__Icon__286302EC">
           <End Role="File" Type="Self.File" Multiplicity="1" />
           <End Role="Team" Type="Self.Team" Multiplicity="*" />
           <ReferentialConstraint>
@@ -240,134 +326,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WSTowersOfficeEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="File" EntityType="Self.File" />
-          <EntitySet Name="Team" EntityType="Self.Team" />
-          <AssociationSet Name="FK__Team__Icon__2B3F6F97" Association="Self.FK__Team__Icon__2B3F6F97">
-            <End Role="File" EntitySet="File" />
-            <End Role="Team" EntitySet="Team" />
-          </AssociationSet>
-          <EntitySet Name="Employee" EntityType="WSTowersOfficeDataModel.Employee" />
-          <EntitySet Name="Role" EntityType="WSTowersOfficeDataModel.Role" />
-          <EntitySet Name="Team_Employee" EntityType="WSTowersOfficeDataModel.Team_Employee" />
-          <EntitySet Name="Team_Role" EntityType="WSTowersOfficeDataModel.Team_Role" />
-          <AssociationSet Name="FK__Employee__Team_R__403A8C7D" Association="WSTowersOfficeDataModel.FK__Employee__Team_R__403A8C7D">
-            <End Role="Team_Role" EntitySet="Team_Role" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Team_Empl__Emplo__440B1D61" Association="WSTowersOfficeDataModel.FK__Team_Empl__Emplo__440B1D61">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Team_Employee" EntitySet="Team_Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Role__Icon__37A5467C" Association="WSTowersOfficeDataModel.FK__Role__Icon__37A5467C">
-            <End Role="File" EntitySet="File" />
-            <End Role="Role" EntitySet="Role" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Team_Role__Role__3B75D760" Association="WSTowersOfficeDataModel.FK__Team_Role__Role__3B75D760">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Team_Role" EntitySet="Team_Role" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Team_Emplo__Team__4316F928" Association="WSTowersOfficeDataModel.FK__Team_Emplo__Team__4316F928">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="Team_Employee" EntitySet="Team_Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Team_Role__Team__3A81B327" Association="WSTowersOfficeDataModel.FK__Team_Role__Team__3A81B327">
-            <End Role="Team" EntitySet="Team" />
-            <End Role="Team_Role" EntitySet="Team_Role" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Team_Emplo__Role__47DBAE45" Association="WSTowersOfficeDataModel.FK__Team_Emplo__Role__47DBAE45">
-            <End Role="Team_Role" EntitySet="Team_Role" />
-            <End Role="Team_Employee" EntitySet="Team_Employee" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CPF" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="QuantityFamilyPersons" Type="Int32" Nullable="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Team_Role" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Team_Role1" Relationship="WSTowersOfficeDataModel.FK__Employee__Team_R__403A8C7D" FromRole="Employee" ToRole="Team_Role" />
-          <NavigationProperty Name="Team_Employee" Relationship="WSTowersOfficeDataModel.FK__Team_Empl__Emplo__440B1D61" FromRole="Employee" ToRole="Team_Employee" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Icon" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="File" Relationship="WSTowersOfficeDataModel.FK__Role__Icon__37A5467C" FromRole="Role" ToRole="File" />
-          <NavigationProperty Name="Team_Role" Relationship="WSTowersOfficeDataModel.FK__Team_Role__Role__3B75D760" FromRole="Role" ToRole="Team_Role" />
-        </EntityType>
-        <EntityType Name="Team_Employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Team" Type="Int32" Nullable="false" />
-          <Property Name="Employee" Type="Int32" Nullable="false" />
-          <Property Name="AddDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Employee1" Relationship="WSTowersOfficeDataModel.FK__Team_Empl__Emplo__440B1D61" FromRole="Team_Employee" ToRole="Employee" />
-          <NavigationProperty Name="Team1" Relationship="WSTowersOfficeDataModel.FK__Team_Emplo__Team__4316F928" FromRole="Team_Employee" ToRole="Team" />
-          <Property Name="Role" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Team_Role" Relationship="WSTowersOfficeDataModel.FK__Team_Emplo__Role__47DBAE45" FromRole="Team_Employee" ToRole="Team_Role" />
-        </EntityType>
-        <EntityType Name="Team_Role">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Team" Type="Int32" Nullable="false" />
-          <Property Name="Role" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="WSTowersOfficeDataModel.FK__Employee__Team_R__403A8C7D" FromRole="Team_Role" ToRole="Employee" />
-          <NavigationProperty Name="Role1" Relationship="WSTowersOfficeDataModel.FK__Team_Role__Role__3B75D760" FromRole="Team_Role" ToRole="Role" />
-          <NavigationProperty Name="Team1" Relationship="WSTowersOfficeDataModel.FK__Team_Role__Team__3A81B327" FromRole="Team_Role" ToRole="Team" />
-          <NavigationProperty Name="Team_Employee" Relationship="WSTowersOfficeDataModel.FK__Team_Emplo__Role__47DBAE45" FromRole="Team_Role" ToRole="Team_Employee" />
-        </EntityType>
-        <Association Name="FK__Employee__Team_R__403A8C7D">
-          <End Type="WSTowersOfficeDataModel.Team_Role" Role="Team_Role" Multiplicity="1" />
-          <End Type="WSTowersOfficeDataModel.Employee" Role="Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Team_Role">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="Team_Role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Team_Empl__Emplo__440B1D61">
-          <End Type="WSTowersOfficeDataModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="WSTowersOfficeDataModel.Team_Employee" Role="Team_Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Team_Employee">
-              <PropertyRef Name="Employee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Role__Icon__37A5467C">
-          <End Type="WSTowersOfficeDataModel.File" Role="File" Multiplicity="1" />
-          <End Type="WSTowersOfficeDataModel.Role" Role="Role" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="File">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Role">
-              <PropertyRef Name="Icon" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Team_Role__Role__3B75D760">
-          <End Type="WSTowersOfficeDataModel.Role" Role="Role" Multiplicity="1" />
-          <End Type="WSTowersOfficeDataModel.Team_Role" Role="Team_Role" Multiplicity="*" />
+        <Association Name="FK__Team_Role__Role__300424B4">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Team_Role" Type="Self.Team_Role" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="ID" />
@@ -377,9 +338,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team_Emplo__Team__4316F928">
-          <End Type="WSTowersOfficeDataModel.Team" Role="Team" Multiplicity="1" />
-          <End Type="WSTowersOfficeDataModel.Team_Employee" Role="Team_Employee" Multiplicity="*" />
+        <Association Name="FK__Team_Emplo__Team__37A5467C">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Team_Employee" Type="Self.Team_Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Team">
               <PropertyRef Name="ID" />
@@ -389,9 +350,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team_Role__Team__3A81B327">
-          <End Type="WSTowersOfficeDataModel.Team" Role="Team" Multiplicity="1" />
-          <End Type="WSTowersOfficeDataModel.Team_Role" Role="Team_Role" Multiplicity="*" />
+        <Association Name="FK__Team_Role__Team__2F10007B">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="Team_Role" Type="Self.Team_Role" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Team">
               <PropertyRef Name="ID" />
@@ -401,9 +362,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Team_Emplo__Role__47DBAE45">
-          <End Type="WSTowersOfficeDataModel.Team_Role" Role="Team_Role" Multiplicity="1" />
-          <End Type="WSTowersOfficeDataModel.Team_Employee" Role="Team_Employee" Multiplicity="*" />
+        <Association Name="FK__Team_Emplo__Role__398D8EEE">
+          <End Role="Team_Role" Type="Self.Team_Role" Multiplicity="1" />
+          <End Role="Team_Employee" Type="Self.Team_Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Team_Role">
               <PropertyRef Name="ID" />
@@ -413,14 +374,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="WSTowersOfficeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="File" EntityType="Self.File" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Team" EntityType="Self.Team" />
+          <EntitySet Name="Team_Employee" EntityType="Self.Team_Employee" />
+          <EntitySet Name="Team_Role" EntityType="Self.Team_Role" />
+          <AssociationSet Name="FK__Employee__Profil__34C8D9D1" Association="Self.FK__Employee__Profil__34C8D9D1">
+            <End Role="File" EntitySet="File" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Empl__Emplo__38996AB5" Association="Self.FK__Team_Empl__Emplo__38996AB5">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Team_Employee" EntitySet="Team_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Role__Icon__2C3393D0" Association="Self.FK__Role__Icon__2C3393D0">
+            <End Role="File" EntitySet="File" />
+            <End Role="Role" EntitySet="Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team__Icon__286302EC" Association="Self.FK__Team__Icon__286302EC">
+            <End Role="File" EntitySet="File" />
+            <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Role__Role__300424B4" Association="Self.FK__Team_Role__Role__300424B4">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Team_Role" EntitySet="Team_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Emplo__Team__37A5467C" Association="Self.FK__Team_Emplo__Team__37A5467C">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Team_Employee" EntitySet="Team_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Role__Team__2F10007B" Association="Self.FK__Team_Role__Team__2F10007B">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="Team_Role" EntitySet="Team_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Team_Emplo__Role__398D8EEE" Association="Self.FK__Team_Emplo__Role__398D8EEE">
+            <End Role="Team_Role" EntitySet="Team_Role" />
+            <End Role="Team_Employee" EntitySet="Team_Employee" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WSTowersOfficeDataModelStoreContainer" CdmEntityContainer="WSTowersOfficeEntities">
+        <EntityContainerMapping StorageEntityContainer="WSTowersOfficeModelStoreContainer" CdmEntityContainer="WSTowersOfficeEntities">
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="QuantityFamilyPersons" ColumnName="QuantityFamilyPersons" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="File">
-            <EntityTypeMapping TypeName="WSTowersOfficeDataModel.File">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.File">
               <MappingFragment StoreEntitySet="File">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FileType" ColumnName="FileType" />
@@ -431,55 +444,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Team">
-            <EntityTypeMapping TypeName="WSTowersOfficeDataModel.Team">
-              <MappingFragment StoreEntitySet="Team">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Icon" ColumnName="Icon" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employee">
-            <EntityTypeMapping TypeName="WSTowersOfficeDataModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Team_Role" ColumnName="Team_Role" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="QuantityFamilyPersons" ColumnName="QuantityFamilyPersons" />
-                <ScalarProperty Name="CPF" ColumnName="CPF" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="WSTowersOfficeDataModel.Role">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Icon" ColumnName="Icon" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Team">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.Team">
+              <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Team_Employee">
-            <EntityTypeMapping TypeName="WSTowersOfficeDataModel.Team_Employee">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.Team_Employee">
               <MappingFragment StoreEntitySet="Team_Employee">
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
-                <ScalarProperty Name="Employee" ColumnName="Employee" />
-                <ScalarProperty Name="Team" ColumnName="Team" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Team" ColumnName="Team" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="AddDate" ColumnName="AddDate" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Team_Role">
-            <EntityTypeMapping TypeName="WSTowersOfficeDataModel.Team_Role">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.Team_Role">
               <MappingFragment StoreEntitySet="Team_Role">
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Team" ColumnName="Team" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Team" ColumnName="Team" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

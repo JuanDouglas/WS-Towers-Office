@@ -43,8 +43,8 @@ CREATE TABLE [Employee] (
 [Name] VARCHAR(500) NOT NULL,
 [QuantityFamilyPersons] INT NOT NULL,
 [Email] VARCHAR(1000) UNIQUE NOT NULL,
-[Team_Role] INTEGER NOT NULL,
-FOREIGN KEY ([Team_Role]) REFERENCES [Team_Role]([ID])
+[ProfileImage] INTEGER NOT NULL,
+FOREIGN KEY ([ProfileImage]) REFERENCES [File]([ID])
 );
 
 CREATE TABLE [Team_Employee](

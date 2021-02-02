@@ -22,12 +22,12 @@ namespace WSTowersOffice.Api.Models
     
         public int ID { get; set; }
         public string CPF { get; set; }
+        public string Name { get; set; }
         public int QuantityFamilyPersons { get; set; }
         public string Email { get; set; }
-        public int Team_Role { get; set; }
-        public string Name { get; set; }
+        public int ProfileImage { get; set; }
     
-        public virtual Team_Role Team_Role1 { get; set; }
+        public virtual File File { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Team_Employee> Team_Employee { get; set; }
     }
