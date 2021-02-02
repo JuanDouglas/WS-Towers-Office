@@ -308,7 +308,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\File.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FileModel.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -317,7 +323,34 @@
     </Compile>
     <Compile Include="Models\Enums\FileType.cs" />
     <Compile Include="Models\Enums\ImageExtension.cs" />
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Team.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TeamModel.cs" />
+    <Compile Include="Models\Team_Employee.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Team_Role.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WSTowersOfficeModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WSTowersOfficeModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WSTowersOfficeModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WSTowersOfficeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WSTowersOfficeModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -345,7 +378,24 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Index.css" />
+    <EntityDeploy Include="Models\WSTowersOfficeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WSTowersOfficeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WSTowersOfficeModel.edmx.diagram">
+      <DependentUpon>WSTowersOfficeModel.edmx</DependentUpon>
+    </Content>
     <None Include="Resources\default_team_icon.png" />
+    <Content Include="Models\WSTowersOfficeModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WSTowersOfficeModel.edmx</DependentUpon>
+      <LastGenOutput>WSTowersOfficeModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WSTowersOfficeModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WSTowersOfficeModel.edmx</DependentUpon>
+      <LastGenOutput>WSTowersOfficeModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
