@@ -536,6 +536,7 @@
     <Content Include="Views\Teams\Index.cshtml" />
     <Content Include="Views\Teams\AddEmployee.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
