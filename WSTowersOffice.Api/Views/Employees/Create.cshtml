@@ -13,7 +13,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@placeholder="Name" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CPF, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control", @placeholder = "CPF" } })
                 @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" }, type = "email" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name", type = "email" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -40,7 +40,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.QuantityFamilyPersons, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.QuantityFamilyPersons, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.QuantityFamilyPersons, new { htmlAttributes = new { @class = "form-control",@placeholder= "QuantityFamilyPersons" } })
                 @Html.ValidationMessageFor(model => model.QuantityFamilyPersons, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,7 +52,7 @@
                     <input type="submit" value="Send" class="btn btn-outline-success"/>
                 }
                 else { 
-            <input value="Send" class="btn btn-outline-success" data-toggle="#addImageModal" data-target="modal" />
+            <input value="Send" class="btn btn-outline-success" data-toggle="modal" data-target="#addImageModal" />
                 }
             </div>
         </div>
@@ -83,7 +83,7 @@
 
         <!-- Set Icon Modal Footer -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Não escolher nenhuma</button>
+            <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;" onclick="location.href='/Employees/Index'">Não escolher nenhuma</button>
             <input type="submit" name="submit" value="Enviar Arquivo" class="btn btn-outline-success add" />
         </div>
     }

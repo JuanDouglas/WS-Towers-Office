@@ -45,7 +45,7 @@ namespace WSTowersOffice.Api.Controllers
             {
                 ModelState.AddModelError("Email", "Already exist one Employee using this Email!");
             }
-
+            ViewBag.SetImage = false;
             if (!ModelState.IsValid)
             {
                 return View(employeeModel);
@@ -58,7 +58,8 @@ namespace WSTowersOffice.Api.Controllers
             employee = await db.Employee.FirstOrDefaultAsync(fs=>fs.CPF==employeeModel.CPF);
             ViewBag.Action = $"SetProfileImage/{employee.ID}";
             ViewBag.Controller= "Employees";
-            ViewBag.SetImage=true;
+            ViewBag.ModalID = "#addImageModal";
+            ViewBag.SetImage = true;
             return View(new EmployeeModel(employee));
         }
 

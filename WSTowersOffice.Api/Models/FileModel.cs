@@ -27,10 +27,13 @@ namespace WSTowersOffice.Api.Models
         }
         public FileModel(File file)
         {
-            Leaght = file.Leaght;
-            Filename = file.FileName;
-            FileType = (FileType)file.FileType;
-            ID = file.ID;
+            if (file!=null)
+            {
+                Leaght = file.Leaght;
+                Filename = file.FileName;
+                FileType = (FileType)file.FileType;
+                ID = file.ID;
+            }
         }
         public FileModel()
         {

@@ -32,7 +32,7 @@ namespace WSTowersOffice.Api.Controllers
         }
 
         [HttpGet]
-        [Route("Management")]
+        [Route("Management/{team_name}")]
         public async Task<ActionResult> Management(string team_name)
         {
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
@@ -103,7 +103,7 @@ namespace WSTowersOffice.Api.Controllers
                 connection.Close();
             }
 
-            return RedirectToAction($"Management/{team.Name}", "Teams");
+            return RedirectToAction($"Management", "Teams",new { team_name=team.Name});
         }
 
         [Route("Management/SetIcon")]
