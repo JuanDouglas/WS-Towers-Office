@@ -307,7 +307,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
     </Compile>
@@ -396,6 +397,7 @@
       <DependentUpon>WSTowersOfficeModel.edmx</DependentUpon>
       <LastGenOutput>WSTowersOfficeModel.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\default_employee_icon.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
