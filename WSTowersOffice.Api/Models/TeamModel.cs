@@ -9,6 +9,19 @@ namespace WSTowersOffice.Api.Models
     public class TeamModel
     {
         private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
+
+        public TeamModel()
+        {
+        }
+
+        public TeamModel(Team team)
+        {
+            ID = team.ID;
+            Name = team.Name;
+            Description = team.Description;
+            Icon = new FileModel(team.File);
+        }
+
         public int ID { get; set; }
         [Required]
         [Display(Name = "Nome")]
@@ -19,14 +32,15 @@ namespace WSTowersOffice.Api.Models
         [StringLength(1000,MinimumLength = 5)]
         public string Description { get; set; }
         [Display(Name = "Icone")]
-        private int Icon { get; set; }
+       public FileModel Icon { get; set; }
+        private int IconID { get; set; }
         internal Team GetTeam()
         {
-            Icon = 2;
+            IconID = 2;
             return new Team() {
                 Name = Name,
                 Description = Description,
-                Icon = Icon
+                Icon = IconID
             };
         }
     }

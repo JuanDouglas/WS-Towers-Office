@@ -1,6 +1,5 @@
 ﻿
-@model IEnumerable<WSTowersOffice.Api.Models.Team>
-@using WSTowersOffice.Api.Models
+@model IEnumerable<WSTowersOffice.Api.Models.TeamModel>
 
 @{
     ViewBag.Title = "List Teams";
@@ -29,11 +28,9 @@
 
     @foreach (var item in Model)
     {
-        FileModel icon = new FileModel(item.File);
-
         <tr>
 
-            <img src="@icon.ImageUrl" />
+            <img src="@item.Icon.ImageUrl" />
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>

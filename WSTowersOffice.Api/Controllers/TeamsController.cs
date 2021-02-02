@@ -27,8 +27,13 @@ namespace WSTowersOffice.Api.Controllers
             {
                 return HttpNotFound();
             }
+            List<TeamModel> teamsModel = new List<TeamModel>();
+            foreach (Team item in teams)
+            {
+                teamsModel.Add(new TeamModel(item));
+            }
 
-            return View(teams);
+            return View(teamsModel);
         }
 
         [HttpGet]
