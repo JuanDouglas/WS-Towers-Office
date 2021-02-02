@@ -16,31 +16,13 @@ using WSTowersOffice.Api.Properties;
 namespace WSTowersOffice.Api.Controllers
 {
     [RoutePrefix("api/Files")]
-    public partial class FilesController : ApiController
+    public class FilesController : ApiController
     {
         public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
-        [HttpGet]
-        [Route("Image")]
         // GET: api/Files
-        public async Task<IHttpActionResult> Get(string filename, FileType filetype, ImageExtension extension)
+        [Route("Image")]
+        public async Task<IHttpActionResult> GetImage(string filename, FileType filetype, ImageExtension extension)
         {
-            //Models.Image imgModel = await db.Image.FirstOrDefaultAsync(fs => fs.FileName == filename);
-            //if (imgModel == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //string basePath = GetPartialDirectory(filetype);
-            //string path = $"{basePath}{filename}";
-
-            //if (!File.Exists(path))
-            //{
-            //    return NotFound();
-            //}
-
-            //FileStream flStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-            //System.Drawing.Image img = System.Drawing.Image.FromStream(flStream);
-
             Bitmap bitmap = null;
             if (filename== "default_team_icon.png"&&filetype==FileType.TeamIcon)
             {

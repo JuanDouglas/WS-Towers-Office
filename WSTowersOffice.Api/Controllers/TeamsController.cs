@@ -89,7 +89,8 @@ namespace WSTowersOffice.Api.Controllers
             }
             Team teamModel = team.GetTeam();
             db.Team.Add(teamModel);
-            db.SaveChanges();
+
+            await db.SaveChangesAsync();
 
             //using (SqlConnection connection = new SqlConnection(Resources.ConnectionString))
             //{

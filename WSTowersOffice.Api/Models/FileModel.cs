@@ -15,7 +15,16 @@ namespace WSTowersOffice.Api.Models
         private UriBuilder UriBuilder => new UriBuilder(System.Web.HttpContext.Current.Request.Url.AbsoluteUri);
         [JsonIgnore]
         [XmlIgnore]
-        public string ImageUrl { get => $"{UriBuilder.Scheme}://{UriBuilder.Host}/api/Files/filename={Filename}&fileType={FileType}"; }
+        public string ImageUrl
+        {
+            get
+            {
+                UriBuilder builder = UriBuilder;
+                builder.Path = "api/Files/Image";
+                builder.Query = $"filename={Filename}&filetype={FileType}&extension={ImageExtension.png}";
+                return builder.ToString();
+            }
+        }
         public FileModel(File file)
         {
             Leaght = file.Leaght;

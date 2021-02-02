@@ -365,10 +365,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\WSTowersOfficeData.mdf" />
-    <Content Include="App_Data\WSTowersOfficeData_log.ldf">
-      <DependentUpon>WSTowersOfficeData.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-lux.css" />

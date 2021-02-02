@@ -8,7 +8,7 @@ namespace WSTowersOffice.Api.Models
 {
     public class TeamModel
     {
-      
+        private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
         public int ID { get; set; }
         [Required]
         [StringLength(100, MinimumLength = 3)]
@@ -16,13 +16,15 @@ namespace WSTowersOffice.Api.Models
         [Required]
         [StringLength(1000,MinimumLength = 5)]
         public string Description { get; set; }
-
+        private int Icon { get; set; }
         internal Team GetTeam()
         {
-            return new Team() { 
-            Name = Name,
-            Description = Description,
-            Icon = 2
+            Icon = 2;
+            return new Team() {
+                Name = Name,
+                Description = Description,
+                Icon = Icon,
+                File = db.File.FirstOrDefault(fs=>fs.ID==Icon)
             };
         }
     }

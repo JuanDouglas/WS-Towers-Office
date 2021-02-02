@@ -13,10 +13,9 @@ namespace WSTowersOffice.Api.Models
         [StringLength(15, MinimumLength = 11)]
         public string CPF { get; set; }
         [Required]
-        [StringLength(3, MinimumLength = 500)]
+        [StringLength(500, MinimumLength = 3)]
         public string Name { get; set; }
         [Required]
-        [MaxLength(50)]
         public int QuantityFamilyPersons { get; set; }
         [Required]
         [EmailAddress]
@@ -33,6 +32,11 @@ namespace WSTowersOffice.Api.Models
             QuantityFamilyPersons = employee.QuantityFamilyPersons;
             Email = employee.Email;
             ProfileImage = new FileModel(employee.File);
+        }
+
+        public EmployeeModel()
+        {
+
         }
 
         public Employee GetEmployee()

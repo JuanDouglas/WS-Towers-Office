@@ -18,11 +18,6 @@ namespace WSTowersOffice.Api
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
-            routes.MapRoute(
-    name: "Teams",
-    url: "{controller}/{team_name}/{action}",
-    defaults: new { controller = "Team", action = "Management", team_name = "null" }
-);
         }
     }
 }
