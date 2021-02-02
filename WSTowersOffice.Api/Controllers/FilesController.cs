@@ -1,16 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Routing;
 using System.Web.Http;
-using WSTowersOffice.Api.Models.Enums;
 using WSTowersOffice.Api.Models;
+using WSTowersOffice.Api.Models.Enums;
 using WSTowersOffice.Api.Properties;
 
 namespace WSTowersOffice.Api.Controllers
@@ -24,7 +26,7 @@ namespace WSTowersOffice.Api.Controllers
         public async Task<IHttpActionResult> GetImage(string filename, FileType filetype, ImageExtension extension)
         {
             Bitmap bitmap = null;
-            if (filename== "default_team_icon.png"&&filetype==FileType.TeamIcon)
+            if (filename == "default_team_icon.png" && filetype == FileType.TeamIcon)
             {
                 bitmap = Resources.default_team_icon;
             }

@@ -23,8 +23,7 @@ namespace WSTowersOffice.Api.Models
             return new Team() {
                 Name = Name,
                 Description = Description,
-                Icon = Icon,
-                File = db.File.FirstOrDefault(fs=>fs.ID==Icon)
+                Icon = Icon
             };
         }
     }

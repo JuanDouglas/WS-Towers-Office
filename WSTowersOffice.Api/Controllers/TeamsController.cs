@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using WSTowersOffice.Api.Properties;
+using System.Configuration;
 
 namespace WSTowersOffice.Api.Controllers
 {
@@ -88,19 +89,19 @@ namespace WSTowersOffice.Api.Controllers
                 return View(team);
             }
             Team teamModel = team.GetTeam();
-            db.Team.Add(teamModel);
+            //db.Team.Add(teamModel);
 
-            await db.SaveChangesAsync();
+            //await db.SaveChangesAsync();
 
-            //using (SqlConnection connection = new SqlConnection(Resources.ConnectionString))
-            //{
-            //    connection.Open();
-            //    SqlCommand sqlCommand = new SqlCommand($"INSERT INTO [Team] ([Name],[Description],[Icon]) VALUES ('{team.Name}','{team.Description}',2);",connection);
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["WSTowersOfficeEntities"].ConnectionString))
+            {
+                connection.Open();
+                SqlCommand sqlCommand = new SqlCommand($"INSERT INTO [Team] ([Name],[Description],[Icon]) VALUES ('{team.Name}','{team.Description}',2);", connection);
 
 
-            //    sqlCommand.ExecuteNonQuery();
-            //    connection.Close();
-            //}
+                sqlCommand.ExecuteNonQuery();
+                connection.Close();
+            }
 
             return RedirectToAction($"Management/{team.Name}", "Teams");
         }

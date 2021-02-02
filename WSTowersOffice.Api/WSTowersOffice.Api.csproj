@@ -308,6 +308,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
@@ -317,7 +318,6 @@
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FileModel.cs" />
-    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
