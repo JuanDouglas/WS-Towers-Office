@@ -23,7 +23,8 @@ namespace WSTowersOffice.Api.Controllers
         public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
         // GET: api/Files
         [Route("Image")]
-        public async Task<IHttpActionResult> GetImage(string filename, FileType filetype, ImageExtension extension)
+        [HttpGet]
+        public async Task<IHttpActionResult> Get(string filename, FileType filetype, ImageExtension extension)
         {
             Bitmap bitmap = null;
             if (filename == "default_team_icon.png" && filetype == FileType.TeamIcon)
@@ -127,6 +128,10 @@ namespace WSTowersOffice.Api.Controllers
             {
                 case FileType.TeamIcon:
                     return baseDirectory + "\\Files\\Images\\Team\\Icon";
+                case FileType.RoleIcon:
+                    return baseDirectory + "\\Files\\Images\\Role\\Icon";
+                case FileType.EmployeeProfileImage:
+                    return baseDirectory + "\\Files\\Images\\Employee\\Profile";
                 default:
                     return baseDirectory;
             }
