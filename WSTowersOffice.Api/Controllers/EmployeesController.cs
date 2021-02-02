@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -80,7 +81,7 @@ namespace WSTowersOffice.Api.Controllers
                 return RedirectToActionPermanent("BadRequest", "Errors");
             }
 
-            if (fileCollection[0] != null)
+            if (fileCollection[0] == null)
             {
                 return RedirectToActionPermanent("BadRequest", "Errors");
             }
@@ -109,7 +110,40 @@ namespace WSTowersOffice.Api.Controllers
                 return RedirectToActionPermanent("InternalError", "Errors");
             }
 
-            return RedirectToAction("", "");
+            return RedirectToAction("Index", "Employees");
+        }
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Employee employee = await db.Employee.FindAsync(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            return View(new EmployeeModel(employee));
+        }
+
+        // POST: Providers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            Employee employee = await db.Employee.FindAsync(id);
+            db.Employee.Remove(employee);
+            await db.SaveChangesAsync();
+
+            if (employee.File!=null)
+            {
+                if (employee.File.ID > ((int)FileType.Max-1))
+                {
+                    await FilesController.DeleteAsync(employee.File.ID);
+                }
+            }
+            return RedirectToAction("Index","Employees");
         }
     }
 }

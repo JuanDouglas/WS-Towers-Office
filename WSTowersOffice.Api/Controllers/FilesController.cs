@@ -44,6 +44,7 @@ namespace WSTowersOffice.Api.Controllers
             message.Content.Headers.ContentType = new MediaTypeHeaderValue($"image/{extension}");
             return ResponseMessage(message);
         }
+
         internal static async Task<FileModel> SaveImageAsync(FileType fileType, HttpPostedFile file)
         {
             WSTowersOfficeEntities db = new WSTowersOfficeEntities();
@@ -94,6 +95,18 @@ namespace WSTowersOffice.Api.Controllers
             }
 
             throw new NotImplementedException();
+        }
+
+        public static async Task DeleteAsync(int id)
+        {
+            WSTowersOfficeEntities db = new WSTowersOfficeEntities();
+            Models.File fileModel = await db.File.FindAsync(id);
+            DeleteFile(GetPartialDirectory((FileType)fileModel.FileType) + fileModel.FileName);
+            db.Entry(fileModel).State = EntityState.Deleted;
+            await db.SaveChangesAsync();
+        }
+        private static void DeleteFile(string path) {
+            System.IO.File.Delete(path);
         }
         private static void SaveInAPI(FileType fileType, System.Drawing.Image image, string filename)
         {

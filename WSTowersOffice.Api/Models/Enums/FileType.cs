@@ -9,6 +9,7 @@ namespace WSTowersOffice.Api.Models.Enums
     {
         TeamIcon = 1,
         RoleIcon = 2,
-        EmployeeProfileImage = 3
+        EmployeeProfileImage = 3,
+        Max = 4
     }
 }

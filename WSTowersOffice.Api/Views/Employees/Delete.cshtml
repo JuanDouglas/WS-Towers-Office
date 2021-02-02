@@ -1,4 +1,4 @@
-﻿@model WSTowersOffice.Api.Models.Employee
+﻿@model WSTowersOffice.Api.Models.EmployeeModel
 
 @{
     ViewBag.Title = "Delete";
@@ -41,14 +41,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.File.FileName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.File.FileName)
         </dd>
 
     </dl>
