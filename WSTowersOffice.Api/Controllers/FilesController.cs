@@ -127,11 +127,11 @@ namespace WSTowersOffice.Api.Controllers
             switch (type)
             {
                 case FileType.TeamIcon:
-                    return baseDirectory + "\\Files\\Images\\Team\\Icon";
+                    return baseDirectory + "\\Files\\Images\\Team\\Icon\\";
                 case FileType.RoleIcon:
-                    return baseDirectory + "\\Files\\Images\\Role\\Icon";
+                    return baseDirectory + "\\Files\\Images\\Role\\Icon\\";
                 case FileType.EmployeeProfileImage:
-                    return baseDirectory + "\\Files\\Images\\Employee\\Profile";
+                    return baseDirectory + "\\Files\\Images\\Employee\\Profile\\";
                 default:
                     return baseDirectory;
             }
