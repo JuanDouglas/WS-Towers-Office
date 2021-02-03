@@ -2,13 +2,13 @@
 @model IEnumerable<WSTowersOffice.Api.Models.TeamModel>
 
 @{
-    ViewBag.Title = "List Teams";
+    ViewBag.Title = "Gerenciar Times";
 }
 
 <h2>ListTeams</h2>
 
 <p>
-    @Html.ActionLink("Add new Team", "Create")
+    @Html.ActionLink("Criar novo time", "Create")
 </p>
 <table class="table">
     <tr>
@@ -38,9 +38,9 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Manage Team", $"Management", new { team_name = item.Name }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("Gerenciar Time", $"Management", new { team_name = item.Name }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Deletar", "Delete", new { id = item.ID })
             </td>
         </tr>
     }

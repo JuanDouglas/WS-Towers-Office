@@ -60,19 +60,27 @@ namespace WSTowersOffice.Api.Controllers
 
             ViewBag.Employees = employeesList;
 
-            Role[] roles = await db.Role.Where(wh => true).ToArrayAsync();
+            Team_Role[] teamRoles = await db.Team_Role.Where(wh => wh.Team==team.ID).ToArrayAsync();
             List<SelectListItem> rolesList = new List<SelectListItem>();
-            foreach (Role role in roles)
+            foreach (Team_Role role in teamRoles)
             {
                 employeesList.Add(new SelectListItem()
                 {
-                    Text = $"{role.Name}",
-                    Value = role.Name
+                    Text = $"{role.Role1.Name}",
+                    Value = role.Role1.Name
                 });
             }
-            ViewBag.Roles = rolesList;
+
+            ViewBag.TeamRoles = rolesList;
 
 
+            List<TeamEmployeeModel> teamEmployees = new List<TeamEmployeeModel>();
+            Team_Employee[] team_employees = await db.Team_Employee.Where(wh => wh.Team == team.ID).ToArrayAsync();
+            foreach (var item in team_employees)
+            {
+                teamEmployees.Add(new TeamEmployeeModel(item));
+            }
+            ViewBag.TeamEmployees = teamEmployees;
             return View(team);
         }
         public async Task<ActionResult> Create()
@@ -165,7 +173,7 @@ namespace WSTowersOffice.Api.Controllers
         [HttpPost]
         [Route("Management/CreateRole")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddRole(string team_name, string role_name, string post)
+        public async Task<ActionResult> AddRole(string team_name,[Bind(Include ="Name,Description")]RoleModel role, string post)
         {
             ViewBag.Post = post;
             ViewBag.TeamName = team_name;
@@ -175,15 +183,20 @@ namespace WSTowersOffice.Api.Controllers
                 return HttpNotFound();
             }
 
-            Role role = await db.Role.FirstOrDefaultAsync(fs => fs.Name == role_name);
-            if (role==null)
+            bool exist = (await db.Role.FirstOrDefaultAsync(fs=>fs.Name==role.Name)) == null;
+
+            if (!exist)
             {
-                return HttpNotFound();
+                db.Role.Add(role.GetRole());
+                await db.SaveChangesAsync();
             }
 
-            Team_Role teamRole = new Team_Role() { Role = role.ID, Team = role.ID };
-            db.Team_Role.Add(teamRole);
+            Role roleModel = await db.Role.FirstOrDefaultAsync(fs=>fs.Name==role.Name);
+
+            db.Team_Role.Add(new Team_Role() { Role = roleModel.ID, Team = roleModel.ID });
             await db.SaveChangesAsync();
+
+
             return Redirect(post);
         }
 
@@ -216,7 +229,7 @@ namespace WSTowersOffice.Api.Controllers
                 Team = team.ID,
                 Role = teamRole.ID,
                 Employee = employee_id,
-                AddDate = DateTime.Now
+                AddDate = DateTime.UtcNow
             });
             await db.SaveChangesAsync();
             return Redirect(post);

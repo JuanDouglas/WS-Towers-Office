@@ -7,7 +7,7 @@
     <title>@ViewBag.Title - WS Towers Office</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @if (ViewBag.ModalID!=null)
+    @if (ViewBag.ModalID != null)
     {
         <!-- Chamada do modal -->
         <script type="text/javascript">
@@ -18,20 +18,25 @@
     }
 </head>
 <body onload="onLoad()">
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        @Html.ActionLink("WS Towers Office", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
+        <a href="@Url.Action("Index","Home")">
+            <img src="~/Resources/ws_towers_office_azul.png" alt="WS TOWERS OFFICE" style="width:40px;" />
+        </a>
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">@Html.ActionLink("Início", "Index")</li>
-                <li class="nav-item">@Html.ActionLink("Sobre", "About", "Home")</li>
-                <li class="nav-item">@Html.ActionLink("Contato", "Contact", "Home")</li>
-                <li class="nav-item">@Html.ActionLink("Times", "", "Teams")</li>
-                <li class="nav-item">@Html.ActionLink("Funcionários", "", "Employees")</li>
-                <li class="nav-item">@Html.ActionLink("Ajuda", "", "Help")</li>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("Times", "", "Teams", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Funcionários", "", "Employees", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Sobre", "About", "Home", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Ajuda", "", "Help", null, new { @class = "nav-link" })
+                </li>
             </ul>
         </div>
     </nav>

@@ -1,15 +1,67 @@
-﻿@model WSTowersOffice.Api.Models.Team
+﻿@using WSTowersOffice.Api.Models
+@model TeamModel
 
 @{
-    ViewBag.Title = "Manage Team";
+    ViewBag.Title = "Gerenciar Time";
 }
 
 <h2>Manage Team</h2>
 
-<div>Team: <img src="" width="4rem">@Model.Name</div>
+<div>Team: <img src="" width="4rem">@ViewBag.TeamName</div>
 <button type="button" class="btn btn-outline-primary add" data-target="#addIconModal" data-toggle="modal" style="margin-right: -2.5%;">Configurar ícone</button>
 <button type="button" class="btn btn-outline-success add" data-target="#addUserModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Funcionário</button>
-<button type="button" class="btn btn-outline-success add" data-target="#addRoleModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Role</button>
+<button type="button" class="btn btn-outline-success add" data-target="#addRoleModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Função</button>
+
+
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (TeamEmployeeModel item in ViewBag.TeamEmployees)
+    {
+        <tr>
+            <td>
+                <img src="" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.QuantityFamilyPersons)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddDate)
+            </td>
+            <td>
+              
+            </td>
+        </tr>
+    }
+
+</table>
+
 <!-- Modal Set Icon -->
 <div class="modal" id="addIconModal">
     <!-- Set Icon Modal Header-->
@@ -55,7 +107,7 @@
         <!-- Add user Modal Body -->
         <div class="modal-body">
             @Html.AntiForgeryToken();
-            @Html.Hidden("team_name", Model.Name)
+            @Html.Hidden("team_name", (string)ViewBag.TeamName)
             @Html.Hidden("post", Request.Url.AbsoluteUri)
             <div class="form-group">
                 <div class="col-md-10">
@@ -81,7 +133,7 @@
 </div>
 
 <!-- Modal Add User -->
-<div class="modal" id="addUserModal">
+<div class="modal" id="addRoleModal">
 
 
     <!-- Header -->
@@ -94,24 +146,24 @@
     @using (Html.BeginForm($"Management/CreateRole", "Team", FormMethod.Post))
     {
         <!-- Add user Modal Body -->
-<div class="modal-body">
-    @Html.AntiForgeryToken();
-    @Html.Hidden("team_name", Model.Name)
-    @Html.Hidden("post", Request.Url.AbsoluteUri)
+        <div class="modal-body">
+            @Html.AntiForgeryToken();
+            @Html.Hidden("team_name", Model.Name)
+            @Html.Hidden("post", Request.Url.AbsoluteUri)
 
-    <div class="form-group">
-        <div class="col-md-10">
-            @Html.EditorForModel("RoleModel", "Name");
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorForModel("RoleModel", "Name");
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorForModel("RoleModel", "Description");
+                </div>
+            </div>
+
         </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-10">
-            @Html.EditorForModel("RoleModel", "Description");
-        </div>
-    </div>
-
-</div>
 
         <!-- Add user Modal Footer -->
         <div class="modal-footer">
