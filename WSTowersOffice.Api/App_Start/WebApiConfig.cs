@@ -11,7 +11,10 @@ namespace WSTowersOffice.Api
     public static class WebApiConfig
     {
         public static string[] KeyValueConnectionString { get => ConnectionString.Split(';'); }
-        public static string EntityFreameworkConnectionString { get {
+        public static string EntityFreameworkConnectionString
+        {
+            get
+            {
                 var connectionBuilder = new EntityConnectionStringBuilder
                 {
                     Provider = "System.Data.SqlClient",
@@ -20,7 +23,7 @@ namespace WSTowersOffice.Api
                 };
                 string connectionString = connectionBuilder.ToString();
                 return connectionString;
-            } 
+            }
         }
         public static string ConnectionString { get { return ConfigurationManager.ConnectionStrings["WSTowersOfficeEntities"].ConnectionString; } }
         public static void Register(HttpConfiguration config)
@@ -32,6 +35,11 @@ namespace WSTowersOffice.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Routes.MapHttpRoute(
+    name: "ActionApi",
+    routeTemplate: "api/{controller}/{action}/{name}", // removed id and used name
+    defaults: new { name = RouteParameter.Optional }
+);
         }
     }
 }

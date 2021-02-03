@@ -1,0 +1,87 @@
+﻿@model WSTowersOffice.Api.Models.Role
+
+@{
+    ViewBag.Title = "CreateRole";
+}
+
+<h2>CreateRole</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Role</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @if (!ViewBag.SetImage)
+                {
+                    <input type="submit" value="Criar Função" class="btn btn-outline-success" />
+                }
+                else
+                {
+                    <input value="Send" class="btn btn-outline-success" data-toggle="modal" data-target="#addImageModal" />
+                }
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Modal Set Icon -->
+<div class="modal" id="addImageModal">
+    <!-- Set Icon Modal Header-->
+    <div class="modal-header">
+        Adicione uma imagem de perfil do Funcionário!
+    </div>
+    @using (Html.BeginForm((string)ViewBag.Action, (string)ViewBag.Controller, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <!-- Set Icon Modal Body -->
+        <div class="modal-body">
+            <img id="output" class="img-icon border-warning" width="50%" height="50%" src="@ViewBag.ImageLink" style="max-width: 18rem;border-width: 0px;cursor: pointer;" />
+            <input type="file" id="Arquivos" name="Arquivos" multiple onchange="" accept="image/*" />
+            <script>
+                var loadFile = function (event) {
+                    var output = document.getElementById('output');
+                    output.src = URl.createObjectURL(event.targetfiles[0]);
+                    output.onload = function () { URL.revokeObjectURL(output.src) }
+                }
+            </script>
+        </div>
+
+        <!-- Set Icon Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;" onclick="location.href='/Employees/Index'">Não escolher nenhuma</button>
+            <input type="submit" name="submit" value="Adicionar Icone" class="btn btn-outline-success add" />
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WSTowersOffice.Api</RootNamespace>
     <AssemblyName>WSTowersOffice.Api</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -360,6 +360,7 @@
     <Compile Include="Models\Role.cs">
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\Team.cs">
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
     </Compile>
@@ -436,7 +437,10 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <None Include="Resources\default_team_icon.png" />
+    <Content Include="Views\Teams\CreateRole.cshtml" />
+    <Resource Include="Resources\default_team_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Models\WSTowersOfficeModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WSTowersOfficeModel.edmx</DependentUpon>
@@ -447,7 +451,9 @@
       <DependentUpon>WSTowersOfficeModel.edmx</DependentUpon>
       <LastGenOutput>WSTowersOfficeModel.cs</LastGenOutput>
     </Content>
-    <None Include="Resources\default_employee_icon.png" />
+    <Resource Include="Resources\default_employee_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

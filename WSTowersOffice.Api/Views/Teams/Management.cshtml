@@ -7,9 +7,9 @@
 <h2>Manage Team</h2>
 
 <div>Team: <img src="" width="4rem">@Model.Name</div>
-<button type="button" class="btn btn-outline-primary add" data-target="#addIconModal" data-toggle="modal" style="margin-right: -2.5%;">Set Icon </button>
-<button type="button" class="btn btn-outline-success add" data-target="#addUserModal" data-toggle="modal" style="margin-right: -2.5%;">Add Employee</button>
-
+<button type="button" class="btn btn-outline-primary add" data-target="#addIconModal" data-toggle="modal" style="margin-right: -2.5%;">Configurar ícone</button>
+<button type="button" class="btn btn-outline-success add" data-target="#addUserModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Funcionário</button>
+<button type="button" class="btn btn-outline-success add" data-target="#addRoleModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Role</button>
 <!-- Modal Set Icon -->
 <div class="modal" id="addIconModal">
     <!-- Set Icon Modal Header-->
@@ -45,7 +45,7 @@
 
     <!-- Header -->
     <div class="modal-header">
-        Adicione um usuário
+        Adicione um Funcionário
     </div>
 
 
@@ -65,11 +65,53 @@
 
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.DropDownList("role_name", (IEnumerable<SelectListItem>)ViewBag.Roles);
+                    @Html.DropDownList("role_name", (IEnumerable<SelectListItem>)ViewBag.TeamRoles);
+                    <button type="button" class="btn btn-outline-success add" data-target="#addRoleModal" data-toggle="modal" style="margin-right: -2.5%;">Criar Função</button>
                 </div>
             </div>
 
         </div>
+
+        <!-- Add user Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
+            <input type="submit" name="submit" value="Adicionar Funcionário" class="btn btn-outline-success add" />
+        </div>
+    }
+</div>
+
+<!-- Modal Add User -->
+<div class="modal" id="addUserModal">
+
+
+    <!-- Header -->
+    <div class="modal-header">
+        Adicione um Funcionário
+    </div>
+
+
+    <!-- Add user Form -->
+    @using (Html.BeginForm($"Management/CreateRole", "Team", FormMethod.Post))
+    {
+        <!-- Add user Modal Body -->
+<div class="modal-body">
+    @Html.AntiForgeryToken();
+    @Html.Hidden("team_name", Model.Name)
+    @Html.Hidden("post", Request.Url.AbsoluteUri)
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorForModel("RoleModel", "Name");
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorForModel("RoleModel", "Description");
+        </div>
+    </div>
+
+</div>
 
         <!-- Add user Modal Footer -->
         <div class="modal-footer">

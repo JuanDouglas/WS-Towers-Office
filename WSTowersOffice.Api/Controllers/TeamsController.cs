@@ -60,14 +60,14 @@ namespace WSTowersOffice.Api.Controllers
 
             ViewBag.Employees = employeesList;
 
-            Team_Role[] roles = await db.Team_Role.Where(wh => wh.Team == team.ID).ToArrayAsync();
+            Role[] roles = await db.Role.Where(wh => true).ToArrayAsync();
             List<SelectListItem> rolesList = new List<SelectListItem>();
-            foreach (Team_Role role in roles)
+            foreach (Role role in roles)
             {
                 employeesList.Add(new SelectListItem()
                 {
-                    Text = $"{role.Role1.Name}",
-                    Value = role.Role1.Name
+                    Text = $"{role.Name}",
+                    Value = role.Name
                 });
             }
             ViewBag.Roles = rolesList;
@@ -161,6 +161,32 @@ namespace WSTowersOffice.Api.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        [Route("Management/CreateRole")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddRole(string team_name, string role_name, string post)
+        {
+            ViewBag.Post = post;
+            ViewBag.TeamName = team_name;
+            Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            Role role = await db.Role.FirstOrDefaultAsync(fs => fs.Name == role_name);
+            if (role==null)
+            {
+                return HttpNotFound();
+            }
+
+            Team_Role teamRole = new Team_Role() { Role = role.ID, Team = role.ID };
+            db.Team_Role.Add(teamRole);
+            await db.SaveChangesAsync();
+            return Redirect(post);
+        }
+
 
         [HttpPost]
         [Route("Management/AddEmployee")]

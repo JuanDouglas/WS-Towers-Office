@@ -14,7 +14,7 @@ CREATE TABLE [File] (
 [Leaght] INTEGER NOT NULL
 );
 INSERT INTO [File] ([FileType], [FileName], [Leaght]) VALUES (1,'default_team_icon.png',32768);
-
+INSERT INTO [File] ([FileType], [FileName], [Leaght]) VALUES (3,'default_employee_icon.png',32768);
 
 CREATE TABLE [Team] (
 [ID] INTEGER PRIMARY KEY IDENTITY NOT NULL,
