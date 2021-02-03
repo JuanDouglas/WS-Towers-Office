@@ -15,6 +15,7 @@ using System.Configuration;
 
 namespace WSTowersOffice.Api.Controllers
 {
+    [RoutePrefix("Teams")]
     public class TeamsController : Controller
     {
         public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
@@ -60,7 +61,7 @@ namespace WSTowersOffice.Api.Controllers
 
             ViewBag.Employees = employeesList;
 
-            Team_Role[] teamRoles = await db.Team_Role.Where(wh => wh.Team==team.ID).ToArrayAsync();
+            Team_Role[] teamRoles = await db.Team_Role.Where(wh => wh.Team == team.ID).ToArrayAsync();
             List<SelectListItem> rolesList = new List<SelectListItem>();
             foreach (Team_Role role in teamRoles)
             {
@@ -87,11 +88,51 @@ namespace WSTowersOffice.Api.Controllers
         {
             return View();
         }
-        public async Task<ActionResult> Delete(string team_name) {
 
-            return View();
+        [HttpGet]
+        public async Task<ActionResult> Delete(string team_name)
+        {
+            Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
+
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(new TeamModel(team));
         }
 
+        [HttpPost]
+        public async Task<ActionResult> DeleteConfirmed(string team_name)
+        {
+            Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
+            if (team == null)
+            {
+                return HttpNotFound();
+            }
+
+            foreach (var item in team.Team_Role)
+            {
+                db.Team_Role.Remove(item);
+            }
+
+            foreach (var item in team.Team_Employee)
+            {
+                db.Team_Employee.Remove(item);
+            }
+
+            await db.SaveChangesAsync();
+            using (SqlConnection connection = new SqlConnection(WebApiConfig.ConnectionString))
+            {
+                connection.Open();
+                SqlCommand sqlCommand = new SqlCommand($"DELETE [Team] WHERE [ID] = {team.ID}", connection);
+
+
+                sqlCommand.ExecuteNonQuery();
+                connection.Close();
+            }
+            return RedirectToAction("Index");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -121,7 +162,7 @@ namespace WSTowersOffice.Api.Controllers
                 connection.Close();
             }
 
-            return RedirectToAction($"Management", "Teams",new { team_name=team.Name});
+            return RedirectToAction($"Management", "Teams", new { team_name = team.Name });
         }
 
         [Route("Management/SetIcon")]
@@ -178,7 +219,7 @@ namespace WSTowersOffice.Api.Controllers
         [HttpPost]
         [Route("Management/CreateRole")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddRole(string team_name,[Bind(Include ="Name,Description")]RoleModel role, string post)
+        public async Task<ActionResult> AddRole(string team_name, [Bind(Include = "Name,Description")] RoleModel role, string post)
         {
             ViewBag.Post = post;
             ViewBag.TeamName = team_name;
@@ -188,7 +229,7 @@ namespace WSTowersOffice.Api.Controllers
                 return HttpNotFound();
             }
 
-            bool exist = (await db.Role.FirstOrDefaultAsync(fs=>fs.Name==role.Name)) == null;
+            bool exist = (await db.Role.FirstOrDefaultAsync(fs => fs.Name == role.Name)) == null;
 
             if (!exist)
             {
@@ -196,7 +237,7 @@ namespace WSTowersOffice.Api.Controllers
                 await db.SaveChangesAsync();
             }
 
-            Role roleModel = await db.Role.FirstOrDefaultAsync(fs=>fs.Name==role.Name);
+            Role roleModel = await db.Role.FirstOrDefaultAsync(fs => fs.Name == role.Name);
 
             db.Team_Role.Add(new Team_Role() { Role = roleModel.ID, Team = roleModel.ID });
             await db.SaveChangesAsync();
@@ -238,6 +279,14 @@ namespace WSTowersOffice.Api.Controllers
             });
             await db.SaveChangesAsync();
             return Redirect(post);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

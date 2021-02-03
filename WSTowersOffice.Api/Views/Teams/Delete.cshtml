@@ -1,4 +1,4 @@
-﻿@model WSTowersOffice.Api.Models.Team
+﻿@model WSTowersOffice.Api.Models.TeamModel
 
 @{
     ViewBag.Title = "Deletar Time";
@@ -37,9 +37,9 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm("DeleteConfirmed", "Teams",FormMethod.Post)) {
         @Html.AntiForgeryToken()
-
+        @Html.Hidden("team_name",Model.Name);
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")

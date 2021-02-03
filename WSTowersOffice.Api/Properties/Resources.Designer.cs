@@ -92,9 +92,29 @@ namespace WSTowersOffice.Api.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ws_black {
+            get {
+                object obj = ResourceManager.GetObject("ws_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ws_towers_office_azul {
             get {
                 object obj = ResourceManager.GetObject("ws_towers_office_azul", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ws_white {
+            get {
+                object obj = ResourceManager.GetObject("ws_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

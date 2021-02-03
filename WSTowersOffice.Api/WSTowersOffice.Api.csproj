@@ -437,6 +437,8 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Resources\ws_towers_office_azul.png" />
+    <None Include="Resources\ws_black.png" />
+    <None Include="Resources\ws_white.png" />
     <Content Include="Views\Teams\CreateRole.cshtml" />
     <Content Include="Views\Teams\Delete.cshtml" />
     <Resource Include="Resources\default_team_icon.png">
