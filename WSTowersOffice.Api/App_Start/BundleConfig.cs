@@ -24,7 +24,7 @@ namespace WSTowersOffice.Api
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Index.css"));
+                      "~/Content/Site.css"));
         }
     }
 }

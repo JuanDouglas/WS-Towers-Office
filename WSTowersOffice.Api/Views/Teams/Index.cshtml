@@ -5,7 +5,7 @@
     ViewBag.Title = "Gerenciar Times";
 }
 
-<h2>ListTeams</h2>
+<h2>Gerenciar Times</h2>
 
 <p>
     @Html.ActionLink("Criar novo time", "Create")
@@ -40,7 +40,7 @@
             <td>
                 @Html.ActionLink("Gerenciar Time", $"Management", new { team_name = item.Name }) |
                 @Html.ActionLink("Detalhes", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Deletar", "Delete", new { id = item.ID })
+                @Html.ActionLink("Deletar", "Delete", new { team_name = item.Name })
             </td>
         </tr>
     }

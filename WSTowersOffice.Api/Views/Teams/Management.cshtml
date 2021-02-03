@@ -8,7 +8,7 @@
 <h2>Manage Team</h2>
 
 <div>Team: <img src="" width="4rem">@ViewBag.TeamName</div>
-<button type="button" class="btn btn-outline-primary add" data-target="#addIconModal" data-toggle="modal" style="margin-right: -2.5%;">Configurar ícone</button>
+<button type="button" class="btn btn-outline-primary add" data-target="#addIconModal" data-toggle="modal" style="margin-right: -2.5%;">Definir Ícone</button>
 <button type="button" class="btn btn-outline-success add" data-target="#addUserModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Funcionário</button>
 <button type="button" class="btn btn-outline-success add" data-target="#addRoleModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Função</button>
 
@@ -55,7 +55,6 @@
                 @Html.DisplayFor(modelItem => item.AddDate)
             </td>
             <td>
-              
             </td>
         </tr>
     }
@@ -145,6 +144,7 @@
     <!-- Add user Form -->
     @using (Html.BeginForm($"Management/CreateRole", "Team", FormMethod.Post))
     {
+       RoleModel roleModel = new RoleModel();
         <!-- Add user Modal Body -->
         <div class="modal-body">
             @Html.AntiForgeryToken();
@@ -153,13 +153,13 @@
 
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.EditorForModel("RoleModel", "Name");
+                    @Html.EditorFor(modelItem => roleModel.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nome da função" } });
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.EditorForModel("RoleModel", "Description");
+                    @Html.EditorFor(modelItem => roleModel.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descrição" } });
                 </div>
             </div>
 

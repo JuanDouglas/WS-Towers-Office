@@ -22,34 +22,11 @@ textarea {
     max-width: 280px;
 }
 
-.navbar-custom {
-    background-color: #ff5500;
-}
-    /* change the brand and text color */
-    .navbar-custom .navbar-brand,
-    .navbar-custom .navbar-text {
-        color: rgba(0,0,0,0.8);
-    }
-    /* change the link color */
-    .navbar-custom .navbar-nav .nav-link {
-        color: rgba(0,0,0,0.8);
-    }
-    /* change the color of active or hovered links */
-    .navbar-custom .nav-item.active .nav-link,
-    .navbar-custom .nav-item:hover .nav-link {
-        color: #000000;
-    }
-
-.h1-custom {
-    background-color: aqua
-}
-
 .footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: red;
-    color: white;
+    color: #000000;
     text-align: center;
 }

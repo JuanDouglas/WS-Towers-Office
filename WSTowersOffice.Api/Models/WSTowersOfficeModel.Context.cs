@@ -12,19 +12,19 @@ namespace WSTowersOffice.Api.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class WSTowersOfficeEntities : DbContext
     {
         public WSTowersOfficeEntities()
             : base(WebApiConfig.EntityFreameworkConnectionString)
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<File> File { get; set; }
         public virtual DbSet<Role> Role { get; set; }

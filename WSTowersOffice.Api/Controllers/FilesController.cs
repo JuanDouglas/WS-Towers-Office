@@ -15,19 +15,15 @@ using WSTowersOffice.Api.Properties;
 
 namespace WSTowersOffice.Api.Controllers
 {
+    [RoutePrefix("api/Files")]
     public class FilesController : ApiController
     {
         public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
 
-        [HttpGet]
-        public async Task<IHttpActionResult> Get()
-        {
-            return Ok("Teste");
-        }
         // GET: api/Files
-        [Route("Image")]
         [HttpGet]
-        public async Task<IHttpActionResult> Get([FromUri]string filename, [FromUri]FileType filetype, [FromUri]ImageExtension extension)
+        [Route("Image")]
+        public async Task<IHttpActionResult> Image(string filename, FileType filetype, ImageExtension extension)
         {
             Bitmap bitmap = null;
             if (filename == "default_team_icon.png" && filetype == FileType.TeamIcon)

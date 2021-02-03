@@ -81,12 +81,17 @@ namespace WSTowersOffice.Api.Controllers
                 teamEmployees.Add(new TeamEmployeeModel(item));
             }
             ViewBag.TeamEmployees = teamEmployees;
-            return View(team);
+            return View(new TeamModel(team));
         }
         public async Task<ActionResult> Create()
         {
             return View();
         }
+        public async Task<ActionResult> Delete(string team_name) {
+
+            return View();
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
