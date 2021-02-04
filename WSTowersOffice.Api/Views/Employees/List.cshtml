@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WSTowersOffice.Api.Models.EmployeeModel>
+﻿@using WSTowersOffice.Api.Models;
+@model IEnumerable<EmployeeModel>
 
 @{
     ViewBag.Title = "Index";
@@ -25,8 +26,7 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                <button class="btn btn-custom btn-outline-light"
-                        @Html.ActionLink("Criar novo", "Create")
+                <button class="btn btn-outline-light btn-custom" onclick="location.href='@Url.Action("Create", "Employees", null)'">Novo Funcionário</button>
             </th>
         </tr>
 
@@ -49,40 +49,61 @@
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
-                    <button class="btn btn-primary btn-custom" onclick="location.href='@Url.Action("Edit", "Employee", new { id = item.ID })'">Editar</button>
-                    <button class="btn btn-warning btn-custom" onclick="location.href='@Url.Action("List", "Employee", new { employee_id= item.ID })'">Detalhes</button>
-                    <button class="btn btn-danger btn-custom" onclick="location.href='@Url.Action("Delete", "Employee", new { id = item.ID })'">Deletar</button>
+                    <button class="btn btn-primary btn-custom" onclick="location.href='@Url.Action("Edit", "Employees", new { id = item.ID })'">Editar</button>
+                    <button class="btn btn-warning btn-custom" onclick="location.href='@Url.Action("List", "Employees", new { employee_id = item.ID })'">Detalhes</button>
+                    <button class="btn btn-danger btn-custom" onclick="location.href='@Url.Action("Delete", "Employees", new { id = item.ID })'">Deletar</button>
                 </td>
             </tr>
         }
     </thead>
 </table>
 
-<!-- Modal Add User -->
-<div class="modal" id="showEmployeeModal">
+@if (ViewBag.ContainEmployee)
+{
+    <!-- Modal Add User -->
+    <div class="modal" id="showEmployeeModal">
+        @{
+            EmployeeModel employee = ViewBag.Employee;
+        }
+        <!-- Add user Modal Body -->
+        <div class="modal-body">
+            <center>
+                <div class="card" style="width:400px">
+                    <img class="card-img-top" src="@employee.ProfileImage.ImageUrl"  alt="Card image" style="height:350px">
+                    <div style="text-align: right;"><button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="max-width: 45px;text-align: right;margin: 0.5rem;margin-top: -658px;">X</button></div>
+                    <div class="card-body">
+                        <h4 class="card-title">@employee.Name</h4>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </dt>
 
-    <!-- Header -->
-    <div class="modal-header">
-        Adicione um Funcionário
-    </div>
+                            <dd>
+                                @Html.DisplayFor(model => employee.Email)
+                            </dd>
 
-    <!-- Add user Modal Body -->
-    <div class="modal-body">
-        <div class="form-group">
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="name" placeholder="Nome" required type="text" value="">
-            </div>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CPF)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => employee.CPF)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.QuantityFamilyPersons)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => employee.QuantityFamilyPersons)
+                            </dd>
+
+                        </dl>
+                        <a href="/Employees/Edit/@employee.ID" class="btn btn-primary">Editar perfil</a>
+                    </div>
+                </div>
+            </center>
         </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="description" placeholder="Descrição" required type="text" value="">
-            </div>
-        </div>
     </div>
 
-    <!-- Add user Modal Footer -->
-    <div class="modal-footer">
-
-    </div>
-
-</div>
+}

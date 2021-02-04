@@ -1,12 +1,12 @@
-﻿body {
+﻿/*body {
     padding-bottom: 1em;
-}
+}*/
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 10px;
-    padding-top:3rem;
-    padding-right: 10px;
+    padding-left: 1em;
+    padding-top:2rem;
+    padding-right: 1em;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -26,10 +26,12 @@ textarea {
 .footer {
     position: fixed;
     left: 0;
-    bottom: 0;
+    bottom: 0px;
     width: 100%;
-    color: #000000;
+    color: #212529;
     text-align: center;
+    background-color: #000000;
+    padding: 0.3em;
 }
 .navbar {
     background-color: #212529;

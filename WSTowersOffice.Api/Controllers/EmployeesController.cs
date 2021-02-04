@@ -32,7 +32,7 @@ namespace WSTowersOffice.Api.Controllers
                 EmployeeModel employeeModel = new EmployeeModel(employeeDB);
                 ViewBag.Employee = employeeModel;
                 ViewBag.ContainEmployee = true;
-                ViewBag.ModalID = "showEmployeeModal";
+                ViewBag.ModalID = "#showEmployeeModal";
             }
             return View(employeeModels);
         }
@@ -120,7 +120,7 @@ namespace WSTowersOffice.Api.Controllers
                 return RedirectToActionPermanent("InternalError", "Errors");
             }
 
-            return RedirectToAction("Index", "Employees");
+            return RedirectToAction("List", "Employees");
         }
         public async Task<ActionResult> Delete(int? id)
         {

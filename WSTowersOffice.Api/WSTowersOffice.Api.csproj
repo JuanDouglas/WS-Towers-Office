@@ -441,6 +441,7 @@
     <None Include="Resources\ws_white.png" />
     <Content Include="Views\Teams\CreateRole.cshtml" />
     <Content Include="Views\Teams\Delete.cshtml" />
+    <Content Include="Views\Employees\Detalhes.cshtml" />
     <Resource Include="Resources\default_team_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

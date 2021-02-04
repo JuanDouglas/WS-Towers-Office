@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - WS Towers Office</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
     @if (ViewBag.ModalID != null)
     {
         <!-- Chamada do modal -->
@@ -45,14 +46,13 @@
         <!--Esse codigo rederiza o resto da pagina que será definido em outro arquivo cshtml -->
         @RenderBody()
         <!-- Após rederizar a tela o código seguinte será rederizado -->
-        <hr />
-            <footer>
-                <h5 class="footer">&copy; @DateTime.Now.Year - WS Corp.</h5>
-            </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <footer>
+        <h5 class="footer">&copy; @DateTime.Now.Year - WS Corp.</h5>
+    </footer>
 </body>
 </html>
