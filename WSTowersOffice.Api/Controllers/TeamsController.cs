@@ -164,13 +164,12 @@ namespace WSTowersOffice.Api.Controllers
 
             return RedirectToAction($"Management", "Teams", new { team_name = team.Name });
         }
-
-        [Route("Management/SetIcon")]
         [HttpPost]
-        public async Task<ActionResult> SetIcon(string team_name)
+        [Route("Management/AddIcon")]
+        public async Task<ActionResult> AddIcon(int id)
         {
 
-            Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
+            Team team = await db.Team.FindAsync(id);
 
             if (team == null)
             {
@@ -219,10 +218,10 @@ namespace WSTowersOffice.Api.Controllers
         [HttpPost]
         [Route("Management/CreateRole")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddRole(string team_name, [Bind(Include = "Name,Description")] RoleModel role, string post)
+        public async Task<ActionResult> AddRole(string team_name,string name,string description)
         {
-            ViewBag.Post = post;
-            ViewBag.TeamName = team_name;
+            RoleModel role = new RoleModel() {Name = name,Description=description };
+
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
             if (team == null)
             {
@@ -243,7 +242,7 @@ namespace WSTowersOffice.Api.Controllers
             await db.SaveChangesAsync();
 
 
-            return Redirect(post);
+            return Redirect(Url.Action("Management","Teams",new {team_name }));
         }
 
 

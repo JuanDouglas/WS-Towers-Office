@@ -31,7 +31,7 @@ namespace WSTowersOffice.Api.Models
         [Display(Name = "Descrição")]
         [StringLength(1000,MinimumLength = 5)]
         public string Description { get; set; }
-        [Display(Name = "Icone")]
+        [Display(Name = "Ícone")]
        public FileModel Icon { get; set; }
         private int IconID { get; set; }
         internal Team GetTeam()

@@ -6,7 +6,7 @@
 }
 
 <center><h2>@Model.Name</h2></center>
-<hr/>
+<hr />
 <table class="table">
     <tr>
         <th>
@@ -31,28 +31,28 @@
 
     @foreach (TeamEmployeeModel item in ViewBag.TeamEmployees)
     {
-<tr>
-    <td>
-        <img src="" />
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Employee.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Employee.CPF)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Employee.QuantityFamilyPersons)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Employee.Email)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.AddDate)
-    </td>
-    <td>
-    </td>
-</tr>
+        <tr>
+            <td>
+                <img src="" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.QuantityFamilyPersons)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddDate)
+            </td>
+            <td>
+            </td>
+        </tr>
     }
 
 </table>
@@ -68,7 +68,7 @@
     <div class="modal-header">
         Adicione um ícone ao Time!
     </div>
-    @using (Html.BeginForm((string)ViewBag.Action, (string)ViewBag.Controller, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm($"Management/AddIcon/{Model.ID}", "Teams", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <!-- Set Icon Modal Body -->
         <div class="modal-body">
@@ -102,7 +102,7 @@
 
 
     <!-- Add user Form -->
-    @using (Html.BeginForm($"Management/AddEmployee", "Team", FormMethod.Post))
+    @using (Html.BeginForm($"Management/AddEmployee", "Teams", FormMethod.Post))
     {
         <!-- Add user Modal Body -->
         <div class="modal-body">
@@ -135,41 +135,33 @@
 <!-- Modal Add User -->
 <div class="modal" id="addRoleModal">
 
-
     <!-- Header -->
     <div class="modal-header">
         Adicione um Funcionário
     </div>
 
-
     <!-- Add user Form -->
-    @using (Html.BeginForm($"Management/CreateRole", "Team", FormMethod.Post))
+    @using (Html.BeginForm($"Management/CreateRole", "Teams", FormMethod.Post,new { form="CreateRole"}))
     {
         RoleModel roleModel = new RoleModel();
         <!-- Add user Modal Body -->
         <div class="modal-body">
-            @Html.AntiForgeryToken();
-            @Html.Hidden("team_name", Model.Name)
-            @Html.Hidden("post", Request.Url.AbsoluteUri)
-
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.EditorFor(modelItem => roleModel.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nome da função", required = true } });
+                    <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="name" placeholder="Nome" required type="text" value="">
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-10">
-                    @Html.EditorFor(modelItem => roleModel.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Descrição", required = true } });
+                    <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="description" placeholder="Descrição" required type="text" value="">
                 </div>
             </div>
-
         </div>
 
         <!-- Add user Modal Footer -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
-            <input type="submit" name="submit" value="Adicionar Funcionário" class="btn btn-outline-success add" />
+            <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Não adicionar</button>
+          <input type="submit" name="team_name" value="@Model.Name" class="btn btn-outline-success add"/>
         </div>
     }
 </div>

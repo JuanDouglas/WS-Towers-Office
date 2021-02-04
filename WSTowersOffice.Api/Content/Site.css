@@ -1,11 +1,12 @@
 ﻿body {
-    padding-bottom: 20px;
+    padding-bottom: 1em;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-top:3rem;
+    padding-right: 10px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -30,10 +31,34 @@ textarea {
     color: #000000;
     text-align: center;
 }
-.navbar-custom {
+.navbar {
+    background-color: #212529;
+    font-size: 14pt;
+    color: #ffffff;
+    font-weight:500;
 }
-#navbar-layout{
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 20px;
+.nav-link{
+    margin:10px;
+}
+.jumbotron-custom {
+    padding: 1em;
+    background-color: #212529;
+    color: #ffffff;
+    text-align:center;
+}
+
+.btn-custom {
+    font-weight: 500;
+    margin-right:1em;
+    margin-left:1em;
+}
+btn {
+    font-size: 14pt;
+}
+table {
+    text-align: center;
+    font-size: 14pt;
+    font-family: Arial;
+    font-weight: 500;
+    border-radius: 20px 20px;
 }

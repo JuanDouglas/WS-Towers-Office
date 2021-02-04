@@ -30,6 +30,11 @@ namespace WSTowersOffice.Api.Controllers
             {
                 bitmap = Resources.default_team_icon;
             }
+            if (filename == "default_employee_icon.png")
+            {
+                bitmap = Resources.default_team_icon;
+            }
+           
             if (bitmap == null)
             {
                 bitmap = (Bitmap)Bitmap.FromFile(GetPartialDirectory(filetype) + filename);

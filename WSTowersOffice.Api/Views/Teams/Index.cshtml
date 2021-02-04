@@ -5,43 +5,46 @@
     ViewBag.Title = "Gerenciar Times";
 }
 
-<h2>Gerenciar Times</h2>
+    <h2 class="jumbotron jumbotron-custom">Times</h2>
 
-<p>
-    @Html.ActionLink("Criar novo time", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Icon)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
+<table class="table table-hover table-bordered table-custom">
+    <thead class="thead-dark">
 
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
         <tr>
-
-            <img src="@item.Icon.ImageUrl" />
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Gerenciar Time", $"Management", new { team_name = item.Name }) |
-                @Html.ActionLink("Detalhes", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Deletar", "Delete", new { team_name = item.Name })
-            </td>
+            <th class="th-center">
+                @Html.DisplayNameFor(model => model.Icon)
+            </th>
+            <th class="th-center">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="th-center">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th class="th-center">
+                <button class="btn btn-outline-light" onclick="location.href = '@Url.Action("Create","Teams", new { })'"> Novo Time</button>
+            </th>
         </tr>
-    }
+
+        @foreach (var item in Model)
+        {
+            <div class="table-teams">
+                <tr>
+                    <td class="td-size-custom">
+                        <img width="45px" src="@item.Icon.ImageUrl" />
+                    </td>
+                    <td class="td-size-custom">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="td-size-custom">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td class="td-size-custom">
+                            <button class="btn btn-primary btn-custom" onclick="location.href = '@Url.Action("Management","Teams", new { team_name=item.Name})'">Detalhes</button>
+                            <button class="btn btn-warning btn-custom" onclick="location.href = '@Url.Action("Management","Teams", new { team_name=item.Name})'">Gerenciar</button>
+                            <button class="btn btn-danger btn-custom" onclick="location.href = '@Url.Action("Delete","Teams", new { team_name=item.Name})'">Deletar</button>
+                    </td>
+                </tr>
+            </div>
+        }
+    </thead>
 </table>

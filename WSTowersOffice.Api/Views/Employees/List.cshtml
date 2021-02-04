@@ -1,0 +1,88 @@
+﻿@model IEnumerable<WSTowersOffice.Api.Models.EmployeeModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="jumbotron jumbotron-custom">Index</h2>
+
+<table class="table table-hover table-bordered table-custom table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfileImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuantityFamilyPersons)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                <button class="btn btn-custom btn-outline-light"
+                        @Html.ActionLink("Criar novo", "Create")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img width="60px" src="@item.ProfileImage.ImageUrl" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityFamilyPersons)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-custom" onclick="location.href='@Url.Action("Edit", "Employee", new { id = item.ID })'">Editar</button>
+                    <button class="btn btn-warning btn-custom" onclick="location.href='@Url.Action("List", "Employee", new { employee_id= item.ID })'">Detalhes</button>
+                    <button class="btn btn-danger btn-custom" onclick="location.href='@Url.Action("Delete", "Employee", new { id = item.ID })'">Deletar</button>
+                </td>
+            </tr>
+        }
+    </thead>
+</table>
+
+<!-- Modal Add User -->
+<div class="modal" id="showEmployeeModal">
+
+    <!-- Header -->
+    <div class="modal-header">
+        Adicione um Funcionário
+    </div>
+
+    <!-- Add user Modal Body -->
+    <div class="modal-body">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="name" placeholder="Nome" required type="text" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="description" placeholder="Descrição" required type="text" value="">
+            </div>
+        </div>
+    </div>
+
+    <!-- Add user Modal Footer -->
+    <div class="modal-footer">
+
+    </div>
+
+</div>

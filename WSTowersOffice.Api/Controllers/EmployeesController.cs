@@ -16,13 +16,23 @@ namespace WSTowersOffice.Api.Controllers
     public class EmployeesController : Controller
     {
         private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> List(int? employee_id)
         {
+            ViewBag.ContainEmployee = false;
             List<Employee> employees = await db.Employee.Where(wh => true).ToListAsync();
             List<EmployeeModel> employeeModels = new List<EmployeeModel>();
             foreach (Employee employee in employees)
             {
                 employeeModels.Add(new EmployeeModel(employee));
+            }
+
+            Employee employeeDB = await db.Employee.FirstOrDefaultAsync(fs => fs.ID == employee_id);
+            if (employeeDB!=null)
+            {
+                EmployeeModel employeeModel = new EmployeeModel(employeeDB);
+                ViewBag.Employee = employeeModel;
+                ViewBag.ContainEmployee = true;
+                ViewBag.ModalID = "showEmployeeModal";
             }
             return View(employeeModels);
         }

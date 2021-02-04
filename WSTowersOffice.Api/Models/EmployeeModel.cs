@@ -18,7 +18,7 @@ namespace WSTowersOffice.Api.Models
         [StringLength(500, MinimumLength = 3)]
         public string Name { get; set; }
         [Required]
-        [Display(Name = "Quantidade de pessoas na familia")]
+        [Display(Name = "Pessoas na família")]
         public int QuantityFamilyPersons { get; set; }
         [Required]
         [EmailAddress]
