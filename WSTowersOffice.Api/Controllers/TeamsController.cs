@@ -52,11 +52,14 @@ namespace WSTowersOffice.Api.Controllers
             List<SelectListItem> employeesList = new List<SelectListItem>();
             foreach (Employee employee in employees)
             {
-                employeesList.Add(new SelectListItem()
+                if ((await db.Team_Employee.FirstOrDefaultAsync(fs => fs.Team == team.ID && fs.Employee == employee.ID))==null)
                 {
-                    Text = $"{employee.Name.Split(' ')[0]}, {employee.CPF}",
-                    Value = employee.ID.ToString()
-                });
+                    employeesList.Add(new SelectListItem()
+                    {
+                        Text = $"{employee.Name.Split(' ')[0]}, {employee.CPF}",
+                        Value = employee.ID.ToString()
+                    });
+                }
             }
 
             ViewBag.Employees = employeesList;
@@ -65,11 +68,12 @@ namespace WSTowersOffice.Api.Controllers
             List<SelectListItem> rolesList = new List<SelectListItem>();
             foreach (Team_Role role in teamRoles)
             {
-                employeesList.Add(new SelectListItem()
-                {
-                    Text = $"{role.Role1.Name}",
-                    Value = role.Role1.Name
-                });
+                    rolesList.Add(new SelectListItem()
+                    {
+                        Text = $"{role.Role1.Name}",
+                        Value = role.Role1.Name
+                    });
+                
             }
 
             ViewBag.TeamRoles = rolesList;
@@ -216,11 +220,10 @@ namespace WSTowersOffice.Api.Controllers
         }
 
         [HttpPost]
-        [Route("Management/CreateRole")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddRole(string team_name,string name,string description)
+        public async Task<ActionResult> CreateRole(string team_name, string role_name, string role_description)
         {
-            RoleModel role = new RoleModel() {Name = name,Description=description };
+            RoleModel role = new RoleModel() {Name = role_name,Description= role_description};
 
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
             if (team == null)
@@ -228,26 +231,37 @@ namespace WSTowersOffice.Api.Controllers
                 return HttpNotFound();
             }
 
-            bool exist = (await db.Role.FirstOrDefaultAsync(fs => fs.Name == role.Name)) == null;
+            bool exist = (await db.Role.FirstOrDefaultAsync(fs => fs.Name == role.Name)) != null;
 
             if (!exist)
             {
-                db.Role.Add(role.GetRole());
+                using (SqlConnection connection = new SqlConnection(WebApiConfig.ConnectionString))
+                {
+                    connection.Open();
+                    SqlCommand sqlCommand = new SqlCommand($"INSERT INTO [Role] ([Name],[Description],[Icon]) VALUES ('{role.Name}','{role.Description}',2);", connection);
+
+                    sqlCommand.ExecuteNonQuery();
+                    connection.Close();
+                }
                 await db.SaveChangesAsync();
             }
 
             Role roleModel = await db.Role.FirstOrDefaultAsync(fs => fs.Name == role.Name);
 
-            db.Team_Role.Add(new Team_Role() { Role = roleModel.ID, Team = roleModel.ID });
-            await db.SaveChangesAsync();
+            using (SqlConnection connection = new SqlConnection(WebApiConfig.ConnectionString))
+            {
+                connection.Open();
+                SqlCommand sqlCommand = new SqlCommand($"INSERT INTO [Team_Role] ([Team],[Role]) VALUES ('{team.ID}','{roleModel.ID}');", connection);
 
+                sqlCommand.ExecuteNonQuery();
+                connection.Close();
+            }
 
             return Redirect(Url.Action("Management","Teams",new {team_name }));
         }
 
 
         [HttpPost]
-        [Route("Management/AddEmployee")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddEmployee(int employee_id, string team_name, string role_name, string post)
         {
@@ -269,14 +283,15 @@ namespace WSTowersOffice.Api.Controllers
                 return HttpNotFound();
             }
 
-            db.Team_Employee.Add(new Team_Employee()
+
+            using (SqlConnection connection = new SqlConnection(WebApiConfig.ConnectionString))
             {
-                Team = team.ID,
-                Role = teamRole.ID,
-                Employee = employee_id,
-                AddDate = DateTime.UtcNow
-            });
-            await db.SaveChangesAsync();
+                connection.Open();
+                SqlCommand sqlCommand = new SqlCommand($"INSERT INTO [Team_Employee] ([Team],[Employee],[Role],[AddDate]) VALUES ('{team.ID}','{employee.ID}','{teamRole.ID}','{DateTime.UtcNow}');", connection);
+
+                sqlCommand.ExecuteNonQuery();
+                connection.Close();
+            }
             return Redirect(post);
         }
         protected override void Dispose(bool disposing)

@@ -16,7 +16,7 @@ namespace WSTowersOffice.Api.Models
 
         internal Role GetRole()
         {
-            return new Role() { Name = Name, Description = Description};
+            return new Role() { Name = Name, Description = Description, Icon = 1};
         }
     }
 }

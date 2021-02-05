@@ -19,9 +19,6 @@
             CPF
         </th>
         <th>
-            Pessoas na Família
-        </th>
-        <th>
             E-mail
         </th>
         <th>
@@ -33,16 +30,13 @@
     {
         <tr>
             <td>
-                <img src="" />
+                <img width="45px" src="@item.Employee.ProfileImage.ImageUrl" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Employee.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Employee.CPF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.QuantityFamilyPersons)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Employee.Email)
@@ -102,7 +96,7 @@
 
 
     <!-- Add user Form -->
-    @using (Html.BeginForm($"Management/AddEmployee", "Teams", FormMethod.Post))
+    @using (Html.BeginForm($"AddEmployee", "Teams", FormMethod.Post))
     {
         <!-- Add user Modal Body -->
         <div class="modal-body">
@@ -127,7 +121,7 @@
         <!-- Add user Modal Footer -->
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
-            <input type="submit" name="submit" value="Adicionar Funcionário" class="btn btn-outline-success add" />
+            <input type="submit" value="Adicionar Funcionário" class="btn btn-outline-success add" />
         </div>
     }
 </div>
@@ -141,27 +135,78 @@
     </div>
 
     <!-- Add user Form -->
-    @using (Html.BeginForm($"Management/CreateRole", "Teams", FormMethod.Post,new { form="CreateRole"}))
+    @using (Html.BeginForm($"CreateRole", "Teams", FormMethod.Post, new { form = "CreateRole" }))
     {
         RoleModel roleModel = new RoleModel();
         <!-- Add user Modal Body -->
         <div class="modal-body">
+            @Html.AntiForgeryToken();
             <div class="form-group">
                 <div class="col-md-10">
-                    <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="name" placeholder="Nome" required type="text" value="">
+                    <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="role_name" placeholder="Nome" required type="text">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-10">
-                    <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="description" placeholder="Descrição" required type="text" value="">
+                    <input class="form-control text-box single-line" data-val="true" data-val-length="O campo Description deve ser uma cadeia de caracteres com um comprimento máximo de 0." data-val-length-max="0" name="role_description" placeholder="Descrição" required type="text">
                 </div>
             </div>
+            <input type="hidden" value="@Model.Name" name="team_name" />
         </div>
 
         <!-- Add user Modal Footer -->
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Não adicionar</button>
-          <input type="submit" name="team_name" value="@Model.Name" class="btn btn-outline-success add"/>
+            <input type="submit" class="btn btn-outline-success add" />
         </div>
     }
 </div>
+@if (ViewBag.ContainEmployee)
+{
+    <!-- Modal Add User -->
+    <div class="modal" id="showEmployeeModal">
+        @{
+            EmployeeModel employee = ViewBag.Employee;
+        }
+        <!-- Add user Modal Body -->
+        <div class="modal-body">
+            <center>
+                <div class="card" style="width:400px">
+
+                    <img class="card-img-top img-employee-modal" src="@employee.ProfileImage.ImageUrl" alt="Card image">
+
+                    <div style="text-align: right;">
+                        <button type="button" class="btn btn-danger btn-custom btn-rounded" data-dismiss="modal">X</button>
+                    </div>
+                    <center>
+                        <div class="card card-body">
+                            <h2 class="btn btn-outline-dark disabled">@employee.Name</h2>
+
+                            <dl class="dl-horizontal">
+
+                                <dd class="btn btn-outline-dark disabled" style="width:19em">
+                                    @Html.DisplayFor(model => employee.Email)
+                                </dd>
+
+                                <dd class="btn btn-outline-dark disabled">
+                                    @Html.DisplayFor(model => employee.CPF)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => employee.QuantityFamilyPersons)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => employee.QuantityFamilyPersons)
+                                </dd>
+
+                            </dl>
+                            <a href="/Employees/Edit/@employee.ID" class="btn btn-primary">Editar perfil</a>
+                        </div>
+                    </center>
+                </div>
+            </center>
+        </div>
+    </div>
+
+}

@@ -53,10 +53,11 @@ namespace WSTowersOffice.Api.Controllers
                 ModelState.AddModelError("CPF", "Already exist one Employee using this CPF!");
             }
 
-            if ((await db.Employee.FirstOrDefaultAsync(fs => fs.CPF == employeeModel.CPF)) != null)
+            if ((await db.Employee.FirstOrDefaultAsync(fs => fs.Email == employeeModel.Email)) != null)
             {
                 ModelState.AddModelError("Email", "Already exist one Employee using this Email!");
             }
+
             ViewBag.SetImage = false;
             if (!ModelState.IsValid)
             {
