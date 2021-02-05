@@ -341,7 +341,11 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
+    <Compile Include="Models\Authentication.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Employee.cs">
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
     </Compile>
@@ -357,6 +361,12 @@
     </Compile>
     <Compile Include="Models\Enums\FileType.cs" />
     <Compile Include="Models\Enums\ImageExtension.cs" />
+    <Compile Include="Models\IP.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Login.cs">
+      <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
     </Compile>
