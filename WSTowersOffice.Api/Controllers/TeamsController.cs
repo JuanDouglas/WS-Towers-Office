@@ -28,19 +28,20 @@ namespace WSTowersOffice.Api.Controllers
             {
                 return HttpNotFound();
             }
+
             List<TeamModel> teamsModel = new List<TeamModel>();
             foreach (Team item in teams)
             {
                 teamsModel.Add(new TeamModel(item));
             }
-
             return View(teamsModel);
         }
 
         [HttpGet]
         [Route("Management/{team_name}")]
-        public async Task<ActionResult> Management(string team_name)
+        public async Task<ActionResult> Management(string team_name, TeamManagementOrdeBy? order_by, string query, int? page)
         {
+            ViewBag.ContainEmployee = false;
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
 
             if (team == null)
@@ -52,7 +53,7 @@ namespace WSTowersOffice.Api.Controllers
             List<SelectListItem> employeesList = new List<SelectListItem>();
             foreach (Employee employee in employees)
             {
-                if ((await db.Team_Employee.FirstOrDefaultAsync(fs => fs.Team == team.ID && fs.Employee == employee.ID))==null)
+                if ((await db.Team_Employee.FirstOrDefaultAsync(fs => fs.Team == team.ID && fs.Employee == employee.ID)) == null)
                 {
                     employeesList.Add(new SelectListItem()
                     {
@@ -63,31 +64,70 @@ namespace WSTowersOffice.Api.Controllers
             }
 
             ViewBag.Employees = employeesList;
-
             Team_Role[] teamRoles = await db.Team_Role.Where(wh => wh.Team == team.ID).ToArrayAsync();
             List<SelectListItem> rolesList = new List<SelectListItem>();
             foreach (Team_Role role in teamRoles)
             {
-                    rolesList.Add(new SelectListItem()
-                    {
-                        Text = $"{role.Role1.Name}",
-                        Value = role.Role1.Name
-                    });
-                
+                rolesList.Add(new SelectListItem()
+                {
+                    Text = $"{role.Role1.Name}",
+                    Value = role.Role1.Name
+                });
+
             }
 
             ViewBag.TeamRoles = rolesList;
-
-
-            List<TeamEmployeeModel> teamEmployees = new List<TeamEmployeeModel>();
-            Team_Employee[] team_employees = await db.Team_Employee.Where(wh => wh.Team == team.ID).ToArrayAsync();
-            foreach (var item in team_employees)
+            TeamEmployeeModel[] teamEmployees = new TeamEmployeeModel[0];
+            IQueryable<Team_Employee> teamEmployeesQueryable = db.Team_Employee.Where(wh => wh.Team == team.ID);
+            if (query != null)
             {
-                teamEmployees.Add(new TeamEmployeeModel(item));
+                if (query != "")
+                {
+                    teamEmployeesQueryable = teamEmployeesQueryable.Where(wh => wh.Employee1.Name.Contains(query));
+                }
             }
+            if (!order_by.HasValue)
+            {
+                order_by = TeamManagementOrdeBy.DecreasingAddDate;
+            }
+            teamEmployeesQueryable = TeamOrdeBy(order_by.Value, teamEmployeesQueryable).AsQueryable();
+            if (!page.HasValue)
+            {
+                page = 0;
+            }
+            teamEmployees = GetTeamEmployeesPage(teamEmployeesQueryable, page.Value);
             ViewBag.TeamEmployees = teamEmployees;
+
             return View(new TeamModel(team));
         }
+
+        private TeamEmployeeModel[] GetTeamEmployeesPage(IQueryable<Team_Employee> teamEmployeesQueryable, int page)
+        {
+            List<TeamEmployeeModel> teamEmployees = new List<TeamEmployeeModel>();
+            for (int i = (10 * (page + 1)); i < teamEmployeesQueryable.Count() && i < (10 * (page + 1)); i++)
+            {
+                teamEmployees.Add(new TeamEmployeeModel());
+            }
+            return teamEmployees.ToArray();
+        }
+
+        private IOrderedQueryable<Team_Employee> TeamOrdeBy(TeamManagementOrdeBy order, IQueryable<Team_Employee> employees)
+        {
+            IOrderedQueryable<Team_Employee> team_employees = null;
+            switch (order)
+            {
+                case TeamManagementOrdeBy.DecreasingAddDate:
+                    team_employees = employees.OrderByDescending(employee => employee.AddDate);
+                    break;
+                case TeamManagementOrdeBy.AscendingAddDate:
+                    team_employees = employees.OrderBy(employee => employee.AddDate);
+                    break;
+                default:
+                    break;
+            }
+            return team_employees;
+        }
+
         public async Task<ActionResult> Create()
         {
             return View();
@@ -223,7 +263,7 @@ namespace WSTowersOffice.Api.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateRole(string team_name, string role_name, string role_description)
         {
-            RoleModel role = new RoleModel() {Name = role_name,Description= role_description};
+            RoleModel role = new RoleModel() { Name = role_name, Description = role_description };
 
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
             if (team == null)
@@ -257,7 +297,7 @@ namespace WSTowersOffice.Api.Controllers
                 connection.Close();
             }
 
-            return Redirect(Url.Action("Management","Teams",new {team_name }));
+            return Redirect(Url.Action("Management", "Teams", new { team_name }));
         }
 
 

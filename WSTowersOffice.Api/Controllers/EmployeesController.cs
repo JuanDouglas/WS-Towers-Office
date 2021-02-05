@@ -17,7 +17,7 @@ namespace WSTowersOffice.Api.Controllers
     public class EmployeesController : Controller
     {
         private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
-        public async Task<ActionResult> List(int? employee_id)
+        public async Task<ActionResult> List(int? employee_id,int? page)
         {
             ViewBag.ContainEmployee = false;
             List<Employee> employees = await db.Employee.Where(wh => true).ToListAsync();

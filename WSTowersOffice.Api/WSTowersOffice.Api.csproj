@@ -346,6 +346,7 @@
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\Enums\TeamManagementOrdeBy.cs" />
     <Compile Include="Models\File.cs">
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
     </Compile>

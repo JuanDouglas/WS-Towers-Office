@@ -9,17 +9,10 @@
 
 <table class="table table-hover table-bordered">
     <thead class="thead-dark">
-
         <tr>
-            <th class="th-center">
-                @Html.DisplayNameFor(model => model.Icon)
-            </th>
-            <th class="th-center">
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th class="th-center">
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
+            <th class="th-center">@Html.DisplayNameFor(model => model.Icon)</th>
+            <th class="th-center">@Html.DisplayNameFor(model => model.Name)</th>
+            <th class="th-center">@Html.DisplayNameFor(model => model.Description)</th>
             <th class="th-center">
                 <button class="btn btn-outline-light" onclick="location.href = '@Url.Action("Create","Teams", new { })'">Adicionar Time</button>
             </th>
@@ -29,15 +22,9 @@
         {
             <div class="table-teams">
                 <tr>
-                    <td class="td-size-custom">
-                        <img width="45px" src="@item.Icon.ImageUrl" />
-                    </td>
-                    <td class="td-size-custom">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td class="td-size-custom">
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
+                    <td class="td-size-custom"><img width="45px" src="@item.Icon.ImageUrl" /></td>
+                    <td class="td-size-custom">@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td class="td-size-custom">@Html.DisplayFor(modelItem => item.Description)</td>
                     <td class="td-size-custom">
                             <button class="btn btn-primary btn-custom" onclick="location.href = '@Url.Action("Management","Teams", new { team_name=item.Name})'">Detalhes</button>
                             <button class="btn btn-warning btn-custom" onclick="location.href = '@Url.Action("Management","Teams", new { team_name=item.Name})'">Gerenciar</button>
