@@ -75,9 +75,9 @@ namespace WSTowersOffice.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SetProfileImage(int id)
+        public async Task<ActionResult> SetProfileImage(int employee_id)
         {
-            Employee employee = await db.Employee.FirstOrDefaultAsync(fs => fs.ID == id);
+            Employee employee = await db.Employee.FirstOrDefaultAsync(fs => fs.ID == employee_id);
 
             if (employee == null)
             {

@@ -7,7 +7,7 @@
 
     <h2 class="jumbotron jumbotron-custom">Times</h2>
 
-<table class="table table-hover table-bordered table-custom">
+<table class="table table-hover table-bordered">
     <thead class="thead-dark">
 
         <tr>
@@ -21,7 +21,7 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th class="th-center">
-                <button class="btn btn-outline-light" onclick="location.href = '@Url.Action("Create","Teams", new { })'"> Novo Time</button>
+                <button class="btn btn-outline-light" onclick="location.href = '@Url.Action("Create","Teams", new { })'">Adicionar Time</button>
             </th>
         </tr>
 

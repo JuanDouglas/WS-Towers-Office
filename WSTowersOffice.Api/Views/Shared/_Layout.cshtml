@@ -10,7 +10,7 @@
 
     @if (ViewBag.ModalID != null)
     {
-        <!-- Chamada do modal -->
+        <!--Chamada do modal -->
         <script type="text/javascript">
             function onLoad() {
                 $('@ViewBag.ModalID').modal('show');
@@ -47,12 +47,12 @@
         @RenderBody()
         <!-- Após rederizar a tela o código seguinte será rederizado -->
     </div>
+    <footer class="footer-custom">
+        <h5 class="footer">&copy; @DateTime.Now.Year - WS Corp.</h5>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <footer>
-        <h5 class="footer">&copy; @DateTime.Now.Year - WS Corp.</h5>
-    </footer>
 </body>
 </html>

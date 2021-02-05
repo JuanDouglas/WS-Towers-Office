@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
-                <button class="btn btn-outline-light btn-custom" onclick="location.href='@Url.Action("Create", "Employees", null)'">Novo Funcionário</button>
+                <button class="btn btn-outline-light btn-custom" onclick="location.href='@Url.Action("Create", "Employees", null)'">Adicionar Funcionário</button>
             </th>
         </tr>
 
@@ -34,7 +34,7 @@
         {
             <tr>
                 <td>
-                    <img width="60px" src="@item.ProfileImage.ImageUrl" />
+                    <img width="45px" src="@item.ProfileImage.ImageUrl" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.CPF)
@@ -69,38 +69,38 @@
         <div class="modal-body">
             <center>
                 <div class="card" style="width:400px">
-                    <img class="card-img-top" src="@employee.ProfileImage.ImageUrl"  alt="Card image" style="height:350px">
-                    <div style="text-align: right;"><button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="max-width: 45px;text-align: right;margin: 0.5rem;margin-top: -658px;">X</button></div>
-                    <div class="card-body">
-                        <h4 class="card-title">@employee.Name</h4>
-                        <dl class="dl-horizontal">
-                            <dt>
-                                @Html.DisplayNameFor(model => model.Email)
-                            </dt>
 
-                            <dd>
-                                @Html.DisplayFor(model => employee.Email)
-                            </dd>
+                    <img class="card-img-top" src="@employee.ProfileImage.ImageUrl" alt="Card image" style="height:400px">
 
-                            <dt>
-                                @Html.DisplayNameFor(model => model.CPF)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => employee.CPF)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.QuantityFamilyPersons)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => employee.QuantityFamilyPersons)
-                            </dd>
-
-                        </dl>
-                        <a href="/Employees/Edit/@employee.ID" class="btn btn-primary">Editar perfil</a>
+                    <div style="text-align: right;">
+                        <button type="button" class="btn btn-danger btn-custom btn-rounded" data-dismiss="modal">X</button>
                     </div>
+                    <center>
+                        <div class="card card-body">
+                            <h2 class="btn btn-outline-dark disabled">@employee.Name</h2>
+
+                            <dl class="dl-horizontal">
+
+                                <dd class="btn btn-outline-dark disabled" style="width:19em">
+                                    @Html.DisplayFor(model => employee.Email)
+                                </dd>
+
+                                <dd class="btn btn-outline-dark disabled">
+                                    @Html.DisplayFor(model => employee.CPF)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.QuantityFamilyPersons)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => employee.QuantityFamilyPersons)
+                                </dd>
+
+                            </dl>
+                            <a href="/Employees/Edit/@employee.ID" class="btn btn-primary">Editar perfil</a>
+                        </div>
+                    </center>
                 </div>
             </center>
         </div>

@@ -7,6 +7,7 @@
     padding-left: 1em;
     padding-top:2rem;
     padding-right: 1em;
+    padding-bottom: 0em;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -23,15 +24,14 @@ textarea {
     max-width: 280px;
 }
 
-.footer {
-    position: fixed;
-    left: 0;
+.footer-custom {
+    position:fixed;
+    left: 0px;
     bottom: 0px;
     width: 100%;
-    color: #212529;
+    color: #FFFFFF;
     text-align: center;
-    background-color: #000000;
-    padding: 0.3em;
+    background-color: #212529;
 }
 .navbar {
     background-color: #212529;
@@ -62,5 +62,29 @@ table {
     font-size: 14pt;
     font-family: Arial;
     font-weight: 500;
-    border-radius: 20px 20px;
+    border-radius:10px;
+}
+th {
+    font-size: 14pt;
+    font-family: Arial;
+    font-weight: 500;
+}
+.badge-custom{
+    background-color:#FFFFFF;
+    color:#000000;
+    padding:3%;
+    font-size:14pt;
+    width:19em;
+    border-color:#000000;
+    align-content:center;
+}
+.btn-rounded {
+    max-width: 45px;
+    text-align: right;
+    margin-top: -55em;
+    margin-right: 0em;
+    border-radius:50%;
+}
+.btn-management{
+    margin: 5em;
 }
