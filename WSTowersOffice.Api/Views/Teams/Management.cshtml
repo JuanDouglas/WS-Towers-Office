@@ -6,83 +6,63 @@
 }
 
 <center><h2>@Model.Name</h2></center>
-<hr />
-<table class="table">
-    <tr>
-        <th>
-            Profile Image
-        </th>
-        <th>
-            Nome
-        </th>
-        <th>
-            CPF
-        </th>
-        <th>
-            E-mail
-        </th>
-        <th>
-            Data de adição
-        </th>
-    </tr>
-
-    @foreach (TeamEmployeeModel item in ViewBag.TeamEmployees)
-    {
+<table class="table table-hover table-bordered">
+    <thead class="thead-dark">
         <tr>
-            <td>
-                <img width="45px" src="@item.Employee.ProfileImage.ImageUrl" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.CPF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AddDate)
-            </td>
-            <td>
-            </td>
+            <th>Profile Image</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>E-mail</th>
+            <th>Data de adição</th>
         </tr>
-    }
 
+        @foreach (TeamEmployeeModel item in ViewBag.TeamEmployees)
+        {
+            <tr>
+                <td><img width="45px" src="@item.Employee.ProfileImage.ImageUrl" /></td>
+                <td>@Html.DisplayFor(modelItem => item.Employee.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Employee.CPF)</td>
+                <td>@Html.DisplayFor(modelItem => item.Employee.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.AddDate)</td>
+            </tr>
+        }
+    </thead>
 </table>
 
 <!-- Aux Buttons-->
-<button type="button" class="btn btn-outline-primary add" data-target="#addIconModal" data-toggle="modal" style="margin-right: -2.5%;">Definir Ícone</button>
-<button type="button" class="btn btn-outline-success add" data-target="#addUserModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Funcionário</button>
-<button type="button" class="btn btn-outline-success add" data-target="#addRoleModal" data-toggle="modal" style="margin-right: -2.5%;">Adicionar Função</button>
+<button type="button" class="btn btn-outline-primary btn-custom" data-target="#addIconModal" data-toggle="modal">Definir Ícone</button>
+<button type="button" class="btn btn-outline-success btn-custom" data-target="#addRoleModal" data-toggle="modal">Adicionar Função</button>
+<button type="button" class="btn btn-outline-success btn-custom" data-target="#addUserModal" data-toggle="modal">Adicionar Funcionário</button>
 
 <!-- Modal Set Icon -->
-<div class="modal" id="addIconModal">
-    <!-- Set Icon Modal Header-->
-    <div class="modal-header">
-        Adicione um ícone ao Time!
-    </div>
-    @using (Html.BeginForm($"Management/AddIcon/{Model.ID}", "Teams", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <!-- Set Icon Modal Body -->
-        <div class="modal-body">
-            <img id="output" class="img-icon border-warning" width="50%" height="50%" src="@ViewBag.ImageLink" style="max-width: 18rem;border-width: 0px;cursor: pointer;" />
-            <input required type="file" id="Arquivos" name="Arquivos" multiple onchange="" accept="image/*" />
-            <script>
-                var loadFile = function (event) {
-                    var output = document.getElementById('output');
-                    output.src = URl.createObjectURL(event.targetfiles[0]);
-                    output.onload = function () { URL.revokeObjectURL(output.src) }
-                }
-            </script>
+<div class="card">
+    <div class="modal" id="addIconModal">
+        <!-- Set Icon Modal Header-->
+        <div class="modal-header">
+            Adicione um ícone ao Time!
         </div>
+        @using (Html.BeginForm($"Management/AddIcon/{Model.ID}", "Teams", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <!-- Set Icon Modal Body -->
+            <div class="modal-body">
+                <img id="output" class="img-icon border-warning" width="50%" height="50%" src="@ViewBag.ImageLink" style="max-width: 18rem;border-width: 0px;cursor: pointer;" />
+                <input required type="file" id="Arquivos" name="Arquivos" multiple onchange="" accept="image/*" />
+                <script>
+                    var loadFile = function (event) {
+                        var output = document.getElementById('output');
+                        output.src = URl.createObjectURL(event.targetfiles[0]);
+                        output.onload = function () { URL.revokeObjectURL(output.src) }
+                    }
+                </script>
+            </div>
 
-        <!-- Set Icon Modal Footer -->
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
-            <input type="submit" name="submit" value="Enviar Arquivo" class="btn btn-outline-success add" />
-        </div>
-    }
+            <!-- Set Icon Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
+                <input type="submit" name="submit" value="Enviar Arquivo" class="btn btn-outline-success add" />
+            </div>
+        }
+    </div>
 </div>
 
 <!-- Modal Add User -->

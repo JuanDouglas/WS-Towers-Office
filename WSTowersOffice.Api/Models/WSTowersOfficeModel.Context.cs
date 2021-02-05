@@ -31,5 +31,8 @@ namespace WSTowersOffice.Api.Models
         public virtual DbSet<Team> Team { get; set; }
         public virtual DbSet<Team_Employee> Team_Employee { get; set; }
         public virtual DbSet<Team_Role> Team_Role { get; set; }
+        public virtual DbSet<Authentication> Authentication { get; set; }
+        public virtual DbSet<IP> IP { get; set; }
+        public virtual DbSet<Login> Login { get; set; }
     }
 }

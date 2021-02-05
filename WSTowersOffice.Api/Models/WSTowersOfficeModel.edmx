@@ -4,7 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WSTowersOfficeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WSTowersOfficeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Authentication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User-Agent" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="89" Nullable="false" />
+          <Property Name="Token" Type="varchar" MaxLength="86" Nullable="false" />
+          <Property Name="Login" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="ID" />
@@ -26,6 +37,27 @@
           <Property Name="Width" Type="int" />
           <Property Name="Height" Type="int" />
           <Property Name="Leaght" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="89" Nullable="false" />
+          <Property Name="Confiance" Type="int" Nullable="false" />
+          <Property Name="AlreadyBeenBanned" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="isValidEmail" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="ValidKey" Type="varchar" MaxLength="86" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -63,6 +95,21 @@
           <Property Name="Team" Type="int" Nullable="false" />
           <Property Name="Role" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Authentic__Login__5165187F">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Authentication" Type="Self.Authentication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Authentication">
+              <PropertyRef Name="Login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__Authenticati__IP__52593CB8' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__Authenticati__IP__52593CB8" />-->
         <Association Name="FK__Employee__Profil__34C8D9D1">
           <End Role="File" Type="Self.File" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -160,12 +207,19 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="WSTowersOfficeModelStoreContainer">
+          <EntitySet Name="Authentication" EntityType="Self.Authentication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="File" EntityType="Self.File" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IP" EntityType="Self.IP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team_Employee" EntityType="Self.Team_Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team_Role" EntityType="Self.Team_Role" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Authentic__Login__5165187F" Association="Self.FK__Authentic__Login__5165187F">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Authentication" EntitySet="Authentication" />
+          </AssociationSet>
           <AssociationSet Name="FK__Employee__Profil__34C8D9D1" Association="Self.FK__Employee__Profil__34C8D9D1">
             <End Role="File" EntitySet="File" />
             <End Role="Employee" EntitySet="Employee" />
@@ -199,8 +253,7 @@
             <End Role="Team_Role" EntitySet="Team_Role" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WSTowersOfficeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -413,7 +466,60 @@
             <End Role="Team_Role" EntitySet="Team_Role" />
             <End Role="Team_Employee" EntitySet="Team_Employee" />
           </AssociationSet>
+          <EntitySet Name="Authentication" EntityType="WSTowersOfficeModel.Authentication" />
+          <EntitySet Name="IP" EntityType="WSTowersOfficeModel.IP" />
+          <EntitySet Name="Login" EntityType="WSTowersOfficeModel.Login" />
+          <AssociationSet Name="FK__Authentic__Login__5165187F" Association="WSTowersOfficeModel.FK__Authentic__Login__5165187F">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Authentication" EntitySet="Authentication" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Authentication">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_Agent" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IP" Type="String" Nullable="false" MaxLength="89" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" Nullable="false" MaxLength="86" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Login1" Relationship="WSTowersOfficeModel.FK__Authentic__Login__5165187F" FromRole="Authentication" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="IP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IP1" Type="String" Nullable="false" MaxLength="89" FixedLength="false" Unicode="false" />
+          <Property Name="Confiance" Type="Int32" Nullable="false" />
+          <Property Name="AlreadyBeenBanned" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="isValidEmail" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValidKey" Type="String" Nullable="false" MaxLength="86" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Authentication" Relationship="WSTowersOfficeModel.FK__Authentic__Login__5165187F" FromRole="Login" ToRole="Authentication" />
+        </EntityType>
+        <Association Name="FK__Authentic__Login__5165187F">
+          <End Type="WSTowersOfficeModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="WSTowersOfficeModel.Authentication" Role="Authentication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Authentication">
+              <PropertyRef Name="Login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -481,6 +587,41 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Team" ColumnName="Team" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authentication">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.Authentication">
+              <MappingFragment StoreEntitySet="Authentication">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="User_Agent" ColumnName="User-Agent" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IP">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.IP">
+              <MappingFragment StoreEntitySet="IP">
+                <ScalarProperty Name="AlreadyBeenBanned" ColumnName="AlreadyBeenBanned" />
+                <ScalarProperty Name="Confiance" ColumnName="Confiance" />
+                <ScalarProperty Name="IP1" ColumnName="IP" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="WSTowersOfficeModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="ValidKey" ColumnName="ValidKey" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="isValidEmail" ColumnName="isValidEmail" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

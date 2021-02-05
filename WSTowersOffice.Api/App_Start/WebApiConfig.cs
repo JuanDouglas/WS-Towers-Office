@@ -25,7 +25,7 @@ namespace WSTowersOffice.Api
                 return connectionString;
             }
         }
-        public static string ConnectionString { get { return ConfigurationManager.ConnectionStrings["WSTowersOfficeEntities"].ConnectionString; } }
+        public static string ConnectionString { get { return ConfigurationManager.ConnectionStrings["WSTowersOfficeEntitiesDefault"].ConnectionString; } }
         public static void Register(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();

@@ -19,6 +19,10 @@
         <AssociationConnector Association="WSTowersOfficeModel.FK__Team_Emplo__Team__37A5467C" ManuallyRouted="false" />
         <AssociationConnector Association="WSTowersOfficeModel.FK__Team_Role__Team__2F10007B" ManuallyRouted="false" />
         <AssociationConnector Association="WSTowersOfficeModel.FK__Team_Emplo__Role__398D8EEE" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WSTowersOfficeModel.Authentication" Width="1.5" PointX="9.625" PointY="1" />
+        <EntityTypeShape EntityType="WSTowersOfficeModel.IP" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="WSTowersOfficeModel.Login" Width="1.5" PointX="7.375" PointY="1" />
+        <AssociationConnector Association="WSTowersOfficeModel.FK__Authentic__Login__5165187F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
