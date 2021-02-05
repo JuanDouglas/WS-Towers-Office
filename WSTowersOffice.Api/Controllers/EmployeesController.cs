@@ -13,6 +13,7 @@ using WSTowersOffice.Api.Models.Enums;
 
 namespace WSTowersOffice.Api.Controllers
 {
+    [RoutePrefix("Employees")]
     public class EmployeesController : Controller
     {
         private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
@@ -75,9 +76,9 @@ namespace WSTowersOffice.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> SetProfileImage(int employee_id)
+        public async Task<ActionResult> SetProfileImage(int id)
         {
-            Employee employee = await db.Employee.FirstOrDefaultAsync(fs => fs.ID == employee_id);
+            Employee employee = await db.Employee.FirstOrDefaultAsync(fs => fs.ID == id);
 
             if (employee == null)
             {
@@ -96,8 +97,6 @@ namespace WSTowersOffice.Api.Controllers
                 return RedirectToActionPermanent("BadRequest", "Errors");
             }
 
-            try
-            {
                 Image image = null;
 
                 try
@@ -114,11 +113,7 @@ namespace WSTowersOffice.Api.Controllers
 
                 db.Entry(employee).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                return RedirectToActionPermanent("InternalError", "Errors");
-            }
+
 
             return RedirectToAction("List", "Employees");
         }
@@ -153,7 +148,7 @@ namespace WSTowersOffice.Api.Controllers
                     await FilesController.DeleteAsync(employee.File.ID);
                 }
             }
-            return RedirectToAction("Index","Employees");
+            return RedirectToAction("List","Employees");
         }
     }
 }

@@ -62,7 +62,6 @@ table {
     font-size: 14pt;
     font-family: Arial;
     font-weight: 500;
-    border-radius:10px;
 }
 th {
     font-size: 14pt;
@@ -81,10 +80,14 @@ th {
 .btn-rounded {
     max-width: 45px;
     text-align: right;
-    margin-top: -55em;
-    margin-right: 0em;
+    margin-top: -775px;
+    margin-right: 0.25rem;
     border-radius:50%;
 }
 .btn-management{
     margin: 5em;
+}
+.img-employee-modal {
+    height: 400px;
+    padding: 1rem;
 }
