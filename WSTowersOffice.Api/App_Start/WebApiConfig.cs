@@ -35,11 +35,6 @@ namespace WSTowersOffice.Api
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-            config.Routes.MapHttpRoute(
-                name: "ActionApi",
-                routeTemplate: "api/{controller}/{action}/{name}", // removed id and used name
-                defaults: new { name = RouteParameter.Optional }
-            );
         }
     }
 }

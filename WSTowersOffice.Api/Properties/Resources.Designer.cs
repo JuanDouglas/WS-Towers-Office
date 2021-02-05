@@ -90,6 +90,16 @@ namespace WSTowersOffice.Api.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Byte[].
+        /// </summary>
+        internal static byte[] sign_in_alt {
+            get {
+                object obj = ResourceManager.GetObject("sign_in_alt", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ws_black {

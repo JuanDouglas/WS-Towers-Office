@@ -347,6 +347,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
+    <Compile Include="Models\Attributes\LoginRequiredAttribute.cs" />
     <Compile Include="Models\Authenticated.cs" />
     <Compile Include="Models\Authentication.cs">
       <DependentUpon>WSTowersOfficeModel.tt</DependentUpon>
@@ -461,6 +462,7 @@
     <None Include="Resources\ws_towers_office_azul.png" />
     <None Include="Resources\ws_black.png" />
     <None Include="Resources\ws_white.png" />
+    <None Include="Resources\sign-in-alt.svg" />
     <Content Include="Views\Teams\CreateRole.cshtml" />
     <Content Include="Views\Teams\Delete.cshtml" />
     <Content Include="Views\Employees\Detalhes.cshtml" />
