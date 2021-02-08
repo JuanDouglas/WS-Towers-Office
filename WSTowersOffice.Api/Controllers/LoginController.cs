@@ -660,43 +660,34 @@ namespace ShowProducts.API.Controllers
         //    {
         //        ModelState.AddModelError("UserName", "There is already a registration with this 'UserName'.");
         //    }
-
         //    //Valida se já existe um Login com o mesmo CPF cadastrado.
         //    exists = await db.Login.FirstOrDefaultAsync(fs => fs.Provider.First().CNPJ == login.Company.CNPJ);
         //    if (exists != null)
         //    {
         //        ModelState.AddModelError("CPF", "There is already a registration with this 'CPF'.");
         //    }
-
         //    //Valida se o 'UserName'contém .
         //    if (login.UserName.Contains(' '))
         //    {
         //        ModelState.AddModelError("UserName", "A username cannot contain spaces.");
         //    }
-
         //    //Verifica se o modelo é valido
         //    if (!ModelState.IsValid)
         //    {
         //        return BadRequest(ModelState);
         //    }
-
         //    #endregion
-
         //    #region LoginInsert
         //    //Adiciona a data de criação do login
         //    login.CreateDate = DateTime.Now;
-
         //    //Criptografa a senha
         //    login.Password = CryptographyString(login.Password);
-
         //    //Trasforma a Classe LoginModel em um mOdelo do banco de dados.
         //    var loginModel = login.GetLogin();
-
         //    try
         //    {
         //        //Adiciona ao DBContext
         //        db.Login.Add(loginModel);
-
         //        //Salva no banco
         //        await db.SaveChangesAsync();
         //    }
@@ -704,20 +695,14 @@ namespace ShowProducts.API.Controllers
         //    {
         //        return InternalServerError();
         //    }
-
         //    #endregion
-
         //    #region UserInsert
         //    //Obtém o Modelo do banco de dados.
         //    var userModel = login.GetProviderModel();
-
         //    loginModel = await db.Login.FirstOrDefaultAsync(predicate: fs => fs.UserName == login.UserName);
-
         //    try
         //    {
-
         //        userModel.LoginID = loginModel.ID;
-
         //        //Obtém uma chave de usuário valida.
         //        bool validKey = false;
         //        do
@@ -764,7 +749,6 @@ namespace ShowProducts.API.Controllers
 
         //    //Obtém o contexto da solicitação 
         //    HttpRequest context = HttpContext.Current.Request;
-
         //    //Valida o usuário
         //    try
         //    {
@@ -774,7 +758,6 @@ namespace ShowProducts.API.Controllers
         //    {
         //        return ResponseMessage(e.Response);
         //    }
-
         //    //Verifica se o email atualizado já foi usado
         //    if (model.Email == null)
         //    {
@@ -790,7 +773,6 @@ namespace ShowProducts.API.Controllers
         //            return ResponseMessage(response);
         //        }
         //    }
-
         //    //Verifica se o nome de usuário já foi usado
         //    if (model.UserName == null)
         //    {
@@ -843,6 +825,14 @@ namespace ShowProducts.API.Controllers
 
         internal async static Task<LoginInformations> ValidLoginAsync(string token, string user_valid_key)
         {
+            if (token == null)
+            {
+                token = string.Empty;
+            }
+            if (user_valid_key == null)
+            {
+                user_valid_key = string.Empty;
+            }
             WSTowersOfficeEntities db = new WSTowersOfficeEntities();
             var context = System.Web.HttpContext.Current;
 
@@ -909,7 +899,7 @@ namespace ShowProducts.API.Controllers
         }
         internal static LoginInformations ValidLogin(string token, string user_valid_key)
         {
-            WSTowersOfficeEntities db = new  WSTowersOfficeEntities();
+            WSTowersOfficeEntities db = new WSTowersOfficeEntities();
             var context = System.Web.HttpContext.Current;
             //Obtém a autenticação deste usuário
             Authentication logToken = db.Authentication.FirstOrDefault(fs => fs.IP == context.Request.UserHostAddress);
@@ -969,7 +959,7 @@ namespace ShowProducts.API.Controllers
                     }
                 }
             }
-            return new LoginInformations(userKey, (loginToken));
+            return new LoginInformations(userKey, loginToken);
         }
         #endregion
         protected override void Dispose(bool disposing)
@@ -988,8 +978,10 @@ namespace ShowProducts.API.Controllers
             public string Message { get; set; }
             public LoginInformations(string userKey, string loginToken)
             {
-                UserKey = userKey ?? throw new ArgumentNullException(nameof(userKey));
+                UserKey = userKey;
                 LoginToken = loginToken;
+                IsValid = false;
+                Message = "No Message here!";
             }
         }
 

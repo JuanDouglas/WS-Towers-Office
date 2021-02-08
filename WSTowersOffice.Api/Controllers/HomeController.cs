@@ -11,7 +11,7 @@ namespace WSTowersOffice.Api.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             return View();
         }
@@ -22,7 +22,6 @@ namespace WSTowersOffice.Api.Controllers
             {
                 return RedirectToActionPermanent("Authentication", "Logins");
             }
-
             ViewBag.Message = "Your application description page.";
 
             return View();

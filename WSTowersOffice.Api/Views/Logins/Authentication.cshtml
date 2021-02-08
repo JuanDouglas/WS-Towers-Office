@@ -1,4 +1,5 @@
-﻿    ViewBag.Title = "Login";
+﻿@{
+    ViewBag.Title = "Login";
 }
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -48,30 +49,27 @@
 <div class="card border-success mb-lg-5 right" style="max-width: 20rem;">
     <div class="card-header"><div class="center">Logue em sua conta</div></div>
     <div class="card-body">
-        <form action="Login" method="post">
-            @Html.AntiForgeryToken()
-            <input name="viewpage" type="hidden" value="true" />
-            <input name="post" type="hidden" value="@ViewBag.Post" />
+
+        @using (Html.BeginForm("Authentication", "api/Login", FormMethod.Get))
+        {
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 <div class="col-md-15">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Digite seu Email" } })
+                    <input class="form-control text-box single-line" name="user" placeholder="Digite seu PIXWS, E-mail ou Nome de Usuário " type="email">
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 <div class="col-md-15">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Digite sua Senha", type = "password" } })
+                    <input class="form-control text-box single-line" name="pas" placeholder="Digite sua Senha" type="password">
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
-            @*<p class="right">
-                @Html.ActionLink("Crie a sua conta", "Create", new { post = ViewBag.Post })
-            </p>*@
-            <div class="form-group left">
-                <button type="submit" class="btn btn-outline-success col-md-6">Logar</button>
+            @Html.Hidden("viewpage", "true");
+            <div class="form-group" style="text-align:right">
+                <input type="submit" value="Fazer login" class="btn btn-outline-info"/>
             </div>
-        </form>
+        }
     </div>
 </div>

@@ -70,7 +70,8 @@ CREATE TABLE [Login] (
 [ValidKey] VARCHAR(86)  UNIQUE NOT NULL,
 [CreateDate] DATETIME NOT NULL
 );
-INSERT INTO [Login] ([UserName],[Email],[Password],[ValidKey],[isValidEmail],[CreateDate]) VALUES ('DefaultAdmin','admin@ws.net','$2a$10$rC5ITCjdql/FC.G4GPoMmeSzr.XffpcxPIpfFro4gr5NGRCCkVmhW','Ch4v3',1,GETDATE());
+
+INSERT INTO [Login] ([UserName],[Email],[Password],[ValidKey],[isValidEmail],[CreateDate]) VALUES ('DefaultAdmin','admin@ws.net','$2a$10$h8qHBTB22nC14owwW7WuAua9njZ4SNjiwGIUMWvl7f9Gdjm8yj1d2','Ch4v3',1,GETDATE());
 CREATE TABLE [IP] (
 [ID] INTEGER IDENTITY PRIMARY KEY NOT NULL,
 [IP] VARCHAR(89) UNIQUE NOT NULL,

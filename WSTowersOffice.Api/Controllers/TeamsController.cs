@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using WSTowersOffice.Api.Properties;
 using System.Configuration;
+using ShowProducts.API.Controllers;
 
 namespace WSTowersOffice.Api.Controllers
 {
@@ -22,6 +23,11 @@ namespace WSTowersOffice.Api.Controllers
         // GET: Teams
         public async Task<ActionResult> Index()
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             List<Team> teams = await db.Team.Where(wh => true).ToListAsync();
 
             if (teams == null)
@@ -41,6 +47,11 @@ namespace WSTowersOffice.Api.Controllers
         [Route("Management/{team_name}")]
         public async Task<ActionResult> Management(string team_name, TeamManagementOrdeBy? order_by, string query, int? page)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             ViewBag.ContainEmployee = false;
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
 
@@ -130,12 +141,22 @@ namespace WSTowersOffice.Api.Controllers
 
         public async Task<ActionResult> Create()
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             return View();
         }
 
         [HttpGet]
         public async Task<ActionResult> Delete(string team_name)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
 
             if (team == null)
@@ -149,6 +170,11 @@ namespace WSTowersOffice.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> DeleteConfirmed(string team_name)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
             if (team == null)
             {
@@ -182,6 +208,11 @@ namespace WSTowersOffice.Api.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Name,Description")] TeamModel team)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             if ((await db.Team.FirstOrDefaultAsync(fs => fs.Name == team.Name)) != null)
             {
                 ModelState.AddModelError("Name", "This name already use!");
@@ -212,7 +243,11 @@ namespace WSTowersOffice.Api.Controllers
         [Route("Management/AddIcon")]
         public async Task<ActionResult> AddIcon(int id)
         {
-
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             Team team = await db.Team.FindAsync(id);
 
             if (team == null)
@@ -263,6 +298,11 @@ namespace WSTowersOffice.Api.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateRole(string team_name, string role_name, string role_description)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             RoleModel role = new RoleModel() { Name = role_name, Description = role_description };
 
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
@@ -305,6 +345,11 @@ namespace WSTowersOffice.Api.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddEmployee(int employee_id, string team_name, string role_name, string post)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
             if (team == null)
             {

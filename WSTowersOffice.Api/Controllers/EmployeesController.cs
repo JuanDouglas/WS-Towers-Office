@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ShowProducts.API.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,6 +20,11 @@ namespace WSTowersOffice.Api.Controllers
         private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
         public async Task<ActionResult> List(int? employee_id,int? page)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             ViewBag.ContainEmployee = false;
             List<Employee> employees = await db.Employee.Where(wh => true).ToListAsync();
             List<EmployeeModel> employeeModels = new List<EmployeeModel>();
@@ -41,6 +47,11 @@ namespace WSTowersOffice.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> Create()
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             ViewBag.SetImage = false;
             return View(new EmployeeModel());
         }
@@ -48,6 +59,11 @@ namespace WSTowersOffice.Api.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "CPF,Name,QuantityFamilyPersons,Email")] EmployeeModel employeeModel)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             if ((await db.Employee.FirstOrDefaultAsync(fs => fs.CPF == employeeModel.CPF)) != null)
             {
                 ModelState.AddModelError("CPF", "Already exist one Employee using this CPF!");
@@ -79,6 +95,11 @@ namespace WSTowersOffice.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> SetProfileImage(int id)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             Employee employee = await db.Employee.FirstOrDefaultAsync(fs => fs.ID == id);
 
             if (employee == null)
@@ -120,6 +141,11 @@ namespace WSTowersOffice.Api.Controllers
         }
         public async Task<ActionResult> Delete(int? id)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -138,6 +164,11 @@ namespace WSTowersOffice.Api.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
             Employee employee = await db.Employee.FindAsync(id);
             db.Employee.Remove(employee);
             await db.SaveChangesAsync();
