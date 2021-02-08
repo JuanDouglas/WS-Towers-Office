@@ -342,6 +342,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AdminsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -467,6 +468,11 @@
     <Content Include="Views\Teams\Delete.cshtml" />
     <Content Include="Views\Employees\Detalhes.cshtml" />
     <Content Include="Views\Logins\Authentication.cshtml" />
+    <Content Include="Views\Admins\Create.cshtml" />
+    <Content Include="Views\Admins\Delete.cshtml" />
+    <Content Include="Views\Admins\Details.cshtml" />
+    <Content Include="Views\Admins\Edit.cshtml" />
+    <Content Include="Views\Admins\Index.cshtml" />
     <Resource Include="Resources\default_team_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
