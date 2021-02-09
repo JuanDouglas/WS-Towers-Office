@@ -62,7 +62,7 @@ Layout = "~/Views/Shared/_LayoutLogin.cshtml";
         <div class="form-group">
             @Html.LabelFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
             <div class="col-md-15">
-                <input class="form-control text-box single-line" name="pas" placeholder="Digite sua Senha" type="password">
+                <input class="form-control text-box single-line" name="pas" placeholder="Digite sua Senha" type="password" autocomplete="current-password"  autocapitalize="off">
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -109,6 +109,19 @@ namespace ShowProducts.API.Controllers
         #endregion
 
         #region Authentication
+        [HttpGet]
+        [Route("Authetication/Logout")]
+        public async Task<IHttpActionResult> GetAsync(bool isWeb)
+        {
+
+            UriBuilder builder = new UriBuilder(Request.RequestUri)
+            {
+                Path = "api/Login/Authetication/Logout",
+                Query = $"isWeb={isWeb}&thisAdress=false&ipAdress={HttpContext.Current.Request.UserHostAddress}"
+            };
+
+            return Redirect(builder.ToString());
+        }
         /// <summary>
         /// Authentication Module 
         /// </summary>
@@ -117,7 +130,7 @@ namespace ShowProducts.API.Controllers
         /// <returns>IHttpActionResult</returns>
         [HttpGet]
         [Route("Authetication/Logout")]
-        public async Task<IHttpActionResult> GetAsync(bool? isWeb, string url_post, string login_token, string user_key, bool thisAdress, string ipAdress)
+        public async Task<IHttpActionResult> GetAsync(bool? isWeb, bool thisAdress, string ipAdress)
         {
             LoginInformations validResult = await ValidLoginAsync();
             if (!validResult.IsValid)
@@ -146,24 +159,16 @@ namespace ShowProducts.API.Controllers
             await db.SaveChangesAsync();
             if (isWeb.Value)
             {
-                if (url_post == "home")
+                string url_post = string.Empty;
+
+                UriBuilder builder = new UriBuilder(Request.RequestUri)
                 {
-                    UriBuilder builder = new UriBuilder(Request.RequestUri)
-                    {
-                        Path = "Home/Index",
-                        Query = string.Empty
-                    };
-                    url_post = builder.ToString();
-                }
-                if (url_post == "products")
-                {
-                    UriBuilder builder = new UriBuilder(Request.RequestUri)
-                    {
-                        Path = "Products/Index",
-                        Query = string.Empty
-                    };
-                    url_post = builder.ToString();
-                }
+                    Path = "Home/Index",
+                    Query = string.Empty
+                };
+                url_post = builder.ToString();
+
+
                 return Redirect(url_post);
             }
 
