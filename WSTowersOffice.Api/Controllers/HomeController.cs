@@ -13,7 +13,7 @@ namespace WSTowersOffice.Api.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            return View();
+            return RedirectToActionPermanent("Authentication","Logins");
         }
         public async Task<ActionResult> About()
         {
