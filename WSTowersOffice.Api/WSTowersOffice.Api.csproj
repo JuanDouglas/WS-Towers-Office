@@ -472,7 +472,7 @@
     <Content Include="Views\Admins\Delete.cshtml" />
     <Content Include="Views\Admins\Details.cshtml" />
     <Content Include="Views\Admins\Edit.cshtml" />
-    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\Admins\Manager.cshtml" />
     <Resource Include="Resources\default_team_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

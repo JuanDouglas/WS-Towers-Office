@@ -91,3 +91,13 @@ th {
     height: 400px;
     padding: 1rem;
 }
+.h1-custom{
+    align-content:center;
+    color:#212529;
+
+}
+.p-custom {
+    font-size: 18pt;
+    font-family: Arial;
+    font-weight: 500;
+}

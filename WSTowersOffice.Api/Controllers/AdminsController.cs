@@ -16,7 +16,7 @@ namespace WSTowersOffice.Api.Controllers
         private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
 
         // GET: Admins
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Manager()
         {
             return View(await db.Login.ToListAsync());
         }
