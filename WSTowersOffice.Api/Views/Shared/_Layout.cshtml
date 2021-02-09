@@ -37,6 +37,9 @@
                     @Html.ActionLink("Sobre", "About", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
+                    @Html.ActionLink("Admins", "Manager", "Admins", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
                     @Html.ActionLink("Ajuda", "", "Help", null, new { @class = "nav-link" })
                 </li>
             </ul>
@@ -44,7 +47,7 @@
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ml-auto align-items-sm-end">
-                    <button class="btn" id="btn-log"><img src="~/Resources/sign-in-alt.svg" height="25px" width="25px" /></button>
+                    <button class="btn btn-danger" " onclick="location.href='/api/Logins/Authentication/Logout'"><img src="~/Resources/sign-in-alt.svg" height="25px" width="25px" /></button>
                 </li>
             </ul>
         </div>

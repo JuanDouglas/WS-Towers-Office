@@ -13,7 +13,12 @@ namespace WSTowersOffice.Api.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            return RedirectToActionPermanent("Authentication","Logins");
+            var loginResult = await LoginController.ValidLoginAsync();
+            if (!loginResult.IsValid)
+            {
+                return RedirectToActionPermanent("Authentication", "Logins");
+            }
+            return View();
         }
         public async Task<ActionResult> About()
         {

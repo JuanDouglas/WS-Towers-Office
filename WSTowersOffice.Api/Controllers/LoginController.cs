@@ -532,9 +532,9 @@ namespace ShowProducts.API.Controllers
                 {
 
                     HttpResponseMessage response = new HttpResponseMessage();
-                    var login_token_cookie = new CookieHeaderValue("login_token", authentication.Token) { Expires = DateTime.Now.AddDays(30), Secure = true, HttpOnly = true, Domain = Request.RequestUri.Host, Path = "/" };
+                    var login_token_cookie = new CookieHeaderValue("login_token", authentication.Token) { Expires = DateTime.Now.AddDays(30), Secure = false, HttpOnly = true, Domain = Request.RequestUri.Host, Path = "/" };
                     var login = db.Login.FirstOrDefault(fs => fs.ID == authentication.Login);
-                    var user_key_cookie = new CookieHeaderValue("user_key", login.ValidKey) { Expires = DateTime.Now.AddDays(30), Secure = true, HttpOnly = true, Domain = Request.RequestUri.Host, Path = "/" };
+                    var user_key_cookie = new CookieHeaderValue("user_key", login.ValidKey) { Expires = DateTime.Now.AddDays(30), Secure = false, HttpOnly = true, Domain = Request.RequestUri.Host, Path = "/" };
                     response.Headers.AddCookies(new CookieHeaderValue[] {login_token_cookie ,
                             user_key_cookie});
                     response.StatusCode = HttpStatusCode.Redirect;
@@ -542,7 +542,7 @@ namespace ShowProducts.API.Controllers
                     {
                         UriBuilder builder = new UriBuilder(Request.RequestUri)
                         {
-                            Path = "Home/Index",
+                            Path = "Employees/List",
                             Query = string.Empty
                         };
                         post = builder.ToString();

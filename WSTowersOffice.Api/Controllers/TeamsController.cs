@@ -217,7 +217,10 @@ namespace WSTowersOffice.Api.Controllers
             {
                 ModelState.AddModelError("Name", "This name already use!");
             }
-
+            if (team.Name.Contains('\"'))
+            {
+                ModelState.AddModelError("Name","Hey don't use \" \' \" in team name.");
+            }
             if (!ModelState.IsValid)
             {
                 return View(team);
@@ -346,10 +349,12 @@ namespace WSTowersOffice.Api.Controllers
         public async Task<ActionResult> AddEmployee(int employee_id, string team_name, string role_name, string post)
         {
             var loginResult = await LoginController.ValidLoginAsync();
+
             if (!loginResult.IsValid)
             {
                 return RedirectToActionPermanent("Authentication", "Logins");
             }
+
             Team team = await db.Team.FirstOrDefaultAsync(fs => fs.Name == team_name);
             if (team == null)
             {

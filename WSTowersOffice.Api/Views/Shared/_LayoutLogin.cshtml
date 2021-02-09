@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WS Towers Office</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @if (ViewBag.ModalID != null)
+    {
+        <!--Chamada do modal -->
+    <script type="text/javascript">
+            function onLoad() {
+                $('@ViewBag.ModalID').modal('show');
+            }
+    </script>
+    }
+</head>
+<body onload="onLoad()">
+  
+    <div class="body-content">
+        <!--Esse codigo rederiza o resto da pagina que ser� definido em outro arquivo cshtml -->
+        @RenderBody()
+        <!-- Ap�s rederizar a tela o c�digo seguinte ser� rederizado -->
+    </div>
+    <footer class="footer-custom">
+        <h5 class="footer">&copy; @DateTime.Now.Year - WS Corp.</h5>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
