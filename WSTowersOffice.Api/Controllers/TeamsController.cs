@@ -9,10 +9,10 @@ using System.Drawing;
 using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using WSTowersOffice.Api.Properties;
 using System.Configuration;
 using ShowProducts.API.Controllers;
+using System.Data.SqlClient;
 
 namespace WSTowersOffice.Api.Controllers
 {

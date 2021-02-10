@@ -6,13 +6,12 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web.Http;
 using System.Net.Http.Headers;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Http;
-using System.Web.Http.Description;
 using WSTowersOffice.Api.Models.Exceptions;
+using System.Web.Http.Description;
 
 namespace ShowProducts.API.Controllers
 {

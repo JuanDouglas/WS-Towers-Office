@@ -101,3 +101,13 @@ th {
     font-family: Arial;
     font-weight: 500;
 }
+.jumbotron-rounded{
+    border-radius:40px;
+}
+.card-rounded{
+    border-radius:40px;
+}
+.btn-admin{
+    margin-top:8px;
+    padding:1em;
+}

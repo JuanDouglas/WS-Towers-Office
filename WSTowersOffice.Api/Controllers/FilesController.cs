@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Http;
 using WSTowersOffice.Api.Models;
 using WSTowersOffice.Api.Models.Enums;
 using WSTowersOffice.Api.Properties;
+using System.Web.Http;
+using System.Drawing.Imaging;
 
 namespace WSTowersOffice.Api.Controllers
 {
@@ -54,7 +54,7 @@ namespace WSTowersOffice.Api.Controllers
         {
             WSTowersOfficeEntities db = new WSTowersOfficeEntities();
             string fileName = $"{fileType}_{DateTime.Now.ToString("yyMMdd_HHmmss_fffffff")}.png";
-            System.Drawing.Image image = System.Drawing.Image.FromStream(file.InputStream);
+            Image image = System.Drawing.Image.FromStream(file.InputStream);
             SaveInAPI(fileType, image, fileName);
             try
             {

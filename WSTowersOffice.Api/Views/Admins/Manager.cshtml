@@ -4,12 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-bordered table-striped">
     <thead class="thead-dark">
         <tr>
             <th>
@@ -21,7 +16,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreateDate)
             </th>
-            <th></th>
+            <th>
+                <button class="btn btn-custom btn-outline-light" onclick="location.href='/Admins/Create'">Adicionar</button> 
+            </th>
         </tr>
 
         @foreach (var item in Model)

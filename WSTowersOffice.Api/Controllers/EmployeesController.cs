@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using ShowProducts.API.Controllers;
+﻿using ShowProducts.API.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,10 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 using WSTowersOffice.Api.Models;
 using WSTowersOffice.Api.Models.Enums;
+using System.Web;
+using System.Web.Mvc;
+using Newtonsoft.Json;
 
 namespace WSTowersOffice.Api.Controllers
 {
