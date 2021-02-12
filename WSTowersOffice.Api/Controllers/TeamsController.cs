@@ -101,13 +101,20 @@ namespace WSTowersOffice.Api.Controllers
             {
                 order_by = TeamManagementOrdeBy.DecreasingAddDate;
             }
-            teamEmployeesQueryable = TeamOrdeBy(order_by.Value, teamEmployeesQueryable).AsQueryable();
-            if (!page.HasValue)
+            teamEmployeesQueryable = TeamOrdeBy(order_by.Value, teamEmployeesQueryable);
+            //if (!page.HasValue)
+            //{
+            //    page = 0;
+            //}
+            //teamEmployees = GetTeamEmployeesPage(teamEmployeesQueryable, page.Value);
+            Team_Employee[] team_Employees = await teamEmployeesQueryable.ToArrayAsync();
+
+            ViewBag.TeamEmployees = new TeamEmployeeModel[team_Employees.Length];
+            for (int i = 0; i < team_Employees.Length; i++)
             {
-                page = 0;
+                ViewBag.TeamEmployees[i] = new TeamEmployeeModel(team_Employees[i]);
             }
-            teamEmployees = GetTeamEmployeesPage(teamEmployeesQueryable, page.Value);
-            ViewBag.TeamEmployees = teamEmployees;
+
 
             return View(new TeamModel(team));
         }

@@ -100,6 +100,16 @@ namespace WSTowersOffice.Api.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Byte[].
+        /// </summary>
+        internal static byte[] sign_in_white {
+            get {
+                object obj = ResourceManager.GetObject("sign_in_white", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ws_black {
@@ -125,6 +135,16 @@ namespace WSTowersOffice.Api.Properties {
         internal static System.Drawing.Bitmap ws_white {
             get {
                 object obj = ResourceManager.GetObject("ws_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wsTowersLogoBlack {
+            get {
+                object obj = ResourceManager.GetObject("wsTowersLogoBlack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

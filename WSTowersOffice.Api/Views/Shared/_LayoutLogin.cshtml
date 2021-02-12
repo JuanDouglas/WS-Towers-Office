@@ -11,26 +11,51 @@
     @if (ViewBag.ModalID != null)
     {
         <!--Chamada do modal -->
-    <script type="text/javascript">
+        <script type="text/javascript">
             function onLoad() {
                 $('@ViewBag.ModalID').modal('show');
             }
-    </script>
+        </script>
     }
+    @model WSTowersOffice.Api.Models.LoginModel
 </head>
 <body onload="onLoad()">
-  
-    <div class="body-content">
-        <!--Esse codigo rederiza o resto da pagina que ser� definido em outro arquivo cshtml -->
-        @RenderBody()
-        <!-- Ap�s rederizar a tela o c�digo seguinte ser� rederizado -->
-    </div>
-    <footer class="footer-custom">
-        <h5 class="footer">&copy; @DateTime.Now.Year - WS Corp.</h5>
-    </footer>
+    @using (Html.BeginForm("Authentication", "api/Login", FormMethod.Get))
+    {
+        <nav class="navbar-login navbar-expand-sm navbar-light navbar-nav ">
+            <a href="@Url.Action("Index", "Home")">
+                <img src="~/Resources/wsTowersLogoBlack.png" class="img-navbar-login" alt="WS TOWERS OFFICE" />
+            </a>
+            <div class="ml-auto">
+                <div class="form-group">
+                    <div class="form-inline">
+                        <input class="form-control text-box single-line mr-sm-5 mt-4" name="user" placeholder="E-mail" type="email">
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <input class="form-control text-box single-line mr-sm-3 mt-4" name="pas" placeholder="Senha" type="password" autocomplete="current-password" autocapitalize="off">
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.Hidden("viewpage", "true")
+                        <div class="form-group nav-item align-items-sm-end mr-3 mt-4">
+                            <input type="submit" value="Fazer login" class="btn btn-outline-success" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <hr style="width:1900px;border-color:#000000" />
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        <div class="body-content">
+            @RenderBody()
+        </div>
+        <hr style=" position: fixed; left: 0px; bottom: 18px; width: 100%; border-color: #000000;" />
+        <footer class="footer-custom">
+            <h5 class="footer">&copy; @DateTime.Now.Year - WS Corp.</h5>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    }
 </body>
 </html>

@@ -2,77 +2,51 @@
     ViewBag.Title = "Login";
 }
 @{
-Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 @model WSTowersOffice.Api.Models.LoginModel
-<style>
-    div.center {
-        text-align: center;
-        align-self: baseline;
-        margin-left: auto;
-        margin-right: auto;
-    }
 
-    div.right {
-        text-align: start;
-        align-self: baseline;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    div.left {
-        text-align: end;
-        align-self: baseline;
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
-<center><h2>Login</h2></center>
-@{
-    string classText = string.Empty;
-    if (ViewBag.IsError)
-    {
-        classText = "alert alert-dismissible alert-danger col-md-6 center";
-
-    }
-    else
-    {
-        classText = "alert alert-dismissible alert-warning col-md-6 center";
-    }
-}
-
-<div class="@classText">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <h4><center> <strong>@ViewBag.ErrorTitle</strong> </center></h4>
-    <p><center>@ViewBag.ErrorText</center></p>
-</div>
-<div class="card border-success mb-lg-5 right" style="max-width: 20rem;">
-    <div class="card-header"><div class="center">Logue em sua conta</div></div>
-    <div class="card-body">
-
-        @using (Html.BeginForm("Authentication", "api/Login", FormMethod.Get))
-        {
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            <div class="col-md-15">
-                <input class="form-control text-box single-line" name="user" placeholder="Digite seu PIXWS, E-mail ou Nome de Usuário " type="email">
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-            <div class="col-md-15">
-                <input class="form-control text-box single-line" name="pas" placeholder="Digite sua Senha" type="password" autocomplete="current-password"  autocapitalize="off">
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        @Html.Hidden("viewpage", "true");
-        <div class="form-group" style="text-align:right">
-            <input type="submit" value="Fazer login" class="btn btn-outline-info" />
-        </div>
-        }
+<div class="jumbotron text-left jumbotron-login">
+    <div class="ml-5">
+        <h1 style="font-size:70pt;margin-left:150px">WS Towers Office</h1>
+        <h1>
+            <p class="text-justify" style="margin-left:150px;margin-right:150px;">
+                Aplicativo que ajuda times de trabalho, na organização de tarefas,
+                motivação com gameficação com premios em uma loja virtual corporativa.
+                Nesse modulo web, você poderá gerenciar os seus times e a loja virtual corporativa.
+            </p>
+        </h1>
     </div>
 </div>
-<footer class="footer-custom">
-    <h5 class="footer">&copy; @DateTime.Now.Year - WS Corp.</h5>
-</footer>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
+            <h3>Times</h3>
+            <p class="text-justify">
+                Gerencie os seus times e organize as tarefas baseado na metodologia SCRUM.
+                Assim você poderá motivá-los a atingir as metas e o Sprint não falhar.
+                Em tempos dificeis é importante a utilização dessas ferramentas.
+                Aprenda que ter um time é ter uma missão nobre e vamos auxilia-lo nessa missão.
+                O gerenciamento de times usa como metodologia o SCRUM.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h3>Gamificação</h3>
+            <p class="text-justify">
+                Aplicando o conceito de gamificação no mundo corporativo, o aplicativo WTO traz produtividade para a sua equipe.
+                Esse conceito de gamificação já é amplamente aplicado em diversas empresas e tem trazido um resultado incrível
+                chamando a atenção de empreendedores, empresários de diversos setores.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h3>Marketplace</h3>
+            <p class="text-justify">
+                A loja virtual corporativa aplica a meritocrácia motivando a sua equipe a produzir mais.
+                A loja possui uma roda da sorte (game) e utiliza a moeda virtual BitWs.
+                Com essa moeda ficticia o membro do time poderá efetuar a compra de produtos
+                ou vouches para certificações, cursos, congressos e palestras.
+            </p>
+        </div>
+    </div>
+</div>

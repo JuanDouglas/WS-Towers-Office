@@ -29,14 +29,19 @@ textarea {
     left: 0px;
     bottom: 0px;
     width: 100%;
-    color: #FFFFFF;
-    text-align: center;
-    background-color: #212529;
+    color: #000000;
+    margin-left:20px;
 }
-.navbar {
+.navbar-custom {
     background-color: #212529;
     font-size: 14pt;
     color: #ffffff;
+    font-weight:500;
+}
+.navbar-login {
+    background-color: #FFFFFF;
+    font-size: 14pt;
+    color: #000000;
     font-weight:500;
 }
 .nav-link{
@@ -62,6 +67,11 @@ table {
     font-size: 14pt;
     font-family: Arial;
     font-weight: 500;
+}
+.table-rounded {
+    border-style:solid;
+    border-color:#000000;
+    border-radius:40px;
 }
 th {
     font-size: 14pt;
@@ -110,4 +120,51 @@ th {
 .btn-admin{
     margin-top:8px;
     padding:1em;
+}
+.h2-login{
+    color:#000000;
+}
+.div-login-auto{
+    width:500px;
+    margin:auto;
+}
+.form-control-custom{
+    color:#000000;
+}
+.form-group-custom{
+    color:#000000;
+    text-align:center;
+    margin-left:10px;
+}
+.img-navbar-login {
+    width: 80px;
+    height: 80px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+.div-admin{
+    margin-left:100px;
+    margin-bottom:10px;
+}
+.btn-employee-delete {
+    margin-bottom: 30px;
+    max-width: 500px;
+    font-weight: 500;
+}
+
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+    text-align: center;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
 }

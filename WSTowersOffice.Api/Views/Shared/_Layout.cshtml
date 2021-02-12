@@ -19,8 +19,8 @@
     }
 </head>
 <body onload="onLoad()">
-    <nav class="navbar navbar-expand-sm sticky-top navbar-dark">
-
+    <nav class="navbar navbar-custom navbar-expand-sm sticky-top navbar-dark">
+        <script src="~/Scripts/jQuery-Mask-Plugin-master/src/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
         <a href="@Url.Action("Index","Home")">
             <img src="~/Resources/ws_white.png" alt="WS TOWERS OFFICE" style="width:60px;" />
         </a>
@@ -67,5 +67,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jQuery-Mask-Plugin-master/src/jquery.mask.js" type="text/javascript" asp-append-version="true"></script>
 </body>
 </html>

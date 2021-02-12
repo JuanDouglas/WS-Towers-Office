@@ -30,40 +30,63 @@
 </table>
 
 <!-- Aux Buttons-->
-<button type="button" class="btn btn-outline-primary btn-custom" data-target="#addIconModal" data-toggle="modal">Definir Ícone</button>
-<button type="button" class="btn btn-outline-success btn-custom" data-target="#addRoleModal" data-toggle="modal">Adicionar Função</button>
-<button type="button" class="btn btn-outline-success btn-custom" data-target="#addUserModal" data-toggle="modal">Adicionar Funcionário</button>
+<center>
+    <button type="button" class="btn btn-outline-primary btn-custom" data-target="#addIconModal" data-toggle="modal">Definir Ícone</button>
+    <button type="button" class="btn btn-outline-success btn-custom" data-target="#addRoleModal" data-toggle="modal">Adicionar Função</button>
+    <button type="button" class="btn btn-outline-success btn-custom" data-target="#addUserModal" data-toggle="modal">Adicionar Funcionário</button>
+</center>
 
-<!-- Modal Set Icon -->
-<div class="card">
-    <div class="modal" id="addIconModal">
-        <!-- Set Icon Modal Header-->
-        <div class="modal-header">
-            Adicione um ícone ao Time!
-        </div>
-        @using (Html.BeginForm($"Management/AddIcon/{Model.ID}", "Teams", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            <!-- Set Icon Modal Body -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
             <div class="modal-body">
-                <img id="output" class="img-icon border-warning" width="50%" height="50%" src="@ViewBag.ImageLink" style="max-width: 18rem;border-width: 0px;cursor: pointer;" />
-                <input required type="file" id="Arquivos" name="Arquivos" multiple onchange="" accept="image/*" />
-                <script>
-                    var loadFile = function (event) {
-                        var output = document.getElementById('output');
-                        output.src = URl.createObjectURL(event.targetfiles[0]);
-                        output.onload = function () { URL.revokeObjectURL(output.src) }
-                    }
-                </script>
+                <p>Some text in the modal.</p>
             </div>
-
-            <!-- Set Icon Modal Footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger add" data-dismiss="modal" style="margin-right: -2.5%;">Continuar aqui</button>
-                <input type="submit" name="submit" value="Enviar Arquivo" class="btn btn-outline-success add" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-        }
+        </div>
+
     </div>
 </div>
+
+
+<div class="modal fade" id="addIconModal">
+    <div class="modal-dialog text-center">
+        <div class="modal-content">
+            <center>
+                <h4 class="modal-header align-content-center">
+                    Adicione um ícone ao Time!
+                </h4>
+                @using (Html.BeginForm("Management/AddIcon/{Model.ID}", "Teams", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="modal-body">
+                        <img id="output" class="img-icon border-warning" width="50%" height="50%" src="@ViewBag.ImageLink" style="max-width: 18rem;border-width: 0px;cursor: pointer;" />
+                        <input required type="file" id="Arquivos" name="Arquivos" multiple onchange="" accept="image/*" />
+                        <script>
+                            var loadFile = function (event) {
+                                var output = document.getElementById('output');
+                                output.src = URl.createObjectURL(event.targetfiles[0]);
+                                output.onload = function () { URL.revokeObjectURL(output.src) }
+                            }
+                        </script>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-warning add mr-auto" data-dismiss="modal">Continuar aqui</button>
+                        <input type="submit" name="submit" value="Enviar Arquivo" class="btn btn-outline-success add" />
+                    </div>
+                }
+            </center>
+        </div>
+    </div>
+</div>
+
 
 <!-- Modal Add User -->
 <div class="modal" id="addUserModal">
@@ -76,7 +99,7 @@
 
 
     <!-- Add user Form -->
-    @using (Html.BeginForm($"AddEmployee", "Teams", FormMethod.Post))
+    @using (Html.BeginForm("AddEmployee", "Teams", FormMethod.Post))
     {
         <!-- Add user Modal Body -->
         <div class="modal-body">
@@ -115,7 +138,7 @@
     </div>
 
     <!-- Add user Form -->
-    @using (Html.BeginForm($"CreateRole", "Teams", FormMethod.Post, new { form = "CreateRole" }))
+    @using (Html.BeginForm("CreateRole", "Teams", FormMethod.Post, new { form = "CreateRole" }))
     {
         RoleModel roleModel = new RoleModel();
         <!-- Add user Modal Body -->

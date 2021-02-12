@@ -1,3 +1,50 @@
 ﻿@{
     ViewBag.Title = "About";
 }
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<WSTowersOffice.Api.Models.Login>
+
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                <button class="btn btn-custom btn-outline-light" onclick="location.href='/Admins/Create'">Adicionar</button>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            item.CreateDate = TimeZoneInfo.ConvertTimeFromUtc(item.CreateDate, TimeZoneInfo.Local);
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    <button class="btn btn-primary btn-custom" onclick="location.href='@Url.Action("Edit","Admins"   ,new {id=item.ID})'">Editar</button>
+                    <button class="btn btn-warning btn-custom" onclick="location.href='@Url.Action("Details","Admins",new {id=item.ID})'">Detalhes</button>
+                    <button class="btn btn-danger btn-custom" onclick="location.href='@Url.Action("Delete","Admins" ,new {id=item.ID})'">Deletar</button>
+                </td>
+            </tr>
+        }
+
+    </thead>
+</table>
+}

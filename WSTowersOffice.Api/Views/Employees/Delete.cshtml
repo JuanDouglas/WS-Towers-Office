@@ -3,56 +3,64 @@
 @{
     ViewBag.Title = "Delete";
 }
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <center>
+        <div style="width:600px;height:600px;align-content:center;margin-top:100px">
 
-<h2>Delete</h2>
+            <div class="jumbotron jumbotron-custom jumbotron-rounded">
 
-<h3>Deseja deletar esse funcionário ?</h3>
-<div class="jumbotron jumbotron-custom">
-    <div class="card">
-    <h4>Employee</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CPF)
-        </dt>
+                <div class="card card-rounded">
 
-        <dd>
-            @Html.DisplayFor(model => model.CPF)
-        </dd>
+                    <h3 class="card-header" style="color:#000000">Funcionário</h3>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                    <div class="card-body" style="color:#000000">
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                        <button class="btn btn-outline-primary disabled btn-employee-delete btn-block">
+                            <h4 style="color:#000000">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </h4>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.QuantityFamilyPersons)
-        </dt>
+                            <h5>
+                                @Html.DisplayFor(model => model.Name)
+                            </h5>
+                        </button>
+                        <button class="btn btn-outline-primary disabled btn-employee-delete btn-block">
+                            <h4 style="color:#000000">
+                                @Html.DisplayNameFor(model => model.CPF)
+                            </h4>
 
-        <dd>
-            @Html.DisplayFor(model => model.QuantityFamilyPersons)
-        </dd>
+                            <h5>
+                                @Html.DisplayFor(model => model.CPF)
+                            </h5>
+                        </button>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                        <button class="btn btn-outline-primary disabled btn-employee-delete btn-block">
+                            <h4 style="color:#000000">
+                                @Html.DisplayNameFor(model => model.Email)
+                            </h4>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                            <h5>
+                                @Html.DisplayFor(model => model.Email)
+                            </h5>
+                        </button>
 
-    </dl>
+                        <button class="btn btn-outline-primary disabled btn-employee-delete btn-block">
+                            <h4 style="color:#000000">
+                                @Html.DisplayNameFor(model => model.QuantityFamilyPersons)
+                            </h4>
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                            <h5>
+                                @Html.DisplayFor(model => model.QuantityFamilyPersons)
+                            </h5>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" value="Delete" class="btn btn-custom btn-danger mt-3" style="padding:10px">Apagar</button>
+                <button onclick="location.href='/Employees/List'" class="btn btn-warning btn-custom mt-3" style="padding:10px">Voltar</button>
+            </div>
         </div>
-    }
-        </div>
-</div>
+    </center>
+
+}
