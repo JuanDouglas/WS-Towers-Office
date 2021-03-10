@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using Android.Animation;
 using Android.App;
+using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
@@ -20,10 +23,39 @@ namespace WSTowersOffice.App
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_start);
+            Button btnRegister = FindViewById<Button>(Resource.Id.buttonRegister);
+            btnRegister.Click += new EventHandler(RegisterClick);
+
             ImageView logoImageView = FindViewById<ImageView>(Resource.Id.logoImg);
             AnimateLogo(logoImageView, 3000);
         }
 
+        private void RegisterClick(object sender, EventArgs args) {
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+
+            alertBuilder.SetTitle("Começar");
+            EditText input = new EditText(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                                  LinearLayout.LayoutParams.MatchParent,
+                                  LinearLayout.LayoutParams.MatchParent);
+            input.LayoutParameters = lp;
+
+
+            alertBuilder.SetPositiveButton("Enviar", new EventHandler<DialogClickEventArgs>(async (object sender, DialogClickEventArgs args) => {
+                HttpClient httpClient = new HttpClient();
+                var query = HttpUtility.ParseQueryString(string.Empty);
+                query["email"] = input.Text;
+                HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post,new UriBuilder("https://172.16.17.31/") { Path= "", Query= query.ToString() }.Uri);
+                httpRequestMessage.Headers.Host = "api.towers-office.ws.server.net";
+                await httpClient.SendAsync(httpRequestMessage);
+                
+            }));
+
+            alertBuilder.SetView(input);
+            alertBuilder.Create().Show();
+        }
+
+        
         private void AnimateLogo(ImageView imgview,int duration) {
             List<ObjectAnimator> logoAnimators = new List<ObjectAnimator>();
             logoAnimators.AddRange(GetAnimatorScale(imgview, duration, new EventHandler((object sender, EventArgs args) => {
