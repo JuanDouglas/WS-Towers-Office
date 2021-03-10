@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Web;
 using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Util;
 using Android.Views;
-using Android.Views.Animations;
 using Android.Widget;
 
 namespace WSTowersOffice.App
@@ -42,13 +39,45 @@ namespace WSTowersOffice.App
 
 
             alertBuilder.SetPositiveButton("Enviar", new EventHandler<DialogClickEventArgs>(async (object sender, DialogClickEventArgs args) => {
-                HttpClient httpClient = new HttpClient();
-                var query = HttpUtility.ParseQueryString(string.Empty);
-                query["email"] = input.Text;
-                HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post,new UriBuilder("https://172.16.17.31/") { Path= "", Query= query.ToString() }.Uri);
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient httpClient = new HttpClient(clientHandler);
+                HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post,new UriBuilder("https://172.16.17.31/") { Path= "api/SaveRequest/NewRequest", Query= $"email={input.Text}" }.Uri);
                 httpRequestMessage.Headers.Host = "api.towers-office.ws.server.net";
-                await httpClient.SendAsync(httpRequestMessage);
-                
+              HttpResponseMessage response = await httpClient.SendAsync(httpRequestMessage);
+                if (response.IsSuccessStatusCode)
+                {
+                    AlertDialog.Builder successAlertBuilder = new AlertDialog.Builder(this);
+                    successAlertBuilder.SetTitle("Começar");
+                    TextView textView = new TextView(this)
+                    {
+                        Text = "Parabéns logo logo alguém da equipe WS irá te mandar mansagem!"
+                    };
+
+                    textView.LayoutParameters = lp;
+
+                    successAlertBuilder.SetView(textView);
+                    successAlertBuilder.Create().Show();
+                }
+                else
+                {
+                    AlertDialog.Builder successAlertBuilder = new AlertDialog.Builder(this);
+                    successAlertBuilder.SetTitle("Algo deu errado!");
+                    TextView textView = new TextView(this)
+                    {
+                        Text = "Algo deu errado ou vc já é cadastro, caso seja um erro contato-nos!"
+                    };
+
+                   
+
+                    textView.LayoutParameters = lp;
+
+                    successAlertBuilder.SetView(textView);
+
+                        successAlertBuilder.Create().Show();
+                    
+                   
+                }
             }));
 
             alertBuilder.SetView(input);

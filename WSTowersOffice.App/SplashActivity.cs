@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 
 namespace WSTowersOffice.App
 {
@@ -30,8 +31,18 @@ namespace WSTowersOffice.App
             alphaAnimation.AnimationEnd += new EventHandler<Animation.AnimationEndEventArgs>((object sender, Animation.AnimationEndEventArgs args) => {
                 SetContentView(Resource.Layout.activity_start);
                 Animate(3000,100);
+                Timer tm = new Timer(3100)
+                {
+                    AutoReset = false
+                };
+                tm.Elapsed += new ElapsedEventHandler((object sender,ElapsedEventArgs args)=> {
+                    Intent intent = new Intent(this, typeof(MainActivity));
+                    StartActivity(intent);
+                });
+                tm.Start();
             });
             logoImageView.StartAnimation(alphaAnimation);
+
             // Create your application here
           
         }
