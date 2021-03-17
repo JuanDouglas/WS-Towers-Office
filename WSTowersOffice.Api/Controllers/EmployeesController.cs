@@ -81,6 +81,8 @@ namespace WSTowersOffice.Api.Controllers
             }
 
             Employee employee = employeeModel.GetEmployee();
+            employee.AppActive = false;
+            employee.Password = "12345678";
             db.Employee.Add(employee);
             await db.SaveChangesAsync();
 
