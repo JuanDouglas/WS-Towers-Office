@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using WSTowersOffice.Api.Models.Enums;
+﻿using WSTowersOffice.Api.Models.Enums;
 
 namespace WSTowersOffice.Api.Models
 {

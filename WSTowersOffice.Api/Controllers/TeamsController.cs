@@ -1,18 +1,16 @@
-﻿using System.Web.Mvc;
-using WSTowersOffice.Api.Models;
-using System.Linq;
+﻿using Newtonsoft.Json;
+using ShowProducts.API.Controllers;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
+using WSTowersOffice.Api.Models;
 using WSTowersOffice.Api.Models.Enums;
-using System.Drawing;
-using System;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using WSTowersOffice.Api.Properties;
-using System.Configuration;
-using ShowProducts.API.Controllers;
-using System.Data.SqlClient;
 
 namespace WSTowersOffice.Api.Controllers
 {
@@ -226,7 +224,7 @@ namespace WSTowersOffice.Api.Controllers
             }
             if (team.Name.Contains('\"'))
             {
-                ModelState.AddModelError("Name","Hey don't use \" \' \" in team name.");
+                ModelState.AddModelError("Name", "Hey don't use \" \' \" in team name.");
             }
             if (!ModelState.IsValid)
             {
