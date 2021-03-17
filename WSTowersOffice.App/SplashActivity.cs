@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
@@ -11,11 +12,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 
 namespace WSTowersOffice.App
 {
     [Activity(Label = "@string/app_name",Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-    public class SplashActivity : Activity
+    public class SplashActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -30,8 +32,18 @@ namespace WSTowersOffice.App
             alphaAnimation.AnimationEnd += new EventHandler<Animation.AnimationEndEventArgs>((object sender, Animation.AnimationEndEventArgs args) => {
                 SetContentView(Resource.Layout.activity_start);
                 Animate(3000,100);
+                Timer tm = new Timer(3100)
+                {
+                    AutoReset = false
+                };
+                tm.Elapsed += new ElapsedEventHandler((object sender,ElapsedEventArgs args)=> {
+                    Intent intent = new Intent(this, typeof(MainActivity));
+                    StartActivity(intent);
+                });
+                tm.Start();
             });
             logoImageView.StartAnimation(alphaAnimation);
+
             // Create your application here
           
         }
