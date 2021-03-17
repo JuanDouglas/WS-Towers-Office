@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WSTowersOffice.Api.Models
 {
@@ -10,7 +6,7 @@ namespace WSTowersOffice.Api.Models
     {
         public int ID { get; set; }
         [Required]
-        [Display(Name="CPF")]
+        [Display(Name = "CPF")]
         [StringLength(15, MinimumLength = 11)]
         public string CPF { get; set; }
         [Required]

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace WSTowersOffice.Api.Models
 {
@@ -52,7 +49,7 @@ namespace WSTowersOffice.Api.Models
         /// Indica se a conta já teve o Email validado.
         /// </summary>
         public bool VerifiedAccount { get; internal set; }
-        
+
         /// <summary>
         /// Construtor Básico.
         /// </summary>

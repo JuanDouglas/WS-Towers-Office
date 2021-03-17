@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WSTowersOffice.Api.Models
 {
@@ -16,7 +12,7 @@ namespace WSTowersOffice.Api.Models
 
         internal Role GetRole()
         {
-            return new Role() { Name = Name, Description = Description, Icon = 1};
+            return new Role() { Name = Name, Description = Description, Icon = 1 };
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Data.Entity.Core.EntityClient;
-using System.Linq;
 using System.Web.Http;
-using WSTowersOffice.Api.Properties;
 
 namespace WSTowersOffice.Api
 {

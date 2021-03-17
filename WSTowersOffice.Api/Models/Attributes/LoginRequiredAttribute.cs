@@ -20,7 +20,7 @@ namespace WSTowersOffice.Api.Models.Attributes
         {
             try
             {
-               LoginInformations loginInformations = LoginController.ValidLogin();
+                LoginInformations loginInformations = LoginController.ValidLogin();
                 return loginInformations.IsValid;
             }
             catch (AuthenticationException e)

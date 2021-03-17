@@ -1,8 +1,7 @@
-﻿using System;
-using WSTowersOffice.Api.Models;
-using WSTowersOffice.Api.Models.Enums;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 using System.Xml.Serialization;
+using WSTowersOffice.Api.Models.Enums;
 
 namespace WSTowersOffice.Api.Models
 {
@@ -27,7 +26,7 @@ namespace WSTowersOffice.Api.Models
         }
         public FileModel(File file)
         {
-            if (file!=null)
+            if (file != null)
             {
                 Leaght = file.Leaght;
                 Filename = file.FileName;

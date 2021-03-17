@@ -1,4 +1,5 @@
-﻿using ShowProducts.API.Controllers;
+﻿using Newtonsoft.Json;
+using ShowProducts.API.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,11 +7,10 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using WSTowersOffice.Api.Models;
-using WSTowersOffice.Api.Models.Enums;
 using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json;
+using WSTowersOffice.Api.Models;
+using WSTowersOffice.Api.Models.Enums;
 
 namespace WSTowersOffice.Api.Controllers
 {
@@ -18,7 +18,7 @@ namespace WSTowersOffice.Api.Controllers
     public class EmployeesController : Controller
     {
         private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
-        public async Task<ActionResult> List(int? employee_id,int? page)
+        public async Task<ActionResult> List(int? employee_id, int? page)
         {
             var loginResult = await LoginController.ValidLoginAsync();
             if (!loginResult.IsValid)
@@ -34,7 +34,7 @@ namespace WSTowersOffice.Api.Controllers
             }
 
             Employee employeeDB = await db.Employee.FirstOrDefaultAsync(fs => fs.ID == employee_id);
-            if (employeeDB!=null)
+            if (employeeDB != null)
             {
                 EmployeeModel employeeModel = new EmployeeModel(employeeDB);
                 ViewBag.Employee = employeeModel;
@@ -84,9 +84,9 @@ namespace WSTowersOffice.Api.Controllers
             db.Employee.Add(employee);
             await db.SaveChangesAsync();
 
-            employee = await db.Employee.FirstOrDefaultAsync(fs=>fs.CPF==employeeModel.CPF);
+            employee = await db.Employee.FirstOrDefaultAsync(fs => fs.CPF == employeeModel.CPF);
             ViewBag.Action = $"SetProfileImage/{employee.ID}";
-            ViewBag.Controller= "Employees";
+            ViewBag.Controller = "Employees";
             ViewBag.ModalID = "#addImageModal";
             ViewBag.SetImage = true;
             return View(new EmployeeModel(employee));
@@ -119,22 +119,22 @@ namespace WSTowersOffice.Api.Controllers
                 return RedirectToActionPermanent("BadRequest", "Errors");
             }
 
-                Image image = null;
+            Image image = null;
 
-                try
-                {
-                    image = Image.FromStream(fileCollection[0].InputStream);
-                }
-                catch (Exception e)
-                {
-                    return Content(JsonConvert.SerializeObject(e));
-                }
+            try
+            {
+                image = Image.FromStream(fileCollection[0].InputStream);
+            }
+            catch (Exception e)
+            {
+                return Content(JsonConvert.SerializeObject(e));
+            }
 
-                FileModel fileModel = await FilesController.SaveImageAsync(FileType.EmployeeProfileImage, image, fileCollection[0].ContentLength);
-                employee.ProfileImage = fileModel.ID;
+            FileModel fileModel = await FilesController.SaveImageAsync(FileType.EmployeeProfileImage, image, fileCollection[0].ContentLength);
+            employee.ProfileImage = fileModel.ID;
 
-                db.Entry(employee).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+            db.Entry(employee).State = EntityState.Modified;
+            await db.SaveChangesAsync();
 
 
             return RedirectToAction("List", "Employees");
@@ -173,14 +173,14 @@ namespace WSTowersOffice.Api.Controllers
             db.Employee.Remove(employee);
             await db.SaveChangesAsync();
 
-            if (employee.File!=null)
+            if (employee.File != null)
             {
-                if (employee.File.ID > ((int)FileType.Max-1))
+                if (employee.File.ID > ((int)FileType.Max - 1))
                 {
                     await FilesController.DeleteAsync(employee.File.ID);
                 }
             }
-            return RedirectToAction("List","Employees");
+            return RedirectToAction("List", "Employees");
         }
     }
 }

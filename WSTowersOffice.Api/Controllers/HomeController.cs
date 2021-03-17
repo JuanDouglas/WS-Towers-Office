@@ -1,11 +1,6 @@
 ﻿using ShowProducts.API.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using WSTowersOffice.Api.Models.Attributes;
 
 namespace WSTowersOffice.Api.Controllers
 {

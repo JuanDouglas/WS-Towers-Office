@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ShowProducts.API.Controllers;
+using System;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WSTowersOffice.Api.Models;
-using ShowProducts.API.Controllers;
 
 namespace WSTowersOffice.Api.Controllers
 {
