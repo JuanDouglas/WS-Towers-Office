@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Web;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -11,6 +6,9 @@ using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using AlertDialog = Android.Support.V7.App.AlertDialog;
 
 namespace WSTowersOffice.App
@@ -29,7 +27,8 @@ namespace WSTowersOffice.App
             AnimateLogo(logoImageView, 3000);
         }
 
-        private void RegisterClick(object sender, EventArgs args) {
+        private void RegisterClick(object sender, EventArgs args)
+        {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
 
             alertBuilder.SetTitle("Começar");
@@ -40,13 +39,14 @@ namespace WSTowersOffice.App
             input.LayoutParameters = lp;
 
 
-            alertBuilder.SetPositiveButton("Enviar", new EventHandler<DialogClickEventArgs>(async (object sender, DialogClickEventArgs args) => {
+            alertBuilder.SetPositiveButton("Enviar", new EventHandler<DialogClickEventArgs>(async (object sender, DialogClickEventArgs args) =>
+            {
                 HttpClientHandler clientHandler = new HttpClientHandler();
                 clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
                 HttpClient httpClient = new HttpClient(clientHandler);
-                HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post,new UriBuilder("https://172.16.17.31/") { Path= "api/SaveRequest/NewRequest", Query= $"email={input.Text}" }.Uri);
+                HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, new UriBuilder("https://172.16.17.31/") { Path = "api/SaveRequest/NewRequest", Query = $"email={input.Text}" }.Uri);
                 httpRequestMessage.Headers.Host = "api.towers-office.ws.server.net";
-              HttpResponseMessage response = await httpClient.SendAsync(httpRequestMessage);
+                HttpResponseMessage response = await httpClient.SendAsync(httpRequestMessage);
                 if (response.IsSuccessStatusCode)
                 {
                     AlertDialog.Builder successAlertBuilder = new AlertDialog.Builder(this);
@@ -70,15 +70,15 @@ namespace WSTowersOffice.App
                         Text = "Algo deu errado ou vc já é cadastro, caso seja um erro contato-nos!"
                     };
 
-                   
+
 
                     textView.LayoutParameters = lp;
 
                     successAlertBuilder.SetView(textView);
 
-                        successAlertBuilder.Create().Show();
-                    
-                   
+                    successAlertBuilder.Create().Show();
+
+
                 }
             }));
 
@@ -86,10 +86,12 @@ namespace WSTowersOffice.App
             alertBuilder.Create().Show();
         }
 
-        
-        private void AnimateLogo(ImageView imgview,int duration) {
+
+        private void AnimateLogo(ImageView imgview, int duration)
+        {
             List<ObjectAnimator> logoAnimators = new List<ObjectAnimator>();
-            logoAnimators.AddRange(GetAnimatorScale(imgview, duration, new EventHandler((object sender, EventArgs args) => {
+            logoAnimators.AddRange(GetAnimatorScale(imgview, duration, new EventHandler((object sender, EventArgs args) =>
+            {
                 imgview.LayoutParameters.Width = imgview.LayoutParameters.Width / 20 * 13;
                 imgview.LayoutParameters.Height = imgview.LayoutParameters.Height / 20 * 13;
             })));
@@ -100,7 +102,8 @@ namespace WSTowersOffice.App
                 item.Start();
             }
         }
-        private ObjectAnimator[] GetAnimatorScale(View @object,int duration,EventHandler animationEnd) {
+        private ObjectAnimator[] GetAnimatorScale(View @object, int duration, EventHandler animationEnd)
+        {
             ObjectAnimator animatorScaleX = ObjectAnimator.OfFloat(@object, "scaleX", 1f, 0.65f);
             ObjectAnimator animatorScaleY = ObjectAnimator.OfFloat(@object, "scaleY", 1f, 0.65f);
             animatorScaleX.SetDuration(duration);
@@ -115,7 +118,8 @@ namespace WSTowersOffice.App
             animatorAlpha.SetDuration(duration);
             return animatorAlpha;
         }
-        private ObjectAnimator[] GetAnimatorPosition(View view, int duration) {
+        private ObjectAnimator[] GetAnimatorPosition(View view, int duration)
+        {
             DisplayMetrics displayMetrics = new DisplayMetrics();
             WindowManager.DefaultDisplay.GetMetrics(displayMetrics);
             int screenWidth;
@@ -126,7 +130,7 @@ namespace WSTowersOffice.App
             ObjectAnimator translateY = ObjectAnimator.OfFloat(view, "translationY", screenWidth / 2f, view.GetY());
             //translateX.SetDuration(duration);
             translateY.SetDuration(duration);
-            return new ObjectAnimator[] { translateY};
+            return new ObjectAnimator[] { translateY };
         }
 
         //public override bool OnCreateOptionsMenu(IMenu menu)
