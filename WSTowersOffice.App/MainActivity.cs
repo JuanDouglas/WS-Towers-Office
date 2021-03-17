@@ -7,14 +7,16 @@ using Android.Animation;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using AlertDialog = Android.Support.V7.App.AlertDialog;
 
 namespace WSTowersOffice.App
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

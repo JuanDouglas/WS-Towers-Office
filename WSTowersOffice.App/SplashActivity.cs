@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Views.Animations;
@@ -16,7 +17,7 @@ using System.Timers;
 namespace WSTowersOffice.App
 {
     [Activity(Label = "@string/app_name",Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-    public class SplashActivity : Activity
+    public class SplashActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
