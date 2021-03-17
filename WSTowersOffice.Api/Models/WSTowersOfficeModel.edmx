@@ -26,6 +26,8 @@
           <Property Name="QuantityFamilyPersons" Type="int" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="ProfileImage" Type="int" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AppActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="File">
           <Key>
@@ -269,6 +271,8 @@ warning 6035: The relationship 'FK__Authenticati__IP__52593CB8' has columns that
           <Property Name="ProfileImage" Type="Int32" Nullable="false" />
           <NavigationProperty Name="File" Relationship="Self.FK__Employee__Profil__34C8D9D1" FromRole="Employee" ToRole="File" />
           <NavigationProperty Name="Team_Employee" Relationship="Self.FK__Team_Empl__Emplo__38996AB5" FromRole="Employee" ToRole="Team_Employee" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AppActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="File">
           <Key>
@@ -529,6 +533,8 @@ warning 6035: The relationship 'FK__Authenticati__IP__52593CB8' has columns that
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="WSTowersOfficeModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="AppActive" ColumnName="AppActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CPF" ColumnName="CPF" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using ShowProducts.API.Controllers;
+using System;
 using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using WSTowersOffice.Api.Models;
-using ShowProducts.API.Controllers;
 
 namespace WSTowersOffice.Api.Controllers
 {
     public class AdminsController : Controller
     {
-        private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
+        private readonly WSTowersOfficeEntities db = new WSTowersOfficeEntities();
 
         // GET: Admins
         public async Task<ActionResult> Manager()

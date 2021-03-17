@@ -1,17 +1,16 @@
 ﻿using Newtonsoft.Json;
-using WSTowersOffice.Api.Models;
-using WSTowersOffice.Api.Models.Enums;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
-using WSTowersOffice.Api.Models.Exceptions;
+using System.Web.Http;
 using System.Web.Http.Description;
+using WSTowersOffice.Api.Models;
+using WSTowersOffice.Api.Models.Exceptions;
 
 namespace ShowProducts.API.Controllers
 {
@@ -21,7 +20,7 @@ namespace ShowProducts.API.Controllers
     [RoutePrefix("api/Login")]
     public class LoginController : ApiController
     {
-        private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
+        private readonly WSTowersOfficeEntities db = new WSTowersOfficeEntities();
 
         /// <summary>
         /// GET Login Informations

@@ -26,6 +26,8 @@ namespace WSTowersOffice.Api.Models
         public int QuantityFamilyPersons { get; set; }
         public string Email { get; set; }
         public int ProfileImage { get; set; }
+        public string Password { get; set; }
+        public bool AppActive { get; set; }
     
         public virtual File File { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

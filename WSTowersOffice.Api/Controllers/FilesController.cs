@@ -1,24 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 using WSTowersOffice.Api.Models;
 using WSTowersOffice.Api.Models.Enums;
 using WSTowersOffice.Api.Properties;
-using System.Web.Http;
-using System.Drawing.Imaging;
 
 namespace WSTowersOffice.Api.Controllers
 {
     [RoutePrefix("api/Files")]
     public class FilesController : ApiController
     {
-        public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
+        private readonly WSTowersOfficeEntities db = new WSTowersOfficeEntities();
 
         // GET: api/Files
         [HttpGet]
@@ -34,7 +33,7 @@ namespace WSTowersOffice.Api.Controllers
             {
                 bitmap = Resources.default_team_icon;
             }
-           
+
             if (bitmap == null)
             {
                 bitmap = (Bitmap)Bitmap.FromFile(GetPartialDirectory(filetype) + filename);
@@ -110,7 +109,8 @@ namespace WSTowersOffice.Api.Controllers
             db.Entry(fileModel).State = EntityState.Deleted;
             await db.SaveChangesAsync();
         }
-        private static void DeleteFile(string path) {
+        private static void DeleteFile(string path)
+        {
             System.IO.File.Delete(path);
         }
         private static void SaveInAPI(FileType fileType, System.Drawing.Image image, string filename)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WSTowersOffice.Api.Models
 {
@@ -29,15 +25,16 @@ namespace WSTowersOffice.Api.Models
         public string Name { get; set; }
         [Required]
         [Display(Name = "Descrição")]
-        [StringLength(1000,MinimumLength = 5)]
+        [StringLength(1000, MinimumLength = 5)]
         public string Description { get; set; }
         [Display(Name = "Ícone")]
-       public FileModel Icon { get; set; }
+        public FileModel Icon { get; set; }
         private int IconID { get; set; }
         internal Team GetTeam()
         {
             IconID = 2;
-            return new Team() {
+            return new Team()
+            {
                 Name = Name,
                 Description = Description,
                 Icon = IconID
