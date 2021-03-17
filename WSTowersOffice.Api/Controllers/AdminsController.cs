@@ -10,7 +10,7 @@ namespace WSTowersOffice.Api.Controllers
 {
     public class AdminsController : Controller
     {
-        private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
+        private readonly WSTowersOfficeEntities db = new WSTowersOfficeEntities();
 
         // GET: Admins
         public async Task<ActionResult> Manager()

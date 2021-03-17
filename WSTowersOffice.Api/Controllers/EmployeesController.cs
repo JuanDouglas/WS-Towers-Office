@@ -17,7 +17,7 @@ namespace WSTowersOffice.Api.Controllers
     [RoutePrefix("Employees")]
     public class EmployeesController : Controller
     {
-        private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
+        private readonly WSTowersOfficeEntities db = new WSTowersOfficeEntities();
         public async Task<ActionResult> List(int? employee_id, int? page)
         {
             var loginResult = await LoginController.ValidLoginAsync();

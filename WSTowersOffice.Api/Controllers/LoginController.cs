@@ -20,7 +20,7 @@ namespace ShowProducts.API.Controllers
     [RoutePrefix("api/Login")]
     public class LoginController : ApiController
     {
-        private WSTowersOfficeEntities db = new WSTowersOfficeEntities();
+        private readonly WSTowersOfficeEntities db = new WSTowersOfficeEntities();
 
         /// <summary>
         /// GET Login Informations

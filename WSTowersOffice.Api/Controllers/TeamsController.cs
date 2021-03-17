@@ -17,7 +17,7 @@ namespace WSTowersOffice.Api.Controllers
     [RoutePrefix("Teams")]
     public class TeamsController : Controller
     {
-        public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
+        private readonly WSTowersOfficeEntities db = new WSTowersOfficeEntities();
         // GET: Teams
         public async Task<ActionResult> Index()
         {

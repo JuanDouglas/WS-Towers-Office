@@ -47,6 +47,8 @@ CREATE TABLE [Employee] (
 [QuantityFamilyPersons] INT NOT NULL,
 [Email] VARCHAR(1000) UNIQUE NOT NULL,
 [ProfileImage] INTEGER NOT NULL,
+[Password] VARCHAR(10) NOT NULL,
+[AppActive] BIT NOT NULL,
 FOREIGN KEY ([ProfileImage]) REFERENCES [File]([ID])
 );
 

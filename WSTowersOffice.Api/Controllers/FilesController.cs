@@ -17,7 +17,7 @@ namespace WSTowersOffice.Api.Controllers
     [RoutePrefix("api/Files")]
     public class FilesController : ApiController
     {
-        public WSTowersOfficeEntities db => new WSTowersOfficeEntities();
+        private readonly WSTowersOfficeEntities db = new WSTowersOfficeEntities();
 
         // GET: api/Files
         [HttpGet]
