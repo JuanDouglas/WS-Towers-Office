@@ -16,7 +16,7 @@ namespace WSTowersOffice.Api.Models
     public partial class WSTowersOfficeEntities : DbContext
     {
         public WSTowersOfficeEntities()
-            : base("name=WSTowersOfficeEntities")
+            : base(WebApiConfig.EntityFreameworkConnectionString)
         {
         }
     
