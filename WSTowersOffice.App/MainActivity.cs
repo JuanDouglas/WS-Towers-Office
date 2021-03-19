@@ -21,8 +21,15 @@ namespace WSTowersOffice.App
             Button btnRegister = FindViewById<Button>(Resource.Id.buttonRegister);
             btnRegister.Click += new EventHandler(RegisterClick);
 
+            Button btnLogin = FindViewById<Button>(Resource.Id.buttonLogin);
+
             ImageView logoImageView = FindViewById<ImageView>(Resource.Id.logoImg);
             AnimateLogo(logoImageView, 3000);
+        }
+
+        private void LoginClick(object sender, EventArgs args) { 
+ 
+        
         }
 
         private void RegisterClick(object sender, EventArgs args)

@@ -4,4 +4,6 @@
 	<string name="start_text">Trabalhe em seu home office,\ncom diversão e produtividade.</string>
 	<string name="start_new_user">Começar agora</string>
 	<string name="start_login">Já tenho conta</string>
+	<string name="login_email">E-mail</string>
+	<string name="login_cpf">CPF</string>
 </resources>
